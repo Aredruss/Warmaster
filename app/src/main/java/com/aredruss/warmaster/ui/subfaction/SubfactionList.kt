@@ -1,4 +1,4 @@
-package com.aredruss.warmaster.ui.factions
+package com.aredruss.warmaster.ui.subfaction
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,34 +8,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.aredruss.warmaster.R
-import com.aredruss.warmaster.ui.about.AboutWarmaster
 import com.aredruss.warmaster.ui.common.CenteredTopBar
-import com.aredruss.warmaster.ui.destinations.AboutWarmasterDestination
 import com.aredruss.warmaster.ui.destinations.DataSheetListDestination
-import com.aredruss.warmaster.ui.destinations.SubfactionListDestination
+import com.aredruss.warmaster.ui.factions.FactionItem
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
 
-@RootNavGraph(start = true)
 @Destination
 @Composable
-fun FactionList(navigator: DestinationsNavigator) {
+fun SubfactionList(
+    factionId: String,
+    navigator: DestinationsNavigator
+) {
 
-    val viewModel = getViewModel<FactionListViewModel>()
+    val viewModel = getViewModel<SubfactionViewModel>()
+    viewModel.getSubfactionByFactionId(factionId)
 
     Column {
         CenteredTopBar(
-            title = stringResource(id = R.string.factions),
-            additionalAction = {
-                navigator.navigate(AboutWarmasterDestination)
+            title = stringResource(id = R.string.subfactions),
+            navigationAction = {
+                navigator.popBackStack()
             }
         )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(viewModel.factionList) {
-                FactionItem(faction = it) { _, id ->
-                    navigator.navigate(SubfactionListDestination(id))
+                FactionItem(faction = it) { name, id ->
+                    navigator.navigate(DataSheetListDestination(name, id))
                 }
             }
         }

@@ -6,16 +6,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.Json.Default.decodeFromString
 import timber.log.Timber
-import java.lang.Exception
-import kotlin.system.measureTimeMillis
 
 class InfoRepository(private val context: Context) {
-
     private val dataFile = context.resources.assets.open("dump.json")
     val ruleInfoStatListener = MutableStateFlow<RuleInfo?>(null)
-
     suspend fun readStats() = withContext(Dispatchers.IO) {
         try {
             val json = Json { ignoreUnknownKeys = true }

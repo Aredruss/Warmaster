@@ -2,12 +2,8 @@
 
 An army building app
 
-
 ## TODOs
-+ Write basic datasheet viewer
-+ Figure out how to get proper file links for images and indexes
-
-
-datasheet_faction_keyword
-miniature
-datasheet
++  Rework factions - child/parent
++ Add an army builder, possibly save to json and export to file
++ Add more entities for the wargear
++ consider rewriting data access point and splitting jsons by field

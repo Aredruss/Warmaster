@@ -1,4 +1,4 @@
-package com.aredruss.warmaster.ui.factions
+package com.aredruss.warmaster.ui.subfaction
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,25 +9,18 @@ import com.aredruss.warmaster.data.InfoRepository
 import com.aredruss.warmaster.data.model.Faction
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
-class FactionListViewModel(
+class SubfactionViewModel(
     private val infoRepository: InfoRepository
 ) : ViewModel() {
-
     var factionList: List<Faction> by mutableStateOf(emptyList()); private set
 
-    init {
-        viewModelScope.launch {
-            infoRepository.readStats()
-        }
-        viewModelScope.also { scope ->
-            infoRepository.ruleInfoStatListener.onEach {
-                factionList =
-                    it?.data?.factions?.filter { item ->
-                        item.parentFactionKeywordId == null
-                    } ?: emptyList()
-            }.launchIn(scope)
-        }
+    fun getSubfactionByFactionId(factionId: String) = viewModelScope.also { scope ->
+        infoRepository.ruleInfoStatListener.onEach {
+            factionList =
+                it?.data?.factions?.filter { item ->
+                    item.parentFactionKeywordId == factionId || item.id == factionId
+                } ?: emptyList()
+        }.launchIn(scope)
     }
 }

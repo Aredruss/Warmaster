@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Warmaster</string>
+    <string name="factions">Factions</string>
+    <string name="subfactions">Subfactions</string>
+    <string name="about">About</string>
+    <string name="datasheets">Datasheets</string>
+    <string name="copyright">Copyright LOLOLOL</string>
+    <string name="about_app">Warmaster is a secret app for viewing datasheets and building your army</string>
 </resources>

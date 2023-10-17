@@ -1,4 +1,4 @@
-package com.aredruss.warmaster.ui.factions
+package com.aredruss.warmaster.ui.about
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,27 +6,19 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aredruss.warmaster.data.InfoRepository
-import com.aredruss.warmaster.data.model.Faction
+import com.aredruss.warmaster.data.model.MetaData
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
-class FactionListViewModel(
+class AboutViewModel(
     private val infoRepository: InfoRepository
 ) : ViewModel() {
-
-    var factionList: List<Faction> by mutableStateOf(emptyList()); private set
+    var aboutInfo: MetaData? by mutableStateOf(null); private set
 
     init {
-        viewModelScope.launch {
-            infoRepository.readStats()
-        }
         viewModelScope.also { scope ->
             infoRepository.ruleInfoStatListener.onEach {
-                factionList =
-                    it?.data?.factions?.filter { item ->
-                        item.parentFactionKeywordId == null
-                    } ?: emptyList()
+                aboutInfo = it?.metaData
             }.launchIn(scope)
         }
     }
