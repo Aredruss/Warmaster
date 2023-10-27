@@ -61,7 +61,7 @@ fun AboutWarmaster(navigator: DestinationsNavigator) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 5.dp),
-                    text = "Data version: ${viewModel.aboutInfo?.dataVersion}",
+                    text = "Data version: ${viewModel.aboutInfo}",
                     style = MaterialTheme.typography.labelMedium,
                     textAlign = TextAlign.Center
                 )

@@ -16,11 +16,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.aredruss.warmaster.data.model.Datasheet
+import com.aredruss.warmaster.domain.database.model.Datasheet
 
 @Composable
 fun DatasheetItem(
@@ -48,7 +49,8 @@ fun DatasheetItem(
                 color = Color.Black.copy(alpha = 0.5f),
                 blendMode = BlendMode.Darken
             ),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            filterQuality = FilterQuality.Low
         )
         Text(
             text = datasheet.name,

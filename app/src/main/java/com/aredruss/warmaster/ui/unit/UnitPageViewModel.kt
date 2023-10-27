@@ -5,84 +5,85 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aredruss.warmaster.data.InfoRepository
-import com.aredruss.warmaster.data.model.Datasheet
-import com.aredruss.warmaster.data.model.DatasheetAbility
-import com.aredruss.warmaster.data.model.DatasheetDamageRule
-import com.aredruss.warmaster.data.model.DatasheetFactionKeyword
-import com.aredruss.warmaster.data.model.DatasheetRule
-import com.aredruss.warmaster.data.model.Faction
-import com.aredruss.warmaster.data.model.InvSave
-import com.aredruss.warmaster.data.model.Miniature
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.aredruss.warmaster.domain.database.model.Datasheet
+import com.aredruss.warmaster.domain.database.model.DatasheetAbility
+import com.aredruss.warmaster.domain.database.model.DatasheetRule
+import com.aredruss.warmaster.domain.database.model.FactionKeyword
+import com.aredruss.warmaster.domain.database.model.InvSave
+import com.aredruss.warmaster.domain.database.model.Miniature
+import com.aredruss.warmaster.domain.database.model.UnitComposition
+import com.aredruss.warmaster.domain.database.model.UnitCompositionMiniature
+import com.aredruss.warmaster.domain.UnitInfoRepository
+import com.aredruss.warmaster.domain.database.model.DatasheetDamage
 import kotlinx.coroutines.launch
-import java.util.Locale.filter
+import okhttp3.internal.notifyAll
 
-class UnitPageViewModel(private val infoRepository: InfoRepository) : ViewModel() {
+class UnitPageViewModel(
+    private val unitInfoRepository: UnitInfoRepository
+) : ViewModel() {
     var datasheet: Datasheet? by mutableStateOf(null); private set
-    var miniature: Miniature? by mutableStateOf(null); private set
-
+    var miniatureList: List<Miniature> by mutableStateOf(emptyList()); private set
     var ruleset: List<DatasheetRule>? by mutableStateOf(null); private set
-
-    var damageRuleset: List<DatasheetRule>? by mutableStateOf(null); private set
-
-    var keywords: List<Faction>? by mutableStateOf(null); private set
-
+    var keywords: List<String>? by mutableStateOf(emptyList()); private set
     var invSave: InvSave? by mutableStateOf(null); private set
-
+    var unitCompositionsByMini: List<UnitCompositionMiniature>? by mutableStateOf(null); private set
+    var unitCompositions: List<UnitComposition>? by mutableStateOf(null); private set
     var datasheetAbilities: List<DatasheetAbility>? by mutableStateOf(null); private set
 
     fun getInfoByDataSheetId(datasheetId: String) = viewModelScope.launch {
-        infoRepository.ruleInfoStatListener.onEach {
-            val data = it?.data
-            datasheet = data?.datasheets?.firstOrNull { item ->
-                item.id == datasheetId
-            }
-            miniature = data?.miniatures?.firstOrNull { item ->
-                item.datasheetId == datasheetId
-            }
 
-            val factionKeywords =
-                data?.datasheetFactionKeywords?.filter { item ->
-                    item.datasheetId == datasheetId
-                }?.sortedBy { item -> item.displayOrder }
-                    ?.map { item -> item.factionKeywordId }
-                    ?: emptyList()
+        datasheet = unitInfoRepository.getDatasheetById(datasheetId)
+        miniatureList = unitInfoRepository.getMiniaturesByDatasheetId(datasheetId)
+        invSave = unitInfoRepository.getInvSaveForUnit(datasheetId)
+        ruleset = unitInfoRepository.getDatasheetRules(datasheetId)
+        unitCompositions = unitInfoRepository.getUnitComposition(datasheetId)
+        unitCompositionsByMini =
+            unitInfoRepository.getUnitCompositionsMiniatureByDatasheet(datasheetId)
+        datasheetAbilities = unitInfoRepository.getAbilitiesByDatasheet(datasheetId)
 
-            keywords = data?.factions?.filter { item -> item.id in factionKeywords } ?: emptyList()
-
-            ruleset = data?.datasheetRule?.filter { item ->
-                item.datasheetId == datasheetId
-            }?.sortedBy { item ->
-                item.displayOrder
-            } ?: emptyList()
-
-            damageRuleset =
-                data?.datasheetDamageRule?.filter { item ->
-                    item.datasheetId == datasheetId
-                }?.sortedBy { item ->
-                    item.displayOrder
-                } ?: emptyList()
-
-            invSave = data?.invSaves?.firstOrNull { item ->
-                item.datasheetId == datasheetId
-            }
-
-            val datasheetAbilityBonds =
-                data?.datasheetAbilityBonds?.filter { item ->
-                    item.datasheetId == datasheetId
-                }?.sortedBy { item -> item.displayOrder }
-                    ?.map { item -> item.datasheetAbilityId } ?: emptyList()
-            datasheetAbilities =
-                data?.datasheetAbilities
-                    ?.filter { item ->
-                        item.id in datasheetAbilityBonds
-                    }
-                    ?.sortedBy { item -> item.abilityType }
-                    ?: emptyList()
-
-        }.launchIn(this)
+        miniatureList.firstOrNull()?.let {
+            keywords = unitInfoRepository.getMiniatureKeywords(it.id)
+        }
+//
+//            val factionKeywords =
+//                it?.datasheetFactionKeywords?.filter { item ->
+//                    item.datasheetId == datasheetId
+//                }?.sortedBy { item -> item.displayOrder }
+//                    ?.map { item -> item.factionKeywordId }
+//                    ?: emptyList()
+//
+//            keywords =
+//                it?.factionKeywords?.filter { item -> item.id in factionKeywords } ?: emptyList()
+//
+//
+//
+//            val datasheetAbilityBonds =
+//                it?.datasheetAbilityBonds?.filter { item ->
+//                    item.datasheetId == datasheetId
+//                }?.sortedBy { item -> item.displayOrder }
+//                    ?.map { item -> item.datasheetAbilityId } ?: emptyList()
+//            datasheetAbilities =
+//                it?.datasheetAbilities
+//                    ?.filter { item ->
+//                        item.id in datasheetAbilityBonds
+//                    }
+//                    ?.sortedBy { item -> item.abilityType }
+//                    ?: emptyList()
+//
+//            mini?.let { _ ->
+//                val unitCompositionsByMiniParsed = it.unitCompositionMiniature.filter { item ->
+//                    item.miniatureId == mini.id
+//                }
+//                unitCompositionsByMini = unitCompositionsByMiniParsed
+//
+//                val ids = unitCompositionsByMiniParsed.map { item -> item.unitCompositionId }
+//
+//                unitCompositions = it.unitComposition.filter { item ->
+//                    item.id in ids
+//                }
+//            }
+//
+//        }.launchIn(this)
     }
 
 }

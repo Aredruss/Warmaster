@@ -16,21 +16,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.aredruss.warmaster.data.model.Faction
+import com.aredruss.warmaster.domain.database.model.FactionKeyword
 
 
 @Composable
 fun FactionItem(
-    faction: Faction,
+    factionKeyword: FactionKeyword,
     action: (String, String) -> Unit
 ) {
     Box(
         modifier = Modifier
             .clickable {
-                action.invoke(faction.name, faction.id)
+                action.invoke(factionKeyword.name, factionKeyword.id)
             }
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .clip(ShapeDefaults.Medium)
@@ -40,16 +41,17 @@ fun FactionItem(
     ) {
         AsyncImage(
             modifier = Modifier.fillMaxSize(),
-            model = faction.rosterHeaderImage,
+            model = factionKeyword.rosterHeaderImage,
             contentDescription = null,
             colorFilter = ColorFilter.tint(
                 color = Color.Black.copy(alpha = 0.5f),
                 blendMode = BlendMode.Darken
             ),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            filterQuality = FilterQuality.Low
         )
         Text(
-            text = faction.name,
+            text = factionKeyword.name,
             color = Color.White,
             style = MaterialTheme.typography.titleLarge
         )

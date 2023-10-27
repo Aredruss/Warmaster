@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -42,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -51,11 +53,9 @@ android {
     }
 }
 
-kotlin {
-    jvmToolchain(8)
-}
-
 dependencies {
+
+    implementation(files(org.gradle.internal.jvm.Jvm.current().toolsJar))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -83,4 +83,7 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.4.2")
 
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    ksp ("androidx.room:room-compiler:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
 }

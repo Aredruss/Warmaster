@@ -11,10 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.aredruss.warmaster.data.model.Faction
+import com.aredruss.warmaster.domain.database.model.FactionKeyword
 
 @Composable
-fun UnitKeywords(modifier: Modifier,unitKeywords: List<Faction>) {
+fun UnitKeywords(modifier: Modifier,unitKeywords: List<String>) {
     Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
         unitKeywords.forEach {
             Text(
@@ -25,7 +25,7 @@ fun UnitKeywords(modifier: Modifier,unitKeywords: List<Faction>) {
                         shape = RoundedCornerShape(size = 5.dp)
                     )
                     .padding(all = 5.dp),
-                text = it.name,
+                text = it,
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSecondary
             )

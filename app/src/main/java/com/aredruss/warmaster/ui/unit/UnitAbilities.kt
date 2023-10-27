@@ -2,9 +2,7 @@ package com.aredruss.warmaster.ui.unit
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -14,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.aredruss.warmaster.data.model.DatasheetAbility
+import com.aredruss.warmaster.domain.database.model.DatasheetAbility
 
 @Composable
 fun UnitAbilities(modifier: Modifier, abilities: List<DatasheetAbility>) {

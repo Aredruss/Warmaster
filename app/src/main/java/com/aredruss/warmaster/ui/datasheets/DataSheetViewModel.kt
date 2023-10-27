@@ -5,31 +5,26 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aredruss.warmaster.data.InfoRepository
-import com.aredruss.warmaster.data.model.Datasheet
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.aredruss.warmaster.domain.DatasheetRepository
+import com.aredruss.warmaster.domain.database.model.Datasheet
 import kotlinx.coroutines.launch
 
 class DataSheetViewModel(
-    private val infoRepository: InfoRepository
+    private val datasheetRepository: DatasheetRepository
 ) : ViewModel() {
 
-    var datasheetList: List<Datasheet> by mutableStateOf(emptyList()); private set
+    var datasheetList: DatasheetLists by mutableStateOf(DatasheetLists()); private set
 
     fun getDataByFaction(factionId: String) = viewModelScope.launch {
-        infoRepository.ruleInfoStatListener.onEach {
-            val idList = it?.data?.datasheetFactionKeywords?.filter { keyword ->
-                keyword.factionKeywordId == factionId
-            }?.map { entity ->
-                entity.datasheetId
-            }
-
-            idList?.let { ids ->
-                val data = it.data.datasheets.filter { sheet -> sheet.id in idList }
-                datasheetList = data
-            }
-
-        }.launchIn(this)
+        val items = datasheetRepository.getDatasheetsForFaction(factionId = factionId)
+        datasheetList = DatasheetLists(
+            items[false] ?: emptyList(),
+            items[true] ?: emptyList()
+        )
     }
 }
+
+data class DatasheetLists(
+    val normalList: List<Datasheet> = emptyList(),
+    val patrolList: List<Datasheet> = emptyList()
+)

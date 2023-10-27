@@ -6,4 +6,7 @@
     <string name="datasheets">Datasheets</string>
     <string name="copyright">Copyright LOLOLOL</string>
     <string name="about_app">Warmaster is a secret app for viewing datasheets and building your army</string>
+    <string name="splash_message">The Machine spirit is looking...</string>
+    <string name="regular_datasheets">Regular datasheets</string>
+    <string name="combat_patrol_datasheets">Combat patrol datasheets</string>
 </resources>

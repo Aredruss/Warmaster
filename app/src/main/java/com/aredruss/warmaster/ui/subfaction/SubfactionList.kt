@@ -22,8 +22,8 @@ fun SubfactionList(
     navigator: DestinationsNavigator
 ) {
 
-    val viewModel = getViewModel<SubfactionViewModel>()
-    viewModel.getSubfactionByFactionId(factionId)
+    val viewModel = getViewModel<SubFactionViewModel>()
+    viewModel.getSubFactionByFactionId(factionId)
 
     Column {
         CenteredTopBar(
@@ -33,8 +33,8 @@ fun SubfactionList(
             }
         )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(viewModel.factionList) {
-                FactionItem(faction = it) { name, id ->
+            items(viewModel.factionKeywordList) {
+                FactionItem(factionKeyword = it) { name, id ->
                     navigator.navigate(DataSheetListDestination(name, id))
                 }
             }

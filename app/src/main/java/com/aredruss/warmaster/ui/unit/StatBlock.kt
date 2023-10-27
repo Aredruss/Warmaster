@@ -13,9 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.aredruss.warmaster.data.model.InvSave
-import com.aredruss.warmaster.data.model.Miniature
-import timber.log.Timber
+import com.aredruss.warmaster.domain.database.model.InvSave
+import com.aredruss.warmaster.domain.database.model.Miniature
 
 @Composable
 fun StatBlock(miniature: Miniature, invSave: InvSave?) {
