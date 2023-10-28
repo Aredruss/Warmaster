@@ -12,9 +12,6 @@ interface UnitCompositionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(items: List<UnitComposition>)
 
-    @Query("SELECT * FROM UnitComposition")
-    suspend fun getAll(): List<UnitComposition>
-
-    @Query("SELECT * FROM UnitComposition WHERE :id = datasheetId")
-    suspend fun getItemById(id: String): List<UnitComposition>
+    @Query("SELECT * FROM UnitComposition WHERE :id = datasheetId AND displayOrder < 10 ORDER BY displayOrder")
+    suspend fun getItemsById(id: String): List<UnitComposition>
 }

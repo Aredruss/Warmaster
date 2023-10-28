@@ -12,4 +12,6 @@ data class UnitCompositionMiniature(
     val min: Long,
     val max: Long,
     val unitCompositionId: String
-)
+) {
+    fun getReadableRange() = if (min == max) "$max" else "$min-$max"
+}

@@ -1,7 +1,10 @@
 package com.aredruss.warmaster.ui.unit
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,9 +27,11 @@ import com.aredruss.warmaster.domain.database.model.DatasheetRule
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.TextBlock
 import com.aredruss.warmaster.ui.theme.md_theme_dark_onPrimary
+import com.aredruss.warmaster.util.getFormattedRule
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Destination
 @Composable
@@ -35,9 +40,9 @@ fun UnitPage(
     navigator: DestinationsNavigator
 ) {
 
-    val viewModel = getViewModel<UnitPageViewModel>()
-
-    viewModel.getInfoByDataSheetId(datasheetId)
+    val viewModel = getViewModel<UnitPageViewModel> {
+        parametersOf(datasheetId)
+    }
 
     Column(
         modifier = Modifier
@@ -55,17 +60,21 @@ fun UnitPage(
         )
 
         viewModel.miniatureList.forEach { mini ->
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = md_theme_dark_onPrimary)
-                    .padding(all = 5.dp),
-                text = mini.name,
-                style = MaterialTheme.typography.labelLarge,
-                textAlign = TextAlign.Center,
-                color = Color.White
-            )
-            StatBlock(miniature = mini, invSave = viewModel.invSave)
+            if (viewModel.miniatureList.size > 1) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = md_theme_dark_onPrimary)
+                        .padding(all = 5.dp),
+                    text = mini.name,
+                    style = MaterialTheme.typography.labelLarge,
+                    textAlign = TextAlign.Center,
+                    color = Color.White
+                )
+            }
+            if (!mini.statlineHidden) {
+                StatBlock(miniature = mini, invSave = viewModel.invSave)
+            }
         }
 
         viewModel.datasheetAbilities?.let {
@@ -76,6 +85,7 @@ fun UnitPage(
                 abilities = it
             )
         }
+
         viewModel.ruleset?.let { list ->
             UnitRules(
                 modifier = Modifier
@@ -84,36 +94,40 @@ fun UnitPage(
                 rules = list
             )
         }
-        viewModel.datasheet?.lore?.let {
-            TextBlock(
-                modifier = Modifier
-                    .padding(top = 5.dp)
-                    .padding(horizontal = 10.dp),
-                textTitle = "Lore",
-                textValue = it
-            )
-        }
+
         viewModel.datasheet?.unitComposition?.let {
             TextBlock(
                 modifier = Modifier
                     .padding(top = 5.dp)
                     .padding(horizontal = 10.dp),
-                textTitle = "Unit info",
+                textTitle = stringResource(R.string.unit_info),
+                textValue = it.getFormattedRule()
+            )
+        }
+
+        viewModel.unitComposition?.let {
+            UnitCompositionView(
+                modifier = Modifier
+                    .padding(top = 5.dp)
+                    .padding(horizontal = 10.dp), items = it
+            )
+        }
+
+        viewModel.datasheet?.lore?.let {
+            TextBlock(
+                modifier = Modifier
+                    .padding(top = 5.dp)
+                    .padding(horizontal = 10.dp),
+                textTitle = stringResource(R.string.lore),
                 textValue = it
             )
         }
-        viewModel.unitCompositions?.forEach {
-            Text(text = it.toString(), color = MaterialTheme.colorScheme.onBackground)
-        }
-        Spacer(modifier = Modifier.padding(horizontal = 5.dp))
-        viewModel.unitCompositionsByMini?.forEach {
-            Text(text = it.toString(), color = MaterialTheme.colorScheme.onBackground)
-        }
-
 
         viewModel.keywords?.let { list ->
             UnitKeywords(
-                modifier = Modifier.padding(top = 5.dp),
+                modifier = Modifier
+                    .padding(top = 5.dp)
+                    .padding(horizontal = 10.dp),
                 unitKeywords = list
             )
         }

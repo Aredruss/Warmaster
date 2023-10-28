@@ -12,6 +12,6 @@ interface MiniatureDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(items: List<Miniature>)
 
-    @Query("SELECT * FROM Miniature WHERE :id = datasheetId")
+    @Query("SELECT * FROM Miniature WHERE :id = datasheetId ORDER  BY displayOrder")
     suspend fun getItemsByDatasheet(id: String): List<Miniature>
 }

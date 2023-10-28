@@ -9,4 +9,8 @@
     <string name="splash_message">The Machine spirit is looking...</string>
     <string name="regular_datasheets">Regular datasheets</string>
     <string name="combat_patrol_datasheets">Combat patrol datasheets</string>
+    <string name="inv_save_rule">Inv. save rule</string>
+    <string name="unit_composition">Unit Composition</string>
+    <string name="lore">Lore</string>
+    <string name="unit_info">Unit info</string>
 </resources>

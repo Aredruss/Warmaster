@@ -14,6 +14,7 @@ import com.aredruss.warmaster.ui.factions.FactionItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Destination
 @Composable
@@ -22,8 +23,9 @@ fun SubfactionList(
     navigator: DestinationsNavigator
 ) {
 
-    val viewModel = getViewModel<SubFactionViewModel>()
-    viewModel.getSubFactionByFactionId(factionId)
+    val viewModel = getViewModel<SubFactionViewModel>(){
+        parametersOf(factionId)
+    }
 
     Column {
         CenteredTopBar(

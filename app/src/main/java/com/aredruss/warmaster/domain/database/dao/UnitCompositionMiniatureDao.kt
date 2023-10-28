@@ -16,5 +16,8 @@ interface UnitCompositionMiniatureDao {
     suspend fun getAll(): List<UnitCompositionMiniature>
 
     @Query("SELECT * FROM UnitCompositionMiniature WHERE unitCompositionId IN (:ids)")
-    suspend fun getItemsById(ids: List<String>): List<UnitCompositionMiniature>
+    suspend fun getItemsByUnitCompId(ids: List<String>): List<UnitCompositionMiniature>
+    @Query("SELECT * FROM UnitCompositionMiniature WHERE :id = miniatureId")
+    suspend fun getItemsByMini(id: String): List<UnitCompositionMiniature>
+
 }

@@ -28,9 +28,8 @@ import com.aredruss.warmaster.ui.theme.md_theme_dark_onPrimary
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
 fun DataSheetList(
@@ -38,16 +37,16 @@ fun DataSheetList(
     factionId: String,
     navigator: DestinationsNavigator
 ) {
-    val viewModel = getViewModel<DataSheetViewModel>()
-
-    viewModel.getDataByFaction(factionId)
+    val viewModel = getViewModel<DataSheetViewModel>() {
+        parametersOf(factionId, factionName)
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top
     ) {
         CenteredTopBar(
-            title = factionName,
+            title = viewModel.factionNameState,
             navigationAction = { navigator.popBackStack() })
         LazyColumn {
             item {
@@ -92,6 +91,4 @@ fun DataSheetList(
             }
         }
     }
-
-
 }

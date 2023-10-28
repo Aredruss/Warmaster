@@ -10,11 +10,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.aredruss.warmaster.R
 import com.aredruss.warmaster.domain.database.model.InvSave
 import com.aredruss.warmaster.domain.database.model.Miniature
+import com.aredruss.warmaster.ui.common.TextBlock
 
 @Composable
 fun StatBlock(miniature: Miniature, invSave: InvSave?) {
@@ -36,15 +39,16 @@ fun StatBlock(miniature: Miniature, invSave: InvSave?) {
             }
         }
         invSave?.rules?.let {
-            Text(
+            TextBlock(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 5.dp)
-                    .padding(horizontal = 10.dp),
-                text = it,
-                style = MaterialTheme.typography.labelSmall,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                    .padding(
+                        horizontal = 10.dp
+                    )
+                    .padding(top = 5.dp),
+                textTitle = stringResource(R.string.inv_save_rule),
+                textValue = it,
+                isTextCentered = true
             )
         }
     }
