@@ -19,34 +19,56 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.domain.database.index.IndexedComposition
+import com.aredruss.warmaster.ui.common.CollapsableContainer
 
 @Composable
 fun UnitCompositionView(
     modifier: Modifier,
     items: List<IndexedComposition>
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.secondaryContainer,
-                shape = RoundedCornerShape(size = 10.dp)
-            )
+    CollapsableContainer(
+        modifier = modifier,
+        title = stringResource(R.string.unit_composition)
     ) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp),
-            text = stringResource(R.string.unit_composition),
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
-            style = MaterialTheme.typography.labelSmall
-        )
+        Row(
+            modifier = modifier.fillMaxWidth()
+        ) {
+            Text(
+                modifier = Modifier
+                    .weight(2f)
+                    .padding(top = 10.dp, start = 10.dp),
+                text = stringResource(R.string.model),
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Start,
+                color = MaterialTheme.colorScheme.onSecondary,
+                style = MaterialTheme.typography.labelMedium
+            )
+            Text(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(top = 10.dp),
+                text = stringResource(R.string.count),
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSecondary,
+                style = MaterialTheme.typography.labelMedium
+            )
+            Text(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(top = 10.dp),
+                text = stringResource(R.string.points),
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSecondary,
+                style = MaterialTheme.typography.labelMedium
+            )
+        }
         items.forEach { indexedComposition ->
             indexedComposition.miniatures.forEachIndexed { index, name ->
                 Row(
                     modifier = Modifier
+                        .background(color = MaterialTheme.colorScheme.secondary)
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Start
                 ) {
@@ -55,9 +77,9 @@ fun UnitCompositionView(
                             .weight(2f)
                             .padding(top = 10.dp, start = 10.dp),
                         text = name,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.Normal,
                         textAlign = TextAlign.Start,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        color = MaterialTheme.colorScheme.onSecondary,
                         style = MaterialTheme.typography.labelSmall
                     )
                     Text(
@@ -65,29 +87,26 @@ fun UnitCompositionView(
                             .weight(1f)
                             .padding(top = 10.dp),
                         text = indexedComposition.unitCompositionMiniature[index],
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        color = MaterialTheme.colorScheme.onSecondary,
                         style = MaterialTheme.typography.labelSmall
                     )
                     Text(
                         modifier = Modifier
                             .weight(1f)
                             .padding(top = 10.dp),
-                        text =
-                        if (index == 0) {
+                        text = if (index == 0) {
                             indexedComposition.unitComposition.pointCosts.toString()
                         } else " ",
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.ExtraBold,
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        color = MaterialTheme.colorScheme.onSecondary,
                         style = MaterialTheme.typography.labelSmall
                     )
-
                 }
             }
-            Spacer(modifier = Modifier.height(height = 10.dp))
         }
+        Spacer(modifier = Modifier.height(height = 5.dp))
     }
-    Spacer(modifier = Modifier.height(height = 5.dp))
 }

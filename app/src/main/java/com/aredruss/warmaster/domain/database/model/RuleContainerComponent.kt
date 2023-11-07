@@ -13,10 +13,10 @@ data class RuleContainerComponent(
     val type: String,
     val altText: String? = null,
     val imageUrl: String? = null,
-    val title: String,
+    val title: String? = null,
     val subtitle: String? = null,
     val backgroundColor: String? = null,
     val ruleContainerId: String? = null,
     val armyRuleId: String? = null,
-    val detachmentRuleId: String
+    val detachmentRuleId: String? = null
 )

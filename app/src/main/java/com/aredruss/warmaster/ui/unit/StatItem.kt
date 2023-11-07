@@ -36,7 +36,7 @@ fun StatItem(title: String, value: String) {
         Box(
             modifier = Modifier
                 .padding(top = 5.dp)
-                .size(size = 35.dp)
+                .size(size = 40.dp)
                 .clip(RoundedCornerShape(corner = CornerSize(size = 5.dp)))
                 .background(MaterialTheme.colorScheme.secondaryContainer),
             contentAlignment = Alignment.Center

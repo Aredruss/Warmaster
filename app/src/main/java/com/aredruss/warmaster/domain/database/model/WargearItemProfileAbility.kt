@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity
-data class WargearItemProfileItemAbility(
+data class WargearItemProfileAbility(
     @PrimaryKey val id: String,
     val wargearItemProfileId: String,
     val wargearAbilityId: String,

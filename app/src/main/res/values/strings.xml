@@ -6,11 +6,23 @@
     <string name="datasheets">Datasheets</string>
     <string name="copyright">Copyright LOLOLOL</string>
     <string name="about_app">Warmaster is a secret app for viewing datasheets and building your army</string>
-    <string name="splash_message">The Machine spirit is looking...</string>
+    <string name="splash_message">The Machine spirit is looking…</string>
     <string name="regular_datasheets">Regular datasheets</string>
     <string name="combat_patrol_datasheets">Combat patrol datasheets</string>
     <string name="inv_save_rule">Inv. save rule</string>
     <string name="unit_composition">Unit Composition</string>
     <string name="lore">Lore</string>
     <string name="unit_info">Unit info</string>
+    <string name="no_sheets_av">Looks like there are no datasheets available</string>
+    <string name="favorite_units">Favorite units</string>
+    <string name="unit_keywords">Unit Keywords</string>
+    <string name="wargear_options">Wargear options</string>
+    <string name="model">Model</string>
+    <string name="count">Count</string>
+    <string name="points">Points</string>
+    <string name="no_rules_sorry">No rules, sorry</string>
+    <string name="ability_info">Ability Info</string>
+    <string name="abilities">Abilities</string>
+    <string name="faction">Faction</string>
+    <string name="faction_ability">Faction Ability</string>
 </resources>

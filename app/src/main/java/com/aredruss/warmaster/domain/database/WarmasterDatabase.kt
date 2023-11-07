@@ -4,6 +4,29 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityBondDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityDao
+import com.aredruss.warmaster.domain.database.dao.DatasheetDao
+import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
+import com.aredruss.warmaster.domain.database.dao.DatasheetRuleDao
+import com.aredruss.warmaster.domain.database.dao.FactionKeywordDao
+import com.aredruss.warmaster.domain.database.dao.FavoriteUnitDao
+import com.aredruss.warmaster.domain.database.dao.InvSaveDao
+import com.aredruss.warmaster.domain.database.dao.KeywordsDao
+import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceDao
+import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceSetDao
+import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceWargearItemDao
+import com.aredruss.warmaster.domain.database.dao.MiniatureDao
+import com.aredruss.warmaster.domain.database.dao.MiniatureKeywordDao
+import com.aredruss.warmaster.domain.database.dao.RuleContainerComponentDao
+import com.aredruss.warmaster.domain.database.dao.UnitCompositionDao
+import com.aredruss.warmaster.domain.database.dao.UnitCompositionMiniatureDao
+import com.aredruss.warmaster.domain.database.dao.WargearAbilityDao
+import com.aredruss.warmaster.domain.database.dao.WargearItemDao
+import com.aredruss.warmaster.domain.database.dao.WargearItemProfileAbilityDao
+import com.aredruss.warmaster.domain.database.dao.WargearItemProfileDao
+import com.aredruss.warmaster.domain.database.dao.WargearOptionDao
+import com.aredruss.warmaster.domain.database.dao.WargearOptionGroupDao
+import com.aredruss.warmaster.domain.database.dao.WargearRuleDao
+import com.aredruss.warmaster.domain.database.index.FavoriteUnit
 import com.aredruss.warmaster.domain.database.model.AllModelWargearChoice
 import com.aredruss.warmaster.domain.database.model.AllModelWargearChoiceSet
 import com.aredruss.warmaster.domain.database.model.AllModelWargearChoiceWargearItem
@@ -67,21 +90,11 @@ import com.aredruss.warmaster.domain.database.model.UnitCompositionMiniature
 import com.aredruss.warmaster.domain.database.model.WargearAbility
 import com.aredruss.warmaster.domain.database.model.WargearItem
 import com.aredruss.warmaster.domain.database.model.WargearItemProfile
-import com.aredruss.warmaster.domain.database.model.WargearItemProfileItemAbility
+import com.aredruss.warmaster.domain.database.model.WargearItemProfileAbility
 import com.aredruss.warmaster.domain.database.model.WargearLimit
 import com.aredruss.warmaster.domain.database.model.WargearOption
 import com.aredruss.warmaster.domain.database.model.WargearOptionGroup
 import com.aredruss.warmaster.domain.database.model.WargearRule
-import com.aredruss.warmaster.domain.database.dao.DatasheetDao
-import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
-import com.aredruss.warmaster.domain.database.dao.DatasheetRuleDao
-import com.aredruss.warmaster.domain.database.dao.FactionKeywordDao
-import com.aredruss.warmaster.domain.database.dao.InvSaveDao
-import com.aredruss.warmaster.domain.database.dao.KeywordsDao
-import com.aredruss.warmaster.domain.database.dao.MiniatureDao
-import com.aredruss.warmaster.domain.database.dao.MiniatureKeywordDao
-import com.aredruss.warmaster.domain.database.dao.UnitCompositionDao
-import com.aredruss.warmaster.domain.database.dao.UnitCompositionMiniatureDao
 
 @Database(
     entities = [
@@ -148,15 +161,17 @@ import com.aredruss.warmaster.domain.database.dao.UnitCompositionMiniatureDao
         WargearAbility::class,
         WargearItem::class,
         WargearItemProfile::class,
-        WargearItemProfileItemAbility::class,
+        WargearItemProfileAbility::class,
         WargearLimit::class,
         WargearOption::class,
         WargearOptionGroup::class,
         WargearRule::class,
+        FavoriteUnit::class
     ],
     version = 1
 )
 abstract class WarmasterDatabase : RoomDatabase() {
+    abstract fun favoriteUnitDao(): FavoriteUnitDao
     abstract fun datasheetDao(): DatasheetDao
     abstract fun datasheetFactionKeywordDao(): DatasheetFactionKeywordDao
     abstract fun factionKeywordDao(): FactionKeywordDao
@@ -169,4 +184,15 @@ abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun datasheetAbilityBondDao(): DatasheetAbilityBondDao
     abstract fun keywordsDao(): KeywordsDao
     abstract fun miniatureKeywordsDao(): MiniatureKeywordDao
+    abstract fun wargearOptionDao(): WargearOptionDao
+    abstract fun wargearOptionGroupDao(): WargearOptionGroupDao
+    abstract fun wargearItemProfileDao(): WargearItemProfileDao
+    abstract fun wargearItemDao(): WargearItemDao
+    abstract fun wargearAbilityDao(): WargearAbilityDao
+    abstract fun wargearItemProfileAbilityDao(): WargearItemProfileAbilityDao
+    abstract fun wargearRuleDao(): WargearRuleDao
+    abstract fun ruleContainerComponentComponent(): RuleContainerComponentDao
+    abstract fun loadoutChoiceDao(): LoadoutChoiceDao
+    abstract fun loadoutChoiceSetDao(): LoadoutChoiceSetDao
+    abstract fun loadoutChoiceWargearItemDao(): LoadoutChoiceWargearItemDao
 }

@@ -12,26 +12,33 @@ import kotlinx.coroutines.launch
 class DataSheetViewModel(
     private val factionId: String,
     private val factionName: String,
+    private val isSubFaction: Boolean,
+    private val isPatrol: Boolean,
+    private val isFavorites: Boolean,
     private val datasheetRepository: DatasheetRepository
 ) : ViewModel() {
 
-    var datasheetList: DatasheetLists by mutableStateOf(DatasheetLists()); private set
+    var datasheetList: List<Datasheet> by mutableStateOf(emptyList()); private set
     var factionNameState: String by mutableStateOf(""); private set
+    var factionIdState: String by mutableStateOf(""); private set
 
     init {
         factionNameState = factionName
+        factionIdState = factionId
         viewModelScope.launch {
-            val items = datasheetRepository.getDatasheetsForFaction(factionId = factionId)
-            datasheetList = DatasheetLists(
-                items[false] ?: emptyList(),
-                items[true] ?: emptyList()
-            )
+            datasheetList = if (isFavorites) {
+                datasheetRepository.getFavoriteUnitsForFaction(
+                    factionId = factionId,
+                    isSubFaction = isSubFaction
+                )
+
+            } else {
+                val items = datasheetRepository.getDatasheetsForFaction(
+                    factionId = factionId,
+                    isSubFaction = isSubFaction
+                )
+                items[isPatrol] ?: emptyList()
+            }
         }
     }
-
 }
-
-data class DatasheetLists(
-    val normalList: List<Datasheet> = emptyList(),
-    val patrolList: List<Datasheet> = emptyList()
-)

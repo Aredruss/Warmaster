@@ -5,3 +5,6 @@ An army building app
 ## TODOs
 + Add an army builder, possibly save to json and export to file
 + Add a linter
++ A data sheet search
++ Revamp unit info UI
++ 

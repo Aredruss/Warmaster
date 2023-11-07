@@ -24,18 +24,24 @@ class FactionListViewModel(
         }
     }
 
-    fun checkIfNeedSubFactions(factionId: String, name: String) = viewModelScope.launch {
+    fun checkIfNeedSubFactions(
+        factionId: String,
+        name: String,
+        image: String
+    ) = viewModelScope.launch {
         navigateState = Event(
             if (factionRepository.checkSubFactionsExist(factionId)) {
                 NavigateFromFactionsState.NavigateSubFactions(factionId)
             } else {
-                NavigateFromFactionsState.NavigateDatasheets(factionId, name)
+                NavigateFromFactionsState.NavigateDatasheets(factionId, name, image)
             }
         )
     }
 }
 
 sealed class NavigateFromFactionsState {
-    class NavigateDatasheets(val id: String, val name: String) : NavigateFromFactionsState()
+    class NavigateDatasheets(val id: String, val name: String, val image: String) :
+        NavigateFromFactionsState()
+
     class NavigateSubFactions(val id: String) : NavigateFromFactionsState()
 }

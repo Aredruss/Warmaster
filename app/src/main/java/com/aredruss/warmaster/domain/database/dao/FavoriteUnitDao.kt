@@ -1,0 +1,27 @@
+package com.aredruss.warmaster.domain.database.dao;
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.aredruss.warmaster.domain.database.index.FavoriteUnit
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface FavoriteUnitDao {
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(item: FavoriteUnit)
+
+    @Query("DELETE FROM FavoriteUnit WHERE datasheetId = :datasheetId")
+    suspend fun deleteUnit(datasheetId: String)
+
+    @Query("SELECT EXISTS (SELECT 1 FROM FavoriteUnit WHERE :datasheetId = datasheetId)")
+    fun checkIfFavorite(datasheetId: String): Flow<Boolean>
+
+    @Query("SELECT * FROM FavoriteUnit")
+    suspend fun getAllItemIds(): List<FavoriteUnit>
+
+    @Query("SELECT datasheetId FROM FavoriteUnit WHERE :factionId = factionId")
+    suspend fun getIdsByFactionId(factionId: String): List<String>
+}

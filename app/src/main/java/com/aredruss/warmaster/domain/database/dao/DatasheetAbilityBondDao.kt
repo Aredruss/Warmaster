@@ -15,6 +15,6 @@ interface DatasheetAbilityBondDao {
     @Query("SELECT * FROM DatasheetAbilityBond")
     suspend fun getAll(): List<DatasheetAbilityBond>
 
-    @Query("SELECT * FROM DatasheetAbilityBond WHERE :id = datasheetId")
-    suspend fun getItemsById(id: String): List<DatasheetAbilityBond>
+    @Query("SELECT datasheetAbilityId FROM DatasheetAbilityBond WHERE :id = datasheetId")
+    suspend fun getItemsById(id: String): List<String>
 }

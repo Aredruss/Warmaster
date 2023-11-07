@@ -20,7 +20,9 @@ import com.aredruss.warmaster.domain.database.model.Miniature
 import com.aredruss.warmaster.ui.common.TextBlock
 
 @Composable
-fun StatBlock(miniature: Miniature, invSave: InvSave?) {
+fun StatBlock(
+    miniature: Miniature
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier
@@ -34,22 +36,6 @@ fun StatBlock(miniature: Miniature, invSave: InvSave?) {
             StatItem(title = "W", value = miniature.wounds)
             StatItem(title = "LD", value = miniature.leadership)
             StatItem(title = "OC", value = miniature.objectiveControl)
-            invSave?.let {
-                StatItem(title = "IS", value = invSave.save)
-            }
-        }
-        invSave?.rules?.let {
-            TextBlock(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = 10.dp
-                    )
-                    .padding(top = 5.dp),
-                textTitle = stringResource(R.string.inv_save_rule),
-                textValue = it,
-                isTextCentered = true
-            )
         }
     }
 }

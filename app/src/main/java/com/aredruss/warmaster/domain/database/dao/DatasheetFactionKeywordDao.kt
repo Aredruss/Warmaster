@@ -13,6 +13,9 @@ interface DatasheetFactionKeywordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(items: List<DatasheetFactionKeyword>)
 
-    @Query("SELECT * FROM datasheetFactionKeyword WHERE factionKeywordId = :factionId")
-    suspend fun getAllDatasheetsByFaction(factionId: String): List<DatasheetFactionKeyword>
+    @Query("SELECT datasheetId FROM datasheetFactionKeyword WHERE factionKeywordId = :factionId")
+    suspend fun getAllDatasheetsByFaction(factionId: String): List<String>
+
+    @Query("SELECT COUNT(*) FROM datasheetFactionKeyword WHERE :datasheetId = datasheetId")
+    suspend fun getDatasheetFactionCount(datasheetId: String): Int
 }

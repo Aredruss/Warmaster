@@ -26,15 +26,21 @@ import com.aredruss.warmaster.domain.database.model.FactionKeyword
 @Composable
 fun FactionItem(
     factionKeyword: FactionKeyword,
-    action: (String, String) -> Unit
+    action: (String, String, String, Boolean) -> Unit
 ) {
     Box(
         modifier = Modifier
             .clickable {
-                action.invoke(factionKeyword.name, factionKeyword.id)
+                action.invoke(
+                    factionKeyword.name,
+                    factionKeyword.id,
+                    factionKeyword.rosterHeaderImage ?: "",
+                    factionKeyword.parentFactionKeywordId != null
+                )
             }
-            .padding(horizontal = 10.dp, vertical = 5.dp)
-            .clip(ShapeDefaults.Medium)
+            .padding(horizontal = 5.dp)
+            .padding(top = 5.dp)
+            .clip(shape = ShapeDefaults.Small)
             .fillMaxWidth()
             .height(height = 100.dp),
         contentAlignment = Alignment.Center
@@ -44,7 +50,7 @@ fun FactionItem(
             model = factionKeyword.rosterHeaderImage,
             contentDescription = null,
             colorFilter = ColorFilter.tint(
-                color = Color.Black.copy(alpha = 0.5f),
+                color = Color.Black.copy(alpha = 0.4f),
                 blendMode = BlendMode.Darken
             ),
             contentScale = ContentScale.Crop,

@@ -21,7 +21,7 @@ import com.aredruss.warmaster.domain.database.model.FactionKeyword
 fun UnitKeywords(modifier: Modifier,unitKeywords: List<String>) {
     FlowRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.Start ,
         verticalAlignment = Alignment.CenterVertically
     ) {
         unitKeywords.forEach {
@@ -30,13 +30,13 @@ fun UnitKeywords(modifier: Modifier,unitKeywords: List<String>) {
                     .padding(top = 1.dp)
                     .padding(horizontal = 1.dp)
                     .background(
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.surfaceVariant,
                         shape = RoundedCornerShape(size = 5.dp)
                     )
                     .padding(all = 5.dp),
                 text = it,
                 style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

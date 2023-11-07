@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -21,10 +22,12 @@ import com.aredruss.warmaster.ui.theme.md_theme_dark_primaryContainer
 fun CenteredTopBar(
     title: String,
     navigationAction: (() -> Unit)? = null,
+    enableAdditionalAction: Boolean = false,
     additionalActionIcon: Int? = null,
     additionalAction: (() -> Unit)? = null
 ) {
     CenterAlignedTopAppBar(
+        modifier = Modifier.shadow(elevation = 5.dp),
         title = {
             Text(
                 modifier = Modifier.padding(horizontal = 20.dp),
@@ -38,7 +41,7 @@ fun CenteredTopBar(
             navigationAction?.let {
                 IconButton(onClick = { it.invoke() }) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_right_arrow),
+                        painter = painterResource(id = R.drawable.ic_left_arrow),
                         contentDescription = null,
                         tint = Color.White
                     )
@@ -46,8 +49,8 @@ fun CenteredTopBar(
             }
         },
         actions = {
-            additionalAction?.let {
-                IconButton(onClick = { it.invoke() }) {
+            if (enableAdditionalAction) {
+                IconButton(onClick = { additionalAction?.invoke() }) {
                     Icon(
                         painter = painterResource(
                             id = additionalActionIcon ?: R.drawable.ic_info

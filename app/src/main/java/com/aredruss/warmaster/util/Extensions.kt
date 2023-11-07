@@ -7,3 +7,9 @@ fun String.getFormattedRule() = if (this.contains("■")) {
 } else {
     this
 }
+
+fun String.uppercaseFirst(): String {
+    return this.replaceFirst(
+        this.first(), this.first().titlecaseChar()
+    )
+}

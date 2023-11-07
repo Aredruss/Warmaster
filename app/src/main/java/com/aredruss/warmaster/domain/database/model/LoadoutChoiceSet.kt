@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Entity
 data class LoadoutChoiceSet(
     @PrimaryKey val id: String,
-    val miniatureId: String,
+    val miniatureId: String? = null,
     val datasheetId: String,
     val limit: Long,
     val allowDuplicates: Boolean,

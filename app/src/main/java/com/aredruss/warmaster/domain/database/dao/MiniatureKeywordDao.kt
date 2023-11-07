@@ -12,6 +12,6 @@ interface MiniatureKeywordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(items: List<MiniatureKeyword>)
 
-    @Query("SELECT * FROM MiniatureKeyword WHERE miniatureId = :id")
-    suspend fun getItemsById(id: String): List<MiniatureKeyword>
+    @Query("SELECT keywordId FROM MiniatureKeyword WHERE miniatureId = :id")
+    suspend fun getItemsById(id: String): List<String>
 }

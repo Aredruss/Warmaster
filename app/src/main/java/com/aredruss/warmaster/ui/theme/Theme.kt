@@ -83,7 +83,6 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun WarmasterTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -96,6 +95,11 @@ fun WarmasterTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = md_theme_dark_onSecondary.toArgb()
+            window.navigationBarColor = if (darkTheme) {
+                md_theme_dark_surfaceVariant
+            } else {
+                md_theme_light_surfaceVariant
+            }.toArgb()
             WindowCompat.getInsetsController(window, view)
                 .isAppearanceLightStatusBars = false
         }

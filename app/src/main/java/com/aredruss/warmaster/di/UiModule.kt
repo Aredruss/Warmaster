@@ -8,6 +8,9 @@ import com.aredruss.warmaster.ui.datasheets.DataSheetViewModel
 import com.aredruss.warmaster.ui.unit.UnitPageViewModel
 import com.aredruss.warmaster.ui.about.AboutViewModel
 import com.aredruss.warmaster.ui.subfaction.SubFactionViewModel
+import com.aredruss.warmaster.ui.datasheets.gameType.GameTypeViewModel
+import com.aredruss.warmaster.ui.datasheets.allFavorites.SavedDatasheetsViewModel
+import com.aredruss.warmaster.ui.abilityInfo.AbilityInfoViewModel
 
 val uiModule = module {
     viewModelOf(::FactionListViewModel)
@@ -16,4 +19,8 @@ val uiModule = module {
     viewModelOf(::UnitPageViewModel)
     viewModelOf(::AboutViewModel)
     viewModelOf(::SubFactionViewModel)
+    viewModelOf(::GameTypeViewModel)
+    viewModelOf(::SavedDatasheetsViewModel)
+    viewModelOf(::AbilityInfoViewModel)
+
 }

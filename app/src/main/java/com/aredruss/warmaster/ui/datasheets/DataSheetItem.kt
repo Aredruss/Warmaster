@@ -50,7 +50,7 @@ fun DatasheetItem(
                 blendMode = BlendMode.Darken
             ),
             contentScale = ContentScale.Crop,
-            filterQuality = FilterQuality.Low
+            filterQuality = FilterQuality.High
         )
         Text(
             text = datasheet.name,
