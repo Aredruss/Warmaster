@@ -21,8 +21,10 @@ class DataSheetViewModel(
     var datasheetList: List<Datasheet> by mutableStateOf(emptyList()); private set
     var factionNameState: String by mutableStateOf(""); private set
     var factionIdState: String by mutableStateOf(""); private set
+    var loadingState: Boolean by mutableStateOf(true); private set
 
     init {
+        loadingState = true
         factionNameState = factionName
         factionIdState = factionId
         viewModelScope.launch {
@@ -39,6 +41,7 @@ class DataSheetViewModel(
                 )
                 items[isPatrol] ?: emptyList()
             }
+            loadingState = false
         }
     }
 }

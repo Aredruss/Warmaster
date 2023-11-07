@@ -14,4 +14,6 @@
 .cxx
 local.properties
 .json
-/src/main/assets
+/src/main/assets/data.json
+/src/main/assets/metadata.json
+

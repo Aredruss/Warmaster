@@ -18,9 +18,13 @@ class FactionListViewModel(
     var factionKeywordList: List<FactionKeyword> by mutableStateOf(emptyList()); private set
     var navigateState: Event<NavigateFromFactionsState>? by mutableStateOf(null); private set
 
+    var loadingState: Boolean by mutableStateOf(true); private set
+
     init {
+        loadingState = true
         viewModelScope.launch {
             factionKeywordList = factionRepository.getMainFactions()
+            loadingState = false
         }
     }
 

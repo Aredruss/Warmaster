@@ -14,10 +14,13 @@ class SubFactionViewModel(
     private val factionRepository: FactionRepository
 ) : ViewModel() {
     var factionKeywordList: List<FactionKeyword> by mutableStateOf(emptyList()); private set
+    var loadingState: Boolean by mutableStateOf(true); private set
 
     init {
+        loadingState = true
         viewModelScope.launch {
             factionKeywordList = factionRepository.getSubFactions(factionId)
+            loadingState = false
         }
     }
 
