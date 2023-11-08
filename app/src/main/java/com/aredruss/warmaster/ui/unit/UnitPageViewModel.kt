@@ -36,6 +36,7 @@ class UnitPageViewModel(
     private val favoriteUnitRepository: FavoriteUnitRepository
 ) : ViewModel() {
 
+    var loadingState: Boolean by mutableStateOf(true); private set
     var datasheet: Datasheet? by mutableStateOf(null); private set
     var miniatureList: List<Miniature> by mutableStateOf(emptyList()); private set
     var ruleset: List<DatasheetRule>? by mutableStateOf(null); private set
@@ -50,6 +51,7 @@ class UnitPageViewModel(
     var isFavorite: Boolean? by mutableStateOf(null); private set
 
     init {
+        loadingState = true
         viewModelScope.launch {
             datasheet = unitInfoRepository.getDatasheetById(datasheetId)
             miniatureList = unitInfoRepository.getMiniaturesByDatasheetId(datasheetId)
@@ -78,6 +80,7 @@ class UnitPageViewModel(
                 isFavorite = it
             }.launchIn(this)
 
+            loadingState = false
             setAbilityData()
         }
     }
