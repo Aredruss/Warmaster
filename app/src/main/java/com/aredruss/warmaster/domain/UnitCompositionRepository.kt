@@ -18,7 +18,9 @@ class UnitCompositionRepository(
     ): List<IndexedComposition> {
         val names = miniatures.map { it.name }
         val compositions = emptyList<IndexedComposition>().toMutableList()
-        val mappedIdCompositions = emptyMap<String, List<UnitCompositionMiniature>>().toMutableMap()
+        val mappedIdCompositions = emptyMap<String, List<UnitCompositionMiniature>>()
+            .toSortedMap()
+            .toMutableMap()
 
         // We get unit_compositions for each UC variant (X points, 2X points, etc)
         val unitCompositionsMap = unitCompositionDao
