@@ -25,4 +25,5 @@
     <string name="abilities">Abilities</string>
     <string name="faction">Faction</string>
     <string name="faction_ability">Faction Ability</string>
+    <string name="first_launch_msg">The app is preparing the data.\nDon\'t worry, it will be quicker next time!</string>
 </resources>

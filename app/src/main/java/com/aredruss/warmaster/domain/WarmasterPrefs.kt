@@ -18,6 +18,8 @@ class WarmasterPrefs(appContext: Context) {
 
     var currentDataVersion: Long by prefs.long(0L)
 
+    var isFirstLaunch: Boolean by prefs.boolean(true)
+
 }
 
 
@@ -30,4 +32,15 @@ private fun SharedPreferences.long(
 
     override fun setValue(thisRef: Any, property: KProperty<*>, value: Long) =
         edit { putLong(key(property), value) }
+}
+
+private fun SharedPreferences.boolean(
+    defaultValue: Boolean,
+    key: (KProperty<*>) -> String = KProperty<*>::name
+) = object : ReadWriteProperty<Any, Boolean> {
+    override fun getValue(thisRef: Any, property: KProperty<*>): Boolean =
+        getBoolean(key(property), defaultValue)
+
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: Boolean) =
+        edit { putBoolean(key(property), value) }
 }

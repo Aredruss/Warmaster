@@ -3,6 +3,7 @@ package com.aredruss.warmaster.ui.unit
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -101,21 +104,24 @@ fun UnitPage(
                     }
 
                 } else {
-                    LazyColumn(
+                    Column(
                         modifier = Modifier
                             .padding(paddingValues = paddingValues)
                             .fillMaxSize()
+                            .verticalScroll(state = rememberScrollState())
                     ) {
-                        item {
-                            AsyncImage(
-                                modifier = Modifier.fillMaxWidth(),
-                                model = unitViewModel.datasheet?.bannerImage,
-                                contentDescription = null,
-                                contentScale = ContentScale.Crop,
-                                filterQuality = FilterQuality.High
-                            )
-                        }
-                        items(unitViewModel.miniatureList) { mini ->
+
+                        AsyncImage(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(height = 200.dp),
+                            model = unitViewModel.datasheet?.bannerImage,
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            filterQuality = FilterQuality.High
+                        )
+
+                        unitViewModel.miniatureList.forEach { mini ->
                             if (unitViewModel.miniatureList.size > 1) {
                                 Text(
                                     modifier = Modifier
@@ -133,51 +139,46 @@ fun UnitPage(
                             }
                         }
                         unitViewModel.invSave?.let {
-                            item {
-                                InvSaveView(modifier = Modifier.fillMaxWidth(), invSave = it)
-                            }
+
+                            InvSaveView(modifier = Modifier.fillMaxWidth(), invSave = it)
+
                         }
                         unitViewModel.datasheetWargear?.let {
-                            item {
-                                WeaponProfileViews(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    profiles = it,
-                                    onAbilityClick = { id, name ->
-                                        navigateToAbility(
-                                            abilityId = id,
-                                            abilityName = name,
-                                            type = AbilityInfoViewModel.Companion.ScreenType.GEAR
-                                        )
-                                    }
-                                )
-                            }
+                            WeaponProfileViews(
+                                modifier = Modifier.fillMaxWidth(),
+                                profiles = it,
+                                onAbilityClick = { id, name ->
+                                    navigateToAbility(
+                                        abilityId = id,
+                                        abilityName = name,
+                                        type = AbilityInfoViewModel.Companion.ScreenType.GEAR
+                                    )
+                                }
+                            )
                         }
                         unitViewModel.datasheetAbilities?.let {
-                            item {
-                                AbilitiesView(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    abilities = it,
-                                    onClick = { id, name, type ->
-                                        navigateToAbility(
-                                            abilityId = id,
-                                            abilityName = name,
-                                            type = type
-                                        )
-                                    }
-                                )
-                            }
+                            AbilitiesView(
+                                modifier = Modifier.fillMaxWidth(),
+                                abilities = it,
+                                onClick = { id, name, type ->
+                                    navigateToAbility(
+                                        abilityId = id,
+                                        abilityName = name,
+                                        type = type
+                                    )
+                                }
+                            )
                         }
-                        unitViewModel.customWargearAbilities?.let { itemRules ->
-                            items(itemRules) {
-                                CollapsableTextContainer(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    title = it.name,
-                                    content = it.ruleText ?: "",
-                                    icon = R.drawable.ic_books
-                                )
-                            }
+                        unitViewModel.customWargearAbilities?.forEach {
+                            CollapsableTextContainer(
+                                modifier = Modifier.fillMaxWidth(),
+                                title = it.name,
+                                content = it.ruleText ?: "",
+                                icon = R.drawable.ic_books
+                            )
                         }
-                        items(unitViewModel.ruleset ?: emptyList()) { rule ->
+
+                        unitViewModel.ruleset?.forEach { rule ->
                             CollapsableTextContainer(
                                 modifier = Modifier.fillMaxWidth(),
                                 title = rule.name,
@@ -187,58 +188,49 @@ fun UnitPage(
                         }
                         unitViewModel.wargearOptionRules?.let { rules ->
                             if (rules.isNotEmpty()) {
-                                item {
-                                    WargearOptionView(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        rules = rules
-                                    )
-                                }
+                                WargearOptionView(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    rules = rules
+                                )
+
                             }
                         }
                         unitViewModel.datasheet?.unitComposition?.let {
-                            item {
-                                CollapsableTextContainer(
-                                    title = stringResource(R.string.unit_info),
-                                    modifier = Modifier.fillMaxWidth(),
-                                    content = it
-                                )
-                            }
+                            CollapsableTextContainer(
+                                title = stringResource(R.string.unit_info),
+                                modifier = Modifier.fillMaxWidth(),
+                                content = it
+                            )
                         }
                         unitViewModel.unitComposition?.let { composition ->
                             if (composition.isNotEmpty()) {
-                                item {
-                                    UnitCompositionView(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        items = composition
-                                    )
-                                }
+                                UnitCompositionView(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    items = composition
+                                )
                             }
                         }
                         unitViewModel.keywords?.let { list ->
-                            item {
-                                CollapsableContainer(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    title = stringResource(R.string.unit_keywords)
-                                ) {
-                                    UnitKeywords(
-                                        modifier = Modifier
-                                            .padding(
-                                                vertical = 5.dp,
-                                                horizontal = 10.dp
-                                            ),
-                                        unitKeywords = list
-                                    )
-                                }
+                            CollapsableContainer(
+                                modifier = Modifier.fillMaxWidth(),
+                                title = stringResource(R.string.unit_keywords)
+                            ) {
+                                UnitKeywords(
+                                    modifier = Modifier
+                                        .padding(
+                                            vertical = 5.dp,
+                                            horizontal = 10.dp
+                                        ),
+                                    unitKeywords = list
+                                )
                             }
                         }
                         unitViewModel.datasheet?.lore?.let {
-                            item {
-                                LoreView(modifier = Modifier, lore = it)
-                            }
+                            LoreView(modifier = Modifier, lore = it)
+
                         }
-                        item {
-                            Spacer(modifier = Modifier.height(height = 30.dp))
-                        }
+                        Spacer(modifier = Modifier.height(height = 30.dp))
+
                     }
                 }
             }

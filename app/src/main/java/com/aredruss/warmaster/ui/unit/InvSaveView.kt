@@ -73,7 +73,6 @@ fun InvSaveView(
                 text = stringResource(id = R.string.inv_save_rule),
                 style = MaterialTheme.typography.labelMedium,
                 textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Bold,
                 color = Color.White
             )
             Spacer(modifier = Modifier.weight(1f))

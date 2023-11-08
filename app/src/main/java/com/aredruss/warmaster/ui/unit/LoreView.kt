@@ -59,11 +59,10 @@ fun LoreView(modifier: Modifier, lore: String) {
             ), verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                modifier = Modifier.padding(horizontal = 15.dp),
+                modifier = Modifier.padding(horizontal = 10.dp),
                 text = stringResource(id = R.string.lore),
                 style = MaterialTheme.typography.labelMedium,
                 textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Bold,
                 color = Color.White
             )
             Spacer(modifier = Modifier.weight(1f))
