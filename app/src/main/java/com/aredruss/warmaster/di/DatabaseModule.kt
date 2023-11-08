@@ -20,6 +20,7 @@ val databaseModule = module {
     single { get<WarmasterDatabase>().datasheetAbilityBondDao() }
     single { get<WarmasterDatabase>().datasheetAbilityDao() }
     single { get<WarmasterDatabase>().datasheetRuleDao() }
+    single { get<WarmasterDatabase>().datasheetSubAbilityDao() }
     single { get<WarmasterDatabase>().invSaveDao() }
 
     single { get<WarmasterDatabase>().unitCompositionDao() }

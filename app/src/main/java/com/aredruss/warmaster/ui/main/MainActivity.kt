@@ -14,12 +14,10 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
-import com.ramcosta.composedestinations.annotation.InternalDestinationsApi
 
 class MainActivity : ComponentActivity() {
     @OptIn(
-        ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class,
-        InternalDestinationsApi::class
+        ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

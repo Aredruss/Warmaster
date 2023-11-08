@@ -7,6 +7,7 @@ import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetRuleDao
+import com.aredruss.warmaster.domain.database.dao.DatasheetSubAbilityDao
 import com.aredruss.warmaster.domain.database.dao.FactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.FavoriteUnitDao
 import com.aredruss.warmaster.domain.database.dao.InvSaveDao
@@ -182,6 +183,7 @@ abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun unitCompositionMiniatureDao(): UnitCompositionMiniatureDao
     abstract fun datasheetRuleDao(): DatasheetRuleDao
     abstract fun datasheetAbilityBondDao(): DatasheetAbilityBondDao
+    abstract fun datasheetSubAbilityDao(): DatasheetSubAbilityDao
     abstract fun keywordsDao(): KeywordsDao
     abstract fun miniatureKeywordsDao(): MiniatureKeywordDao
     abstract fun wargearOptionDao(): WargearOptionDao

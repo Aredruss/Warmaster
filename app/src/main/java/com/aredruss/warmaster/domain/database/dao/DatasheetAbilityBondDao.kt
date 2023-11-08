@@ -9,7 +9,7 @@ import com.aredruss.warmaster.domain.database.model.DatasheetAbilityBond
 @Dao
 interface DatasheetAbilityBondDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(items: List<DatasheetAbilityBond>)
 
     @Query("SELECT * FROM DatasheetAbilityBond")

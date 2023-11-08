@@ -110,7 +110,6 @@ fun UnitPage(
                             .fillMaxSize()
                             .verticalScroll(state = rememberScrollState())
                     ) {
-
                         AsyncImage(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -139,7 +138,6 @@ fun UnitPage(
                             }
                         }
                         unitViewModel.invSave?.let {
-
                             InvSaveView(modifier = Modifier.fillMaxWidth(), invSave = it)
 
                         }
@@ -167,6 +165,12 @@ fun UnitPage(
                                         type = type
                                     )
                                 }
+                            )
+                        }
+                        unitViewModel.subAbilities?.let {
+                            SubAbilitiesView(
+                                modifier = Modifier.fillMaxWidth(),
+                                abilities = it
                             )
                         }
                         unitViewModel.customWargearAbilities?.forEach {

@@ -72,7 +72,7 @@ fun CollapsableContainer(
         ) {
             iconId?.let {
                 Icon(
-                    modifier = Modifier.padding(horizontal = 5.dp),
+                    modifier = Modifier.padding(start = 10.dp, end = 5.dp),
                     painter = painterResource(id = iconId),
                     contentDescription = "icon"
                 )

@@ -3,6 +3,7 @@ package com.aredruss.warmaster.ui.unit
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Shadow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aredruss.warmaster.domain.AbilityInfoRepository
@@ -15,6 +16,7 @@ import com.aredruss.warmaster.domain.database.index.AggregatedAbilities
 import com.aredruss.warmaster.domain.database.index.IndexedComposition
 import com.aredruss.warmaster.domain.database.model.Datasheet
 import com.aredruss.warmaster.domain.database.model.DatasheetRule
+import com.aredruss.warmaster.domain.database.model.DatasheetSubAbility
 import com.aredruss.warmaster.domain.database.model.InvSave
 import com.aredruss.warmaster.domain.database.model.Miniature
 import com.aredruss.warmaster.domain.database.model.WargearItem
@@ -43,6 +45,7 @@ class UnitPageViewModel(
     var keywords: List<String>? by mutableStateOf(emptyList()); private set
     var invSave: InvSave? by mutableStateOf(null); private set
     var datasheetAbilities: AggregatedAbilities? by mutableStateOf(null); private set
+    var subAbilities: Map<String, List<DatasheetSubAbility>>? by mutableStateOf(null); private set
     var unitComposition: List<IndexedComposition>? by mutableStateOf(null); private set
     var wargearOptionRules: List<WargearRule>? by mutableStateOf(null); private set
     var datasheetWargear: Map<String, List<WargearItemProfile>>? by mutableStateOf(null); private set
@@ -57,7 +60,9 @@ class UnitPageViewModel(
             miniatureList = unitInfoRepository.getMiniaturesByDatasheetId(datasheetId)
             invSave = unitInfoRepository.getInvSaveForUnit(datasheetId)
             ruleset = unitInfoRepository.getDatasheetRules(datasheetId)
-            datasheetAbilities = unitInfoRepository.getDatasheetAbilities(datasheetId)
+            datasheetAbilities = unitInfoRepository.getDatasheetAbilities(datasheetId).apply {
+                subAbilities = subNormalAbilities
+            }
 
             miniatureList.firstOrNull()?.let {
                 keywords = unitInfoRepository.getMiniatureKeywords(it.id)

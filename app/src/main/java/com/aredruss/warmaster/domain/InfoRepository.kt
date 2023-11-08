@@ -99,6 +99,7 @@ class InfoRepository(
                 compositionPopulator.insertUnitCompositionMiniature(unitCompositionMiniature)
                 datasheetPopulator.insertDatasheetRule(datasheetRule + datasheetDamageRule)
                 datasheetPopulator.insertDatasheetAbilityBond(datasheetAbilityBonds)
+                datasheetPopulator.insertDatasheetSubAbility(datasheetSubAbilities)
 
                 datasheetPopulator.insertKeywords(keywords)
                 datasheetPopulator.insertMiniatureKeyword(miniatureKeywords)

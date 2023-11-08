@@ -4,6 +4,7 @@ import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityBondDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetRuleDao
+import com.aredruss.warmaster.domain.database.dao.DatasheetSubAbilityDao
 import com.aredruss.warmaster.domain.database.dao.InvSaveDao
 import com.aredruss.warmaster.domain.database.dao.KeywordsDao
 import com.aredruss.warmaster.domain.database.dao.MiniatureDao
@@ -12,6 +13,7 @@ import com.aredruss.warmaster.domain.database.model.Datasheet
 import com.aredruss.warmaster.domain.database.model.DatasheetAbility
 import com.aredruss.warmaster.domain.database.model.DatasheetAbilityBond
 import com.aredruss.warmaster.domain.database.model.DatasheetRule
+import com.aredruss.warmaster.domain.database.model.DatasheetSubAbility
 import com.aredruss.warmaster.domain.database.model.InvSave
 import com.aredruss.warmaster.domain.database.model.Keyword
 import com.aredruss.warmaster.domain.database.model.Miniature
@@ -26,6 +28,7 @@ class DatasheetPopulator(
     private val invSaveDao: InvSaveDao,
     private val datasheetRuleDao: DatasheetRuleDao,
     private val datasheetAbilityDao: DatasheetAbilityDao,
+    private val datasheetSubAbilityDao: DatasheetSubAbilityDao,
     private val datasheetAbilityBondDao: DatasheetAbilityBondDao,
     private val miniatureKeywordsDao: MiniatureKeywordDao,
     private val keywordsDao: KeywordsDao,
@@ -54,6 +57,11 @@ class DatasheetPopulator(
     suspend fun insertDatasheetAbility(data: List<DatasheetAbility>) =
         withContext(Dispatchers.IO + Job()) {
             datasheetAbilityDao.insert(data)
+        }
+
+    suspend fun insertDatasheetSubAbility(data: List<DatasheetSubAbility>) =
+        withContext(Dispatchers.IO + Job()) {
+            datasheetSubAbilityDao.insert(data)
         }
 
     suspend fun insertDatasheetAbilityBond(data: List<DatasheetAbilityBond>) =

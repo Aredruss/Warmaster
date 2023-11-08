@@ -5,6 +5,7 @@ import com.aredruss.warmaster.domain.database.model.DatasheetAbility
 import com.aredruss.warmaster.domain.database.model.DatasheetAbilityBond
 import com.aredruss.warmaster.domain.database.model.DatasheetFactionKeyword
 import com.aredruss.warmaster.domain.database.model.DatasheetRule
+import com.aredruss.warmaster.domain.database.model.DatasheetSubAbility
 import com.aredruss.warmaster.domain.database.model.FactionKeyword
 import com.aredruss.warmaster.domain.database.model.InvSave
 import com.aredruss.warmaster.domain.database.model.Keyword
@@ -50,6 +51,8 @@ data class WarhammerData(
     val datasheetDamageRule: List<DatasheetRule>,
     @SerialName("datasheet_ability")
     val datasheetAbilities: List<DatasheetAbility>,
+    @SerialName("datasheet_sub_ability")
+    val datasheetSubAbilities: List<DatasheetSubAbility>,
     @SerialName("datasheet_datasheet_ability")
     val datasheetAbilityBonds: List<DatasheetAbilityBond>,
     @SerialName("unit_composition")

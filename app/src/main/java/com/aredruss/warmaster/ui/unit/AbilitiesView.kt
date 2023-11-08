@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.domain.database.index.AggregatedAbilities
 import com.aredruss.warmaster.domain.database.model.DatasheetAbility
+import com.aredruss.warmaster.domain.database.model.DatasheetSubAbility
 import com.aredruss.warmaster.ui.abilityInfo.AbilityInfoViewModel
 import com.aredruss.warmaster.ui.common.CollapsableContainer
 import com.aredruss.warmaster.ui.theme.md_theme_dark_onPrimary
@@ -71,6 +72,33 @@ fun AbilitiesView(
             }
         }
     }
+}
+
+@Composable
+fun SubAbilitiesView(
+    modifier: Modifier,
+    abilities: Map<String, List<DatasheetSubAbility>>,
+) {
+    abilities.keys.forEach { key ->
+        CollapsableContainer(
+            title = key.uppercaseFirst(),
+            modifier = modifier
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(top = 5.dp)
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.colorScheme.secondary)
+            ) {
+                abilities[key]?.forEach { ability ->
+                    SubAbilityView(ability = ability)
+                    Spacer(modifier = Modifier.height(height = 5.dp))
+                }
+
+                Spacer(modifier = Modifier.height(height = 5.dp)) }
+        }
+    }
+
 }
 
 @Composable
@@ -146,6 +174,50 @@ fun FullAbilityView(
         )
     }
 }
+
+@Composable
+fun SubAbilityView(
+    ability: DatasheetSubAbility
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 5.dp)
+    ) {
+        MiniSubAbilityView(ability = ability)
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 5.dp, start = 10.dp),
+            text = ability.rules ?: "-",
+            fontWeight = FontWeight.Normal,
+            textAlign = TextAlign.Start,
+            color = MaterialTheme.colorScheme.onSecondary,
+            style = MaterialTheme.typography.labelMedium
+        )
+    }
+}
+
+@Composable
+fun MiniSubAbilityView(
+    ability: DatasheetSubAbility,
+) {
+    Text(
+        modifier = Modifier
+            .padding(start = 5.dp, top = 10.dp)
+            .background(
+                color = md_theme_dark_onPrimary,
+                shape = MaterialTheme.shapes.extraSmall
+            )
+            .padding(all = 5.dp),
+        text = ability.name,
+        fontWeight = FontWeight.ExtraBold,
+        textAlign = TextAlign.Center,
+        color = Color.White,
+        style = MaterialTheme.typography.labelMedium
+    )
+}
+
 
 @Composable
 fun AbilityBlockHeader(title: String) {
