@@ -45,7 +45,9 @@ fun AbilitiesView(
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.secondary)
         ) {
-            AbilityBlockHeader(title = stringResource(id = R.string.faction))
+            if (abilities.factionAbilities?.isNotEmpty() == true) {
+                AbilityBlockHeader(title = stringResource(id = R.string.faction))
+            }
             abilities.factionAbilities?.let { abilities ->
                 AbilitiesFlowRow(
                     abilities = abilities.map { it.first },

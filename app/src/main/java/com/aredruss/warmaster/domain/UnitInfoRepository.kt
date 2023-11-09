@@ -77,9 +77,6 @@ class UnitInfoRepository(
 
             return@withContext AggregatedAbilities(
                 normalAbilities = abilities.filter { it.armyRuleId == null }
-                    .filter {
-                        it !in extraAbilities.keys
-                    }
                     .groupBy { it.abilityType },
                 subNormalAbilities = extraAbilities.map {
                     it.key.name to it.value

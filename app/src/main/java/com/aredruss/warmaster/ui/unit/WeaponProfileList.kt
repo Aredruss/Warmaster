@@ -143,7 +143,7 @@ fun WeaponAbilityList(
                     }
                     .padding(all = 5.dp),
                 text = it.name,
-                style = MaterialTheme.typography.labelMedium,
+                style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
