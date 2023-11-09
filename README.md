@@ -3,7 +3,7 @@
 A personal tabletop wargaming companion app
 
 **IMPORTANT**: This app is for my personal use only. 
-I do not intend to share it or it's functions with anyone.
+I do not intend to share it or its functions with anyone.
 This page acts as personal project notes, and the releases help me organize my work.
 All the data is collected by myself and myself only.
 
@@ -13,7 +13,7 @@ All the data is collected by myself and myself only.
 + Add an army builder
 + Basic rules
 + Export/Import data
-+ A data sheet search
++ A search functionality for datasheet lists
 
 ### Code
 + Add a linter
