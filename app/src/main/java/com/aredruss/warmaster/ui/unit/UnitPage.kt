@@ -49,12 +49,11 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun UnitPage(
     datasheetId: String,
-    factionId: String,
     navigator: DestinationsNavigator
 ) {
 
     val unitViewModel = getViewModel<UnitPageViewModel> {
-        parametersOf(datasheetId, factionId)
+        parametersOf(datasheetId)
     }
 
     fun navigateToAbility(

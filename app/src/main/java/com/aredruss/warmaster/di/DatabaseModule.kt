@@ -43,4 +43,6 @@ val databaseModule = module {
     single { get<WarmasterDatabase>().loadoutChoiceDao() }
     single { get<WarmasterDatabase>().loadoutChoiceSetDao() }
     single { get<WarmasterDatabase>().loadoutChoiceWargearItemDao() }
+
+    single { get<WarmasterDatabase>().publicationDao() }
 }

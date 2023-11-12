@@ -13,7 +13,6 @@ All the data is collected by myself and myself only.
 + Add an army builder
 + Basic rules
 + Export/Import data
-+ A search functionality for datasheet lists
 
 ### Code
 + Add a linter

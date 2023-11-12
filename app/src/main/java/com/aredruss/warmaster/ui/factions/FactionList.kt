@@ -25,6 +25,7 @@ import com.aredruss.warmaster.ui.common.ClickableTextLine
 import com.aredruss.warmaster.ui.destinations.AboutWarmasterDestination
 import com.aredruss.warmaster.ui.destinations.GameTypeDestination
 import com.aredruss.warmaster.ui.destinations.SavedDatasheetsDestination
+import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
 import com.aredruss.warmaster.ui.destinations.SubfactionListDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -59,8 +60,14 @@ fun FactionList(navigator: DestinationsNavigator) {
             CenteredTopBar(
                 title = stringResource(id = R.string.factions),
                 enableAdditionalAction = true,
+                additionalActionIcon = R.drawable.ic_search,
                 additionalAction = {
-                    navigator.navigate(AboutWarmasterDestination)
+                    navigator.navigate(
+                        SearchScreenDestination(
+                            factionId = "",
+                            isSubFaction = false
+                        )
+                    )
                 }
             )
         },

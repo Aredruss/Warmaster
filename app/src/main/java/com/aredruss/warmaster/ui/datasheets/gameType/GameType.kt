@@ -19,6 +19,7 @@ import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextCard
 import com.aredruss.warmaster.ui.destinations.DataSheetListDestination
+import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
@@ -56,8 +57,22 @@ fun GameType(
     }
 
     Scaffold(topBar = {
-        CenteredTopBar(title = viewModel.factionNameState,
-            navigationAction = { navigator.popBackStack() })
+        CenteredTopBar(
+            title = viewModel.factionNameState,
+            navigationAction = {
+                navigator.popBackStack()
+            },
+            additionalActionIcon = R.drawable.ic_search,
+            enableAdditionalAction = true,
+            additionalAction = {
+                navigator.navigate(
+                    SearchScreenDestination(
+                        viewModel.factionIdState,
+                        viewModel.isSubFactionState
+                    )
+                )
+            }
+        )
     }, content = {
         Column(
             modifier = Modifier
@@ -75,9 +90,13 @@ fun GameType(
                 filterQuality = FilterQuality.High
             )
             ClickableTextCard(
-                modifier = Modifier, text = stringResource(id = R.string.regular_datasheets)
+                modifier = Modifier,
+                text = stringResource(id = R.string.regular_datasheets)
             ) {
-                navigateToDatasheetList(isPatrol = false, isFavorites = false)
+                navigateToDatasheetList(
+                    isPatrol = false,
+                    isFavorites = false
+                )
             }
             ClickableTextCard(
                 modifier = Modifier,

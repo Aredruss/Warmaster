@@ -29,7 +29,6 @@ import timber.log.Timber
 
 class UnitPageViewModel(
     private val datasheetId: String,
-    private val factionId: String,
     private val unitInfoRepository: UnitInfoRepository,
     private val unitCompositionRepository: UnitCompositionRepository,
     private val wargearRepository: WargearRepository,
@@ -37,6 +36,8 @@ class UnitPageViewModel(
     private val loadoutChoiceRepository: LoadoutChoiceRepository,
     private val favoriteUnitRepository: FavoriteUnitRepository
 ) : ViewModel() {
+
+    private var factionId: String? = null
 
     var loadingState: Boolean by mutableStateOf(true); private set
     var datasheet: Datasheet? by mutableStateOf(null); private set
@@ -57,6 +58,11 @@ class UnitPageViewModel(
         loadingState = true
         viewModelScope.launch {
             datasheet = unitInfoRepository.getDatasheetById(datasheetId)
+
+            datasheet?.publicationId?.let {
+                factionId = unitInfoRepository.getFactionId(it)
+            }
+
             miniatureList = unitInfoRepository.getMiniaturesByDatasheetId(datasheetId)
             invSave = unitInfoRepository.getInvSaveForUnit(datasheetId)
             ruleset = unitInfoRepository.getDatasheetRules(datasheetId)
@@ -99,7 +105,9 @@ class UnitPageViewModel(
     }
 
     private fun addToFavorites() = viewModelScope.launch {
-        favoriteUnitRepository.insertFavorite(datasheetId, factionId)
+        factionId?.let {
+            favoriteUnitRepository.insertFavorite(datasheetId, it)
+        }
     }
 
     private fun removeFromFavorites() = viewModelScope.launch {

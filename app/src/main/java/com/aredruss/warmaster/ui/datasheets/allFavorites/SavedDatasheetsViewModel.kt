@@ -13,7 +13,7 @@ class SavedDatasheetsViewModel(
     datasheetRepository: DatasheetRepository
 ) : ViewModel() {
 
-    var datasheetList: List<Pair<String, Datasheet>> by mutableStateOf(emptyList()); private set
+    var datasheetList: List<Datasheet> by mutableStateOf(emptyList()); private set
 
     init {
         viewModelScope.launch {

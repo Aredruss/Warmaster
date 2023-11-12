@@ -17,4 +17,7 @@ interface DatasheetDao {
 
     @Query("SELECT * FROM Datasheet WHERE id IN (:ids) ORDER BY displayOrder")
     suspend fun getItemsByIds(ids: List<String>): List<Datasheet>
+
+    @Query("SELECT * FROM Datasheet WHERE name LIKE '%' || :query || '%'")
+    fun getItemsByName(query: String): Flow<List<Datasheet>>
 }

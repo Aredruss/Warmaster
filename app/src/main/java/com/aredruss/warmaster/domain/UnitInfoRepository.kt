@@ -9,6 +9,7 @@ import com.aredruss.warmaster.domain.database.dao.InvSaveDao
 import com.aredruss.warmaster.domain.database.dao.KeywordsDao
 import com.aredruss.warmaster.domain.database.dao.MiniatureDao
 import com.aredruss.warmaster.domain.database.dao.MiniatureKeywordDao
+import com.aredruss.warmaster.domain.database.dao.PublicationDao
 import com.aredruss.warmaster.domain.database.dao.RuleContainerComponentDao
 import com.aredruss.warmaster.domain.database.index.AggregatedAbilities
 import com.aredruss.warmaster.domain.database.model.DatasheetAbility
@@ -27,7 +28,8 @@ class UnitInfoRepository(
     private val datasheetSubAbilityDao: DatasheetSubAbilityDao,
     private val miniatureKeywordDao: MiniatureKeywordDao,
     private val keywordsDao: KeywordsDao,
-    private val ruleContainerComponentDao: RuleContainerComponentDao
+    private val ruleContainerComponentDao: RuleContainerComponentDao,
+    private val publicationDao: PublicationDao
 ) {
     suspend fun getDatasheetById(id: String) = withContext(Dispatchers.IO + Job()) {
         datasheetDao.getItemById(
@@ -47,6 +49,11 @@ class UnitInfoRepository(
 
     suspend fun getDatasheetRules(datasheetId: String) =
         withContext(Dispatchers.IO + Job()) { datasheetRuleDao.getItemById(datasheetId) }
+
+    suspend fun getFactionId(publicationId: String) =
+        withContext(Dispatchers.IO + Job()) {
+            publicationDao.getFactionKeywordId(publicationId)
+        }
 
     suspend fun getMiniatureKeywords(miniatureId: String): List<String> =
         withContext(Dispatchers.IO + Job()) {

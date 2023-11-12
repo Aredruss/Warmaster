@@ -88,11 +88,12 @@ class InfoRepository(
     private suspend fun populateDatabase(data: WarhammerData): Boolean =
         withContext(Dispatchers.IO) {
             data.apply {
-                datasheetPopulator.insertDatasheet(datasheets)
-                datasheetPopulator.insertMiniatures(miniatures)
                 factionPopulator.insertDatasheetFactionKeyword(datasheetFactionKeywords)
                 factionPopulator.insertFactionKeyword(factionKeywords)
+                factionPopulator.insertPublications(publications)
 
+                datasheetPopulator.insertDatasheet(datasheets)
+                datasheetPopulator.insertMiniatures(miniatures)
                 datasheetPopulator.insertInvSave(invSaves)
                 datasheetPopulator.insertDatasheetAbility(datasheetAbilities)
                 compositionPopulator.insertUnitComposition(unitComposition)
@@ -100,7 +101,6 @@ class InfoRepository(
                 datasheetPopulator.insertDatasheetRule(datasheetRule + datasheetDamageRule)
                 datasheetPopulator.insertDatasheetAbilityBond(datasheetAbilityBonds)
                 datasheetPopulator.insertDatasheetSubAbility(datasheetSubAbilities)
-
                 datasheetPopulator.insertKeywords(keywords)
                 datasheetPopulator.insertMiniatureKeyword(miniatureKeywords)
 
@@ -111,7 +111,6 @@ class InfoRepository(
                 wargearPopulator.insertWargearAbility(wargearAbilities)
                 wargearPopulator.insertWargearItemProfileAbility(wargearItemProfileAbilities)
                 wargearPopulator.insertWargearRule(wargearRules)
-
                 wargearPopulator.insertRuleContainerComponent(ruleContainerComponents)
 
                 loadoutPopulator.insertLoadoutChoiceWargearItem(loadoutChoiceWargearItems)

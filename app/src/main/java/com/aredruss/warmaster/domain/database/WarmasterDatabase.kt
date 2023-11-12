@@ -17,6 +17,7 @@ import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceSetDao
 import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceWargearItemDao
 import com.aredruss.warmaster.domain.database.dao.MiniatureDao
 import com.aredruss.warmaster.domain.database.dao.MiniatureKeywordDao
+import com.aredruss.warmaster.domain.database.dao.PublicationDao
 import com.aredruss.warmaster.domain.database.dao.RuleContainerComponentDao
 import com.aredruss.warmaster.domain.database.dao.UnitCompositionDao
 import com.aredruss.warmaster.domain.database.dao.UnitCompositionMiniatureDao
@@ -197,4 +198,5 @@ abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun loadoutChoiceDao(): LoadoutChoiceDao
     abstract fun loadoutChoiceSetDao(): LoadoutChoiceSetDao
     abstract fun loadoutChoiceWargearItemDao(): LoadoutChoiceWargearItemDao
+    abstract fun publicationDao(): PublicationDao
 }

@@ -28,6 +28,7 @@ fun DatasheetItem(
     datasheet: Datasheet,
     action: (String) -> Unit
 ) {
+    val subtext = if (datasheet.isCombatPatrol) "\n(Combat Patrol)" else ""
     Box(
         modifier = Modifier
             .clickable {
@@ -46,14 +47,14 @@ fun DatasheetItem(
             model = datasheet.bannerImage,
             contentDescription = null,
             colorFilter = ColorFilter.tint(
-                color = Color.Black.copy(alpha = 0.5f),
+                color = Color.Black.copy(alpha = 0.7f),
                 blendMode = BlendMode.Darken
             ),
             contentScale = ContentScale.Crop,
             filterQuality = FilterQuality.High
         )
         Text(
-            text = datasheet.name,
+            text = datasheet.name + subtext,
             color = Color.White,
             textAlign = TextAlign.Center
         )

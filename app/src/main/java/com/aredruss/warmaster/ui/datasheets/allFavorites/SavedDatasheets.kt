@@ -42,11 +42,10 @@ fun SavedDatasheets(
                 if (viewModel.datasheetList.isNotEmpty()) {
                     LazyColumn {
                         items(viewModel.datasheetList) { data ->
-                            DatasheetItem(datasheet = data.second) { id ->
+                            DatasheetItem(datasheet = data) { id ->
                                 navigator.navigate(
                                     UnitPageDestination(
-                                        id,
-                                        data.first
+                                        id
                                     )
                                 )
                             }

@@ -3,6 +3,10 @@ package com.aredruss.warmaster.domain
 import com.aredruss.warmaster.domain.database.dao.DatasheetDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
 import com.aredruss.warmaster.domain.database.model.Datasheet
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import timber.log.Timber
 
 class DatasheetRepository(
@@ -40,16 +44,31 @@ class DatasheetRepository(
     }
 
     suspend fun getAllFavoriteUnits(
-    ): List<Pair<String, Datasheet>> {
+    ): List<Datasheet> {
         val favoriteUnits = favoriteUnitRepository.selectAllFavoriteIds()
         val favoriteIds = favoriteUnits.map { it.datasheetId }
+        return datasheetDao.getItemsByIds(favoriteIds)
+    }
 
-        val datasheets = datasheetDao.getItemsByIds(favoriteIds)
+    suspend fun getDatasheetsByQuery(query: String) = datasheetDao
+        .getItemsByName(query)
+        .distinctUntilChanged()
 
-         return datasheets.map { datasheet ->
-             (favoriteUnits.firstOrNull { favoriteInfo ->
-                 datasheet.id == favoriteInfo.datasheetId
-             }?.factionId ?: "") to datasheet
+    suspend fun getDatasheetsByQueryWithFilter(
+        query: String,
+        factionId: String,
+        isSubFaction: Boolean
+    ): Flow<List<Datasheet>> {
+        val datasheetIdsByFaction = getDatasheetsForFaction(factionId, isSubFaction)
+            .values
+            .flatten()
+            .toList()
+            .map {
+                it.id
+            }
+        return getDatasheetsByQuery(query).map { list ->
+            list.filter { it.id in datasheetIdsByFaction }
         }
     }
+
 }

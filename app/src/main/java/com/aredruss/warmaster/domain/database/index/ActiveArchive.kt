@@ -14,6 +14,7 @@ import com.aredruss.warmaster.domain.database.model.LoadoutChoiceSet
 import com.aredruss.warmaster.domain.database.model.LoadoutChoiceWargearItem
 import com.aredruss.warmaster.domain.database.model.Miniature
 import com.aredruss.warmaster.domain.database.model.MiniatureKeyword
+import com.aredruss.warmaster.domain.database.model.Publication
 import com.aredruss.warmaster.domain.database.model.RuleContainerComponent
 import com.aredruss.warmaster.domain.database.model.UnitComposition
 import com.aredruss.warmaster.domain.database.model.UnitCompositionMiniature
@@ -84,5 +85,7 @@ data class WarhammerData(
     @SerialName("loadout_choice")
     val loadoutChoices: List<LoadoutChoice>,
     @SerialName("loadout_choice_wargear_item")
-    val loadoutChoiceWargearItems: List<LoadoutChoiceWargearItem>
+    val loadoutChoiceWargearItems: List<LoadoutChoiceWargearItem>,
+    @SerialName("publication")
+    val publications: List<Publication>,
 )

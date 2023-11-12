@@ -1,4 +1,4 @@
-package com.aredruss.warmaster.ui.datasheets
+package com.aredruss.warmaster.ui.datasheets.search
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
@@ -18,12 +18,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
-import com.aredruss.warmaster.ui.common.ClickableTextLine
 import com.aredruss.warmaster.ui.common.InfoMessage
-import com.aredruss.warmaster.ui.destinations.SavedDatasheetsDestination
-import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
+import com.aredruss.warmaster.ui.common.SearchTopBar
+import com.aredruss.warmaster.ui.datasheets.DatasheetItem
 import com.aredruss.warmaster.ui.destinations.UnitPageDestination
-import com.aredruss.warmaster.ui.factions.FactionItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
@@ -32,31 +30,28 @@ import org.koin.core.parameter.parametersOf
 @OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
-fun DataSheetList(
-    factionName: String,
-    factionId: String,
-    isSubFaction: Boolean,
-    isPatrol: Boolean,
-    isFavorites: Boolean,
-    navigator: DestinationsNavigator,
+fun SearchScreen(
+    factionId: String = "",
+    isSubFaction: Boolean = false,
+    navigator: DestinationsNavigator
 ) {
-    val viewModel = getViewModel<DataSheetViewModel> {
-        parametersOf(factionId, factionName, isSubFaction, isPatrol, isFavorites)
+
+    val searchViewModel = getViewModel<SearchViewModel> {
+        parametersOf(factionId, isSubFaction)
     }
 
     Scaffold(
         topBar = {
-            CenteredTopBar(
-                title = viewModel.factionNameState,
-                additionalActionIcon = R.drawable.ic_search,
-                enableAdditionalAction = true,
-                additionalAction = {
-                    navigator.navigate(SearchScreenDestination(
-                        factionId = factionId,
-                        isSubFaction = isSubFaction
-                    ))
+            SearchTopBar(
+                queryCallback = { query ->
+                    searchViewModel.getData(query)
                 },
-                navigationAction = { navigator.popBackStack() })
+                navigationAction = {
+                    navigator.popBackStack()
+                },
+                clearQueryCallback = {
+                    searchViewModel.clearList()
+                })
         },
         content = {
             Column(
@@ -65,7 +60,7 @@ fun DataSheetList(
                     .padding(paddingValues = it)
             ) {
                 Crossfade(
-                    targetState = viewModel.loadingState,
+                    targetState = searchViewModel.loadingState,
                     label = "",
                     modifier = Modifier.fillMaxSize(),
                 ) { isLoading ->
@@ -76,11 +71,10 @@ fun DataSheetList(
                         ) {
                             CircularProgressIndicator(modifier = Modifier.size(size = 40.dp))
                         }
-
                     } else {
-                        if (viewModel.datasheetList.isNotEmpty()) {
+                        if (searchViewModel.datasheetList.isNotEmpty()) {
                             LazyColumn {
-                                items(viewModel.datasheetList) { data ->
+                                items(searchViewModel.datasheetList) { data ->
                                     DatasheetItem(datasheet = data) { id ->
                                         navigator.navigate(
                                             UnitPageDestination(id)
@@ -89,7 +83,9 @@ fun DataSheetList(
                                 }
                             }
                         } else {
-                            InfoMessage(text = stringResource(R.string.no_sheets_av), action = {})
+                            InfoMessage(
+                                text = stringResource(R.string.no_datasheets_matching_that_input),
+                                action = {})
                         }
                     }
                 }

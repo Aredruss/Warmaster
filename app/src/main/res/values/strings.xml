@@ -26,4 +26,7 @@
     <string name="faction">Faction</string>
     <string name="faction_ability">Faction Ability</string>
     <string name="first_launch_msg">The app is preparing the data.\nDon\'t worry, it will be quicker next time!</string>
+    <string name="start_typing">Start typing...</string>
+    <string name="no_datasheets_matching_that_input">No datasheets matching that input</string>
+    <string name="datasheet_name">Datasheet name...</string>
 </resources>
