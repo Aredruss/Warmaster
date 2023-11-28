@@ -22,11 +22,10 @@ import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
-import com.aredruss.warmaster.ui.destinations.AboutWarmasterDestination
 import com.aredruss.warmaster.ui.destinations.GameTypeDestination
 import com.aredruss.warmaster.ui.destinations.SavedDatasheetsDestination
 import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
-import com.aredruss.warmaster.ui.destinations.SubfactionListDestination
+import com.aredruss.warmaster.ui.destinations.SubFactionListDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
@@ -41,7 +40,7 @@ fun FactionList(navigator: DestinationsNavigator) {
     viewModel.navigateState?.consume()?.let { state ->
         when (state) {
             is NavigateFromFactionsState.NavigateSubFactions -> navigator.navigate(
-                SubfactionListDestination(state.id)
+                SubFactionListDestination(state.id)
             )
 
             is NavigateFromFactionsState.NavigateDatasheets -> navigator.navigate(

@@ -5,9 +5,7 @@ import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
 import com.aredruss.warmaster.domain.database.model.Datasheet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
-import timber.log.Timber
 
 class DatasheetRepository(
     private val datasheetFactionKeywordDao: DatasheetFactionKeywordDao,
@@ -45,7 +43,7 @@ class DatasheetRepository(
 
     suspend fun getAllFavoriteUnits(
     ): List<Datasheet> {
-        val favoriteUnits = favoriteUnitRepository.selectAllFavoriteIds()
+        val favoriteUnits = favoriteUnitRepository.selectAllFavorites()
         val favoriteIds = favoriteUnits.map { it.datasheetId }
         return datasheetDao.getItemsByIds(favoriteIds)
     }

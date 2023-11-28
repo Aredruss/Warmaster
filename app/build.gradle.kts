@@ -94,4 +94,6 @@ dependencies {
 
     ksp ("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
+
+    implementation("com.simonsickle:composed-barcodes:1.1.1")
 }

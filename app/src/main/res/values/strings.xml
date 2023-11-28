@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Warmaster</string>
-    <string name="factions">Factions</string>
+    <string name="factions">Rules</string>
     <string name="subfactions">Subfactions</string>
     <string name="about">About</string>
     <string name="datasheets">Datasheets</string>
     <string name="copyright">Copyright LOLOLOL</string>
     <string name="about_app">Warmaster is a secret app for viewing datasheets and building your army</string>
+    <string name="share_app">Share this app with your friends!</string>
     <string name="splash_message">The Machine spirit is looking…</string>
     <string name="regular_datasheets">Regular datasheets</string>
     <string name="combat_patrol_datasheets">Combat patrol datasheets</string>
@@ -14,6 +15,7 @@
     <string name="lore">Lore</string>
     <string name="unit_info">Unit info</string>
     <string name="no_sheets_av">Looks like there are no datasheets available</string>
+    <string name="work_in_progress">Work in progress</string>
     <string name="favorite_units">Favorite units</string>
     <string name="unit_keywords">Unit Keywords</string>
     <string name="wargear_options">Wargear options</string>
@@ -21,12 +23,17 @@
     <string name="count">Count</string>
     <string name="points">Points</string>
     <string name="no_rules_sorry">No rules, sorry</string>
+    <string name="discord_msg">We have cookies</string>
     <string name="ability_info">Ability Info</string>
     <string name="abilities">Abilities</string>
     <string name="faction">Faction</string>
     <string name="faction_ability">Faction Ability</string>
     <string name="first_launch_msg">The app is preparing the data.\nDon\'t worry, it will be quicker next time!</string>
-    <string name="start_typing">Start typing...</string>
+    <string name="start_typing">Start typing…</string>
     <string name="no_datasheets_matching_that_input">No datasheets matching that input</string>
-    <string name="datasheet_name">Datasheet name...</string>
+    <string name="datasheet_name">Datasheet name…</string>
+    <string name="rules_tab_name">Quick reference</string>
+    <string name="army_builder_tab_name">Army builder</string>
+    <string name="or_get_the_link">or just copy the link below</string>
+    <string name="and_join_the_official_discord">And join the official discord!</string>
 </resources>

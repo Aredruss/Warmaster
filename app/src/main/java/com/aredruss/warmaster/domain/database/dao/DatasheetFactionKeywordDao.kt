@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DatasheetFactionKeywordDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun insert(items: List<DatasheetFactionKeyword>)
 
     @Query("SELECT datasheetId FROM datasheetFactionKeyword WHERE factionKeywordId = :factionId")

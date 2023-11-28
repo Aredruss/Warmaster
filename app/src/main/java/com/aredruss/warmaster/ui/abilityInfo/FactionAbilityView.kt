@@ -29,7 +29,7 @@ fun FactionAbilityView(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 5.dp, vertical = 5.dp),
+                    .padding(horizontal = 10.dp, vertical = 5.dp),
                 text = stringResource(R.string.faction_ability).uppercase(),
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Start,
@@ -43,7 +43,7 @@ fun FactionAbilityView(
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 5.dp, vertical = 5.dp),
+                            .padding(horizontal = 10.dp, vertical = 5.dp),
                         text = rule.textContent,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start,
@@ -59,7 +59,7 @@ fun FactionAbilityView(
                 else -> {
                     Column(
                         modifier = modifier
-                            .padding(all = 5.dp)
+                            .padding(horizontal = 10.dp, vertical = 5.dp)
                             .clip(shape = MaterialTheme.shapes.medium)
                             .border(
                                 width = 5.dp,

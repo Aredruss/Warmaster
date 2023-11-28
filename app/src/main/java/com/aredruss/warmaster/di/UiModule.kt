@@ -2,6 +2,7 @@ package com.aredruss.warmaster.di
 
 import com.aredruss.warmaster.ui.abilityInfo.AbilityInfoViewModel
 import com.aredruss.warmaster.ui.about.AboutViewModel
+import com.aredruss.warmaster.ui.army.ArmyListViewModel
 import com.aredruss.warmaster.ui.datasheets.DataSheetViewModel
 import com.aredruss.warmaster.ui.datasheets.allFavorites.SavedDatasheetsViewModel
 import com.aredruss.warmaster.ui.datasheets.gameType.GameTypeViewModel
@@ -23,6 +24,6 @@ val uiModule = module {
     viewModelOf(::GameTypeViewModel)
     viewModelOf(::SavedDatasheetsViewModel)
     viewModelOf(::AbilityInfoViewModel)
-    viewModelOf(::AbilityInfoViewModel)
+    viewModelOf(::ArmyListViewModel)
     viewModelOf(::SearchViewModel)
 }

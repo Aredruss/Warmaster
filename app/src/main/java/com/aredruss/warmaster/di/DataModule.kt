@@ -15,6 +15,7 @@ import com.aredruss.warmaster.domain.populators.DatasheetPopulator
 import com.aredruss.warmaster.domain.populators.FactionPopulator
 import com.aredruss.warmaster.domain.populators.LoadoutPopulator
 import com.aredruss.warmaster.domain.populators.WargearPopulator
+import com.aredruss.warmaster.domain.util.ClearUtil
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -35,4 +36,6 @@ val dataModule = module {
     singleOf(::UnitCompositionRepository)
     singleOf(::WargearRepository)
     singleOf(::FavoriteUnitRepository)
+
+    singleOf(::ClearUtil)
 }

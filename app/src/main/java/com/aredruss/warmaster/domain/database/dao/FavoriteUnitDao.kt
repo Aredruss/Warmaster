@@ -10,8 +10,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FavoriteUnitDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: FavoriteUnit)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(items: List<FavoriteUnit>)
 
     @Query("DELETE FROM FavoriteUnit WHERE datasheetId = :datasheetId")
     suspend fun deleteUnit(datasheetId: String)
@@ -20,7 +23,7 @@ interface FavoriteUnitDao {
     fun checkIfFavorite(datasheetId: String): Flow<Boolean>
 
     @Query("SELECT * FROM FavoriteUnit")
-    suspend fun getAllItemIds(): List<FavoriteUnit>
+    suspend fun getAllItems(): List<FavoriteUnit>
 
     @Query("SELECT datasheetId FROM FavoriteUnit WHERE :factionId = factionId")
     suspend fun getIdsByFactionId(factionId: String): List<String>

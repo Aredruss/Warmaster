@@ -1,56 +1,52 @@
-package com.aredruss.warmaster.ui.army
+package com.aredruss.warmaster.ui.subfaction
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
-import com.aredruss.warmaster.ui.common.InfoMessage
-import com.aredruss.warmaster.ui.destinations.AboutWarmasterDestination
+import com.aredruss.warmaster.ui.destinations.GameTypeDestination
+import com.aredruss.warmaster.ui.factions.FactionItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
-fun ArmyList(navigator: DestinationsNavigator) {
+fun SubFactionList(
+    factionId: String, navigator: DestinationsNavigator
+) {
 
-    val viewModel = getViewModel<ArmyListViewModel>()
+    val viewModel = getViewModel<SubFactionViewModel>() {
+        parametersOf(factionId)
+    }
 
     Scaffold(
         topBar = {
             CenteredTopBar(
-                title = stringResource(id = R.string.army_builder_tab_name),
-                enableAdditionalAction = true,
-                additionalAction = {
-                    navigator.navigate(AboutWarmasterDestination)
-                }
+                title = stringResource(id = R.string.subfactions),
+                navigationAction = { navigator.popBackStack() }
             )
-        },
-        content = { paddingValues ->
+        }, content = { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues = paddingValues),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                    .padding(paddingValues = paddingValues)
             ) {
                 Crossfade(
                     targetState = viewModel.loadingState,
@@ -59,31 +55,27 @@ fun ArmyList(navigator: DestinationsNavigator) {
                 ) { isLoading ->
                     if (isLoading) {
                         Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
+                            modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
                         ) {
                             CircularProgressIndicator(modifier = Modifier.size(size = 40.dp))
                         }
                     } else {
-                        InfoMessage(
-                            text = stringResource(R.string.work_in_progress),
-                            action = {}
-                        )
+                        LazyColumn(modifier = Modifier.fillMaxSize()) {
+                            items(viewModel.factionKeywordList) {
+                                FactionItem(factionKeyword = it) { name, id, image, isSubFaction ->
+                                    navigator.navigate(
+                                        GameTypeDestination(
+                                            factionId = id,
+                                            factionName = name,
+                                            factionImage = image,
+                                            isSubFaction = isSubFaction
+                                        )
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-
-                }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_add),
-                    contentDescription = ""
-                )
-            }
-        },
-        floatingActionButtonPosition = FabPosition.End
-    )
+        })
 }

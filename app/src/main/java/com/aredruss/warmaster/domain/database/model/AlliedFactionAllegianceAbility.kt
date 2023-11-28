@@ -1,6 +1,7 @@
 package com.aredruss.warmaster.domain.database.model
 
 import androidx.room.Entity
+import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 

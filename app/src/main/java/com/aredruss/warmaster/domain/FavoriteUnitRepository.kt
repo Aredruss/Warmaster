@@ -18,7 +18,9 @@ class FavoriteUnitRepository(
             )
         )
 
-    suspend fun selectAllFavoriteIds() = favoriteUnitDao.getAllItemIds()
+    suspend fun selectAllFavorites() = favoriteUnitDao.getAllItems()
+
+    suspend fun insertAll(items: List<FavoriteUnit>) = favoriteUnitDao.insertAll(items)
 
     suspend fun deleteFavorite(datasheetId: String) =
         favoriteUnitDao.deleteUnit(datasheetId = datasheetId)

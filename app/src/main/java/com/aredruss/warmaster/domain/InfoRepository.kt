@@ -31,6 +31,7 @@ import com.aredruss.warmaster.domain.populators.DatasheetPopulator
 import com.aredruss.warmaster.domain.populators.FactionPopulator
 import com.aredruss.warmaster.domain.populators.LoadoutPopulator
 import com.aredruss.warmaster.domain.populators.WargearPopulator
+import com.aredruss.warmaster.domain.util.ClearUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -43,7 +44,8 @@ class InfoRepository(
     private val datasheetPopulator: DatasheetPopulator,
     private val factionPopulator: FactionPopulator,
     private val wargearPopulator: WargearPopulator,
-    private val loadoutPopulator: LoadoutPopulator
+    private val loadoutPopulator: LoadoutPopulator,
+    private val clearUtil: ClearUtil
 ) {
 
     private val json = Json { ignoreUnknownKeys = true }
@@ -78,6 +80,9 @@ class InfoRepository(
                 }
             )
             (metadata.dataVersion > prefs.currentDataVersion).also {
+                if (prefs.currentDataVersion != 0L) {
+
+                }
                 prefs.currentDataVersion = metadata.dataVersion
             }
         } catch (e: Exception) {
@@ -87,6 +92,7 @@ class InfoRepository(
 
     private suspend fun populateDatabase(data: WarhammerData): Boolean =
         withContext(Dispatchers.IO) {
+            clearUtil.purgeDatabase()
             data.apply {
                 factionPopulator.insertDatasheetFactionKeyword(datasheetFactionKeywords)
                 factionPopulator.insertFactionKeyword(factionKeywords)
