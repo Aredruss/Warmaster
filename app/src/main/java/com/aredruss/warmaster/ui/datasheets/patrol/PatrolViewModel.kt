@@ -1,27 +1,23 @@
-package com.aredruss.warmaster.ui.datasheets.gameType
+package com.aredruss.warmaster.ui.datasheets.patrol
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-
-class GameTypeViewModel(
-    factionName: String,
-    factionId: String,
-    isSubFaction: Boolean,
-    factionImage: String
+class PatrolViewModel (
+    private val factionName: String,
+    private val publicationId: String,
+    private val factionImage: String,
 ) : ViewModel() {
 
     var factionNameState: String by mutableStateOf(""); private set
-    var factionIdState: String by mutableStateOf(""); private set
-    var isSubFactionState: Boolean by mutableStateOf(false); private set
+    var publicationIdState: String by mutableStateOf(""); private set
     var factionImageState: String by mutableStateOf(""); private set
 
     init {
         factionNameState = factionName
-        factionIdState = factionId
-        isSubFactionState = isSubFaction
+        publicationIdState = publicationId
         factionImageState = factionImage
     }
 }

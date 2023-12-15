@@ -2,12 +2,20 @@ package com.aredruss.warmaster.domain.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.aredruss.warmaster.domain.database.dao.ArmyRuleDao
+import com.aredruss.warmaster.domain.database.dao.BulletPointDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityBondDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetRuleDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetSubAbilityDao
+import com.aredruss.warmaster.domain.database.dao.DetachmentDao
+import com.aredruss.warmaster.domain.database.dao.DetachmentDetailBulletPointDao
+import com.aredruss.warmaster.domain.database.dao.DetachmentDetailDao
+import com.aredruss.warmaster.domain.database.dao.DetachmentFactionKeywordDao
+import com.aredruss.warmaster.domain.database.dao.DetachmentRuleDao
+import com.aredruss.warmaster.domain.database.dao.EnhancementDao
 import com.aredruss.warmaster.domain.database.dao.FactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.FavoriteUnitDao
 import com.aredruss.warmaster.domain.database.dao.InvSaveDao
@@ -19,6 +27,8 @@ import com.aredruss.warmaster.domain.database.dao.MiniatureDao
 import com.aredruss.warmaster.domain.database.dao.MiniatureKeywordDao
 import com.aredruss.warmaster.domain.database.dao.PublicationDao
 import com.aredruss.warmaster.domain.database.dao.RuleContainerComponentDao
+import com.aredruss.warmaster.domain.database.dao.SecondaryObjectiveDao
+import com.aredruss.warmaster.domain.database.dao.StrategemDao
 import com.aredruss.warmaster.domain.database.dao.UnitCompositionDao
 import com.aredruss.warmaster.domain.database.dao.UnitCompositionMiniatureDao
 import com.aredruss.warmaster.domain.database.dao.WargearAbilityDao
@@ -168,7 +178,7 @@ import com.aredruss.warmaster.domain.database.model.WargearRule
         WargearOption::class,
         WargearOptionGroup::class,
         WargearRule::class,
-        FavoriteUnit::class
+        FavoriteUnit::class,
     ],
     version = 1
 )
@@ -199,4 +209,15 @@ abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun loadoutChoiceSetDao(): LoadoutChoiceSetDao
     abstract fun loadoutChoiceWargearItemDao(): LoadoutChoiceWargearItemDao
     abstract fun publicationDao(): PublicationDao
+
+    abstract fun detachmentDao(): DetachmentDao
+    abstract fun detachmentFactionKeywordDao(): DetachmentFactionKeywordDao
+    abstract fun detachmentRuleDao(): DetachmentRuleDao
+    abstract fun strategemDao(): StrategemDao
+    abstract fun enhancementDao(): EnhancementDao
+    abstract fun detachmentDetailDao(): DetachmentDetailDao
+    abstract fun secondaryObjectiveDao(): SecondaryObjectiveDao
+    abstract fun detachmentDetailBulletPointDao(): DetachmentDetailBulletPointDao
+    abstract fun armyRuleDao(): ArmyRuleDao
+    abstract fun bulletDao(): BulletPointDao
 }

@@ -6,7 +6,9 @@ import com.aredruss.warmaster.domain.database.model.WargearAbility
 import com.aredruss.warmaster.domain.database.model.WargearItemProfile
 import timber.log.Timber
 
-class AbilityInfoRepository {
+class AbilityInfoRepository(
+    private val detachmentInfoRepository: DetachmentInfoRepository
+) {
 
     private var factionAbilities: List<Pair<DatasheetAbility, List<RuleContainerComponent>>>? = null
     private var wargearAbilities: List<WargearAbility>? = null
@@ -31,6 +33,9 @@ class AbilityInfoRepository {
     fun getWargearAbility(abilityId: String) = wargearAbilities?.find { it.id == abilityId }
 
     fun getDatasheetAbility(abilityId: String) =
+        datasheetAbility?.find { it.id == abilityId }
+
+    fun getPublicationAbility(abilityId: String) =
         datasheetAbility?.find { it.id == abilityId }
 
 }

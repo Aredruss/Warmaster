@@ -1,6 +1,7 @@
 package com.aredruss.warmaster.domain.database.model
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
@@ -19,4 +20,7 @@ data class RuleContainerComponent(
     val ruleContainerId: String? = null,
     val armyRuleId: String? = null,
     val detachmentRuleId: String? = null
-)
+) {
+    @Ignore
+    var bullets: List<BulletPoint> = emptyList()
+}

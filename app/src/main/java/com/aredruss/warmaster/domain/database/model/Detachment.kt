@@ -1,6 +1,7 @@
 package com.aredruss.warmaster.domain.database.model
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
@@ -13,4 +14,7 @@ data class Detachment(
     val publicationId: String,
     val bannerImage: String? = null,
     val rowImage: String? = null
-)
+) {
+    @Ignore
+    var bullets: List<DetachmentDetailBulletPoint> = emptyList()
+}

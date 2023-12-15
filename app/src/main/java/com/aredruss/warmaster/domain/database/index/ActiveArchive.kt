@@ -1,11 +1,19 @@
 package com.aredruss.warmaster.domain.database.index
 
+import com.aredruss.warmaster.domain.database.model.ArmyRule
+import com.aredruss.warmaster.domain.database.model.BulletPoint
 import com.aredruss.warmaster.domain.database.model.Datasheet
 import com.aredruss.warmaster.domain.database.model.DatasheetAbility
 import com.aredruss.warmaster.domain.database.model.DatasheetAbilityBond
 import com.aredruss.warmaster.domain.database.model.DatasheetFactionKeyword
 import com.aredruss.warmaster.domain.database.model.DatasheetRule
 import com.aredruss.warmaster.domain.database.model.DatasheetSubAbility
+import com.aredruss.warmaster.domain.database.model.Detachment
+import com.aredruss.warmaster.domain.database.model.DetachmentDetail
+import com.aredruss.warmaster.domain.database.model.DetachmentDetailBulletPoint
+import com.aredruss.warmaster.domain.database.model.DetachmentFactionKeyword
+import com.aredruss.warmaster.domain.database.model.DetachmentRule
+import com.aredruss.warmaster.domain.database.model.Enhancement
 import com.aredruss.warmaster.domain.database.model.FactionKeyword
 import com.aredruss.warmaster.domain.database.model.InvSave
 import com.aredruss.warmaster.domain.database.model.Keyword
@@ -16,6 +24,8 @@ import com.aredruss.warmaster.domain.database.model.Miniature
 import com.aredruss.warmaster.domain.database.model.MiniatureKeyword
 import com.aredruss.warmaster.domain.database.model.Publication
 import com.aredruss.warmaster.domain.database.model.RuleContainerComponent
+import com.aredruss.warmaster.domain.database.model.SecondaryObjective
+import com.aredruss.warmaster.domain.database.model.Strategem
 import com.aredruss.warmaster.domain.database.model.UnitComposition
 import com.aredruss.warmaster.domain.database.model.UnitCompositionMiniature
 import com.aredruss.warmaster.domain.database.model.WargearAbility
@@ -88,4 +98,24 @@ data class WarhammerData(
     val loadoutChoiceWargearItems: List<LoadoutChoiceWargearItem>,
     @SerialName("publication")
     val publications: List<Publication>,
+    @SerialName("detachment")
+    val detachments: List<Detachment>,
+    @SerialName("stratagem")
+    val strategems: List<Strategem>,
+    @SerialName("detachment_faction_keyword")
+    val detachmentFactionKeywords: List<DetachmentFactionKeyword>,
+    @SerialName("detachment_rule")
+    val detachmentRules: List<DetachmentRule>,
+    @SerialName("enhancement")
+    val enhancements: List<Enhancement>,
+    @SerialName("detachment_detail")
+    val detachmentDetails: List<DetachmentDetail>,
+    @SerialName("detachment_detail_bullet_point")
+    val detailBulletPoints: List<DetachmentDetailBulletPoint>,
+    @SerialName("secondary_objective")
+    val secondaryObjectives: List<SecondaryObjective>,
+    @SerialName("army_rule")
+    val armyRules: List<ArmyRule>,
+    @SerialName("bullet_point")
+    val bulletPoints: List<BulletPoint>,
 )

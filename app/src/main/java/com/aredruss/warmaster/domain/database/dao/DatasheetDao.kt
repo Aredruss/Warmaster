@@ -20,4 +20,7 @@ interface DatasheetDao {
 
     @Query("SELECT * FROM Datasheet WHERE name LIKE '%' || :query || '%'")
     fun getItemsByName(query: String): Flow<List<Datasheet>>
+
+    @Query("SELECT * FROM Datasheet WHERE :id = publicationId")
+    fun getDataByPubId(id: String): List<Datasheet>
 }

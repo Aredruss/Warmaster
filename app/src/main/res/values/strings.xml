@@ -8,14 +8,14 @@
     <string name="about_app">Warmaster is a secret app for viewing datasheets and building your army</string>
     <string name="share_app">Share this app with your friends!</string>
     <string name="splash_message">The Machine spirit is looking…</string>
-    <string name="regular_datasheets">Regular datasheets</string>
-    <string name="combat_patrol_datasheets">Combat patrol datasheets</string>
+    <string name="regular_datasheets">Datasheets</string>
+    <string name="combat_patrol_datasheets">Index: Combat patrol datasheets</string>
     <string name="inv_save_rule">Inv. save rule</string>
     <string name="unit_composition">Unit Composition</string>
     <string name="lore">Lore</string>
     <string name="unit_info">Unit info</string>
     <string name="no_sheets_av">Looks like there are no datasheets available</string>
-    <string name="work_in_progress">Work in progress</string>
+    <string name="work_in_progress">Work in progress.\nSorry :(</string>
     <string name="favorite_units">Favorite units</string>
     <string name="unit_keywords">Unit Keywords</string>
     <string name="wargear_options">Wargear options</string>
@@ -36,4 +36,18 @@
     <string name="army_builder_tab_name">Army builder</string>
     <string name="or_get_the_link">or just copy the link below</string>
     <string name="and_join_the_official_discord">And join the official discord!</string>
+    <string name="detachments">Detachments</string>
+    <string name="enhancements">Enhancements</string>
+    <string name="strategems">Strategems</string>
+    <string name="codex">"Codex: "</string>
+    <string name="combat_patrol">"Combat Patrol: "</string>
+    <string name="army_rules">Army Rules</string>
+    <string name="secondary_objectives">Secondary Objectives</string>
+    <string name="detachment_rules">Detachment Rules</string>
+    <string name="generic_empty_data">Looks like there\'s no data about that just yet</string>
+    <string name="strategic_ploy">Strategic Ploy</string>
+    <string name="battle_tactic">Battle Tactic</string>
+    <string name="when_strategem">  When: </string>
+    <string name="target_strategem">Target: </string>
+    <string name="effect_strategem">"Effect: "</string>
 </resources>

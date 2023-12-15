@@ -2,6 +2,7 @@ package com.aredruss.warmaster.di
 
 import com.aredruss.warmaster.domain.AbilityInfoRepository
 import com.aredruss.warmaster.domain.DatasheetRepository
+import com.aredruss.warmaster.domain.DetachmentInfoRepository
 import com.aredruss.warmaster.domain.FactionRepository
 import com.aredruss.warmaster.domain.FavoriteUnitRepository
 import com.aredruss.warmaster.domain.InfoRepository
@@ -36,6 +37,7 @@ val dataModule = module {
     singleOf(::UnitCompositionRepository)
     singleOf(::WargearRepository)
     singleOf(::FavoriteUnitRepository)
+    singleOf(::DetachmentInfoRepository)
 
     singleOf(::ClearUtil)
 }

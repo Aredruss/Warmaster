@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
-import com.aredruss.warmaster.ui.destinations.GameTypeDestination
+import com.aredruss.warmaster.ui.destinations.GameMenuDestination
 import com.aredruss.warmaster.ui.destinations.SavedDatasheetsDestination
 import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
 import com.aredruss.warmaster.ui.destinations.SubFactionListDestination
@@ -44,7 +44,7 @@ fun FactionList(navigator: DestinationsNavigator) {
             )
 
             is NavigateFromFactionsState.NavigateDatasheets -> navigator.navigate(
-                GameTypeDestination(
+                GameMenuDestination(
                     factionId = state.id,
                     factionName = state.name,
                     factionImage = state.image,

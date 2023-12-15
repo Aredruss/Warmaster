@@ -61,7 +61,7 @@ fun ClickableTextLine(modifier: Modifier, text: String, action: () -> Unit) {
             .clickable {
                 action.invoke()
             }
-            .background(color = MaterialTheme.colorScheme.surfaceVariant)
+            .background(color = Color.White)
             .fillMaxWidth()
             .height(height = 50.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -72,11 +72,13 @@ fun ClickableTextLine(modifier: Modifier, text: String, action: () -> Unit) {
                 .padding(start = 15.dp)
                 .weight(weight = 9f),
             text = text,
-            style = MaterialTheme.typography.titleSmall
+            style = MaterialTheme.typography.titleSmall,
+            color = Color.Black
         )
         Icon(
             modifier = Modifier.weight(weight = 1f),
             painter = painterResource(id = R.drawable.ic_right_arrow),
+            tint = Color.Black.copy(alpha = 0.7F),
             contentDescription = null,
         )
     }

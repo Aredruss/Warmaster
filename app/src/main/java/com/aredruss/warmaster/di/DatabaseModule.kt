@@ -45,4 +45,15 @@ val databaseModule = module {
     single { get<WarmasterDatabase>().loadoutChoiceWargearItemDao() }
 
     single { get<WarmasterDatabase>().publicationDao() }
+
+    single { get<WarmasterDatabase>().detachmentDao() }
+    single { get<WarmasterDatabase>().detachmentRuleDao() }
+    single { get<WarmasterDatabase>().enhancementDao() }
+    single { get<WarmasterDatabase>().detachmentDetailBulletPointDao() }
+    single { get<WarmasterDatabase>().detachmentDetailDao() }
+    single { get<WarmasterDatabase>().detachmentFactionKeywordDao() }
+    single { get<WarmasterDatabase>().secondaryObjectiveDao() }
+    single { get<WarmasterDatabase>().strategemDao() }
+    single { get<WarmasterDatabase>().armyRuleDao() }
+    single { get<WarmasterDatabase>().bulletDao() }
 }

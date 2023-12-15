@@ -1,19 +1,13 @@
 package com.aredruss.warmaster.ui.common
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.EaseInOut
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,9 +28,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImagePainter.State.Empty.painter
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.theme.md_theme_dark_onPrimary
 
@@ -44,7 +38,10 @@ import com.aredruss.warmaster.ui.theme.md_theme_dark_onPrimary
 fun CollapsableContainer(
     modifier: Modifier,
     title: String = "",
+    minorLeftText: String? = null,
     iconId: Int? = null,
+    titleBackground: Color = md_theme_dark_onPrimary,
+    contentBackground: Color = MaterialTheme.colorScheme.secondary,
     content: @Composable () -> Unit
 ) {
 
@@ -58,7 +55,7 @@ fun CollapsableContainer(
             .clickable {
                 expandedState = !expandedState
             }
-            .background(color = md_theme_dark_onPrimary)
+            .background(color = titleBackground)
     ) {
         Row(
             modifier = Modifier
@@ -80,11 +77,22 @@ fun CollapsableContainer(
             Spacer(modifier = Modifier.width(width = 10.dp))
             Text(
                 text = title,
-                style = MaterialTheme.typography.labelMedium,
+                modifier = Modifier.padding(horizontal = 5.dp),
+                style = MaterialTheme.typography.labelLarge,
                 textAlign = TextAlign.Start,
                 color = Color.White
             )
             Spacer(modifier = Modifier.weight(1f))
+            minorLeftText?.let {
+                Text(
+                    text = it,
+                    modifier = Modifier.padding(horizontal = 5.dp),
+                    style = MaterialTheme.typography.labelLarge,
+                    textAlign = TextAlign.Start,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
+                )
+            }
             IconButton(
                 modifier = Modifier
                     .rotate(rotationState),
@@ -104,7 +112,7 @@ fun CollapsableContainer(
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .background(color = MaterialTheme.colorScheme.secondary)
+                    .background(color = contentBackground)
             ) {
                 content()
             }

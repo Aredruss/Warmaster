@@ -11,8 +11,8 @@ data class Enhancement(
     val name: String,
     val lore: String,
     val rules: String,
-    val detachmentId: String,
-    val basePointsCost: Long,
+    val detachmentId: String?,
+    val basePointsCost: Long?,
     val displayOrder: Long,
     val isCombatPatrol: Boolean,
     val publicationId: String

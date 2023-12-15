@@ -3,9 +3,11 @@ package com.aredruss.warmaster.domain
 import com.aredruss.warmaster.domain.database.dao.DatasheetDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
 import com.aredruss.warmaster.domain.database.model.Datasheet
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
 class DatasheetRepository(
     private val datasheetFactionKeywordDao: DatasheetFactionKeywordDao,
@@ -51,6 +53,10 @@ class DatasheetRepository(
     suspend fun getDatasheetsByQuery(query: String) = datasheetDao
         .getItemsByName(query)
         .distinctUntilChanged()
+
+    suspend fun getDatasheetsPublication(id: String) = withContext(Dispatchers.IO) {
+        return@withContext datasheetDao.getDataByPubId(id)
+    }
 
     suspend fun getDatasheetsByQueryWithFilter(
         query: String,

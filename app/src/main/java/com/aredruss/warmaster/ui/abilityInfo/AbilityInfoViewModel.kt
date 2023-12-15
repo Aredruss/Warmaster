@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aredruss.warmaster.domain.AbilityInfoRepository
+import com.aredruss.warmaster.domain.DetachmentInfoRepository
 import com.aredruss.warmaster.domain.database.model.DatasheetAbility
 import com.aredruss.warmaster.domain.database.model.RuleContainerComponent
 import com.aredruss.warmaster.domain.database.model.WargearAbility
@@ -15,14 +16,16 @@ class AbilityInfoViewModel(
     private val abilityId: String,
     private val abilityName: String,
     private val type: ScreenType,
-    private val abilityInfoRepository: AbilityInfoRepository
+    private val abilityInfoRepository: AbilityInfoRepository,
+    private val detachmentInfoRepository: DetachmentInfoRepository
 ) : ViewModel() {
 
     companion object {
         enum class ScreenType(val id: Int) {
             FACTION(id = 0),
             GEAR(id = 1),
-            DATASHEET(id = 2)
+            DATASHEET(id = 2),
+            PUBLICATION(id = 3)
         }
     }
 
@@ -40,6 +43,7 @@ class AbilityInfoViewModel(
                 ScreenType.FACTION -> factionAbility = getFactionAbility()
                 ScreenType.DATASHEET -> datasheetAbility = getDatasheetAbility()
                 ScreenType.GEAR -> gearAbility = getGearAbility()
+                ScreenType.PUBLICATION -> factionAbility = getFactionPublicationAbility()
             }
         }
 
@@ -48,12 +52,6 @@ class AbilityInfoViewModel(
     private suspend fun getFactionAbility() = abilityInfoRepository.getFactionAbility(abilityId)
     private suspend fun getGearAbility() = abilityInfoRepository.getWargearAbility(abilityId)
     private suspend fun getDatasheetAbility() = abilityInfoRepository.getDatasheetAbility(abilityId)
-
-}
-
-sealed class AbilityScreenTypeState {
-    data object FactionAbilityState : AbilityScreenTypeState()
-    data object GearAbilityState : AbilityScreenTypeState()
-    data object DatasheetAbilityState : AbilityScreenTypeState()
+    private suspend fun getFactionPublicationAbility() = detachmentInfoRepository.getArmyRulesSteps(abilityId)
 
 }

@@ -1,31 +1,8 @@
 package com.aredruss.warmaster.domain
 
 import android.content.Context
-import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityBondDao
-import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityDao
 import com.aredruss.warmaster.domain.database.index.MetaData
 import com.aredruss.warmaster.domain.database.index.WarhammerData
-import com.aredruss.warmaster.domain.database.dao.DatasheetDao
-import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
-import com.aredruss.warmaster.domain.database.dao.DatasheetRuleDao
-import com.aredruss.warmaster.domain.database.dao.FactionKeywordDao
-import com.aredruss.warmaster.domain.database.dao.InvSaveDao
-import com.aredruss.warmaster.domain.database.dao.KeywordsDao
-import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceDao
-import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceSetDao
-import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceWargearItemDao
-import com.aredruss.warmaster.domain.database.dao.MiniatureDao
-import com.aredruss.warmaster.domain.database.dao.MiniatureKeywordDao
-import com.aredruss.warmaster.domain.database.dao.RuleContainerComponentDao
-import com.aredruss.warmaster.domain.database.dao.UnitCompositionDao
-import com.aredruss.warmaster.domain.database.dao.UnitCompositionMiniatureDao
-import com.aredruss.warmaster.domain.database.dao.WargearAbilityDao
-import com.aredruss.warmaster.domain.database.dao.WargearItemDao
-import com.aredruss.warmaster.domain.database.dao.WargearItemProfileAbilityDao
-import com.aredruss.warmaster.domain.database.dao.WargearItemProfileDao
-import com.aredruss.warmaster.domain.database.dao.WargearOptionDao
-import com.aredruss.warmaster.domain.database.dao.WargearOptionGroupDao
-import com.aredruss.warmaster.domain.database.dao.WargearRuleDao
 import com.aredruss.warmaster.domain.populators.CompositionPopulator
 import com.aredruss.warmaster.domain.populators.DatasheetPopulator
 import com.aredruss.warmaster.domain.populators.FactionPopulator
@@ -94,9 +71,19 @@ class InfoRepository(
         withContext(Dispatchers.IO) {
             clearUtil.purgeDatabase()
             data.apply {
+                factionPopulator.insertArmyRules(armyRules)
                 factionPopulator.insertDatasheetFactionKeyword(datasheetFactionKeywords)
                 factionPopulator.insertFactionKeyword(factionKeywords)
                 factionPopulator.insertPublications(publications)
+                factionPopulator.insertDetachments(detachments)
+                factionPopulator.insertDetachmentFactionKeywords(detachmentFactionKeywords)
+                factionPopulator.insertDetachmentRules(detachmentRules)
+                factionPopulator.insertStrategems(strategems)
+                factionPopulator.insertEnhancements(enhancements)
+                factionPopulator.insertDetachmentDetails(detachmentDetails)
+                factionPopulator.insertDetachmentBulletPoints(detailBulletPoints)
+                factionPopulator.insertSecondaryObjective(secondaryObjectives)
+                factionPopulator.insertBulletPoints(bulletPoints)
 
                 datasheetPopulator.insertDatasheet(datasheets)
                 datasheetPopulator.insertMiniatures(miniatures)

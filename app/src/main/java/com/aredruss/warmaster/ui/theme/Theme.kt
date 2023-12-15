@@ -11,6 +11,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -95,18 +96,14 @@ fun WarmasterTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = md_theme_dark_onSecondary.toArgb()
-            window.navigationBarColor = if (darkTheme) {
-                md_theme_dark_surfaceVariant
-            } else {
-                md_theme_light_surfaceVariant
-            }.toArgb()
+            window.navigationBarColor = Color.Black.toArgb()
             WindowCompat.getInsetsController(window, view)
                 .isAppearanceLightStatusBars = false
         }
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = DarkColors,
         typography = WarmasterType,
         content = content
     )

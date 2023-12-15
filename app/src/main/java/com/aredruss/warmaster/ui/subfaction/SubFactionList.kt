@@ -18,7 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
-import com.aredruss.warmaster.ui.destinations.GameTypeDestination
+import com.aredruss.warmaster.ui.datasheets.menu.GameMenu
+import com.aredruss.warmaster.ui.destinations.GameMenuDestination
 import com.aredruss.warmaster.ui.factions.FactionItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -64,7 +65,7 @@ fun SubFactionList(
                             items(viewModel.factionKeywordList) {
                                 FactionItem(factionKeyword = it) { name, id, image, isSubFaction ->
                                     navigator.navigate(
-                                        GameTypeDestination(
+                                        GameMenuDestination(
                                             factionId = id,
                                             factionName = name,
                                             factionImage = image,
