@@ -180,7 +180,7 @@ import com.aredruss.warmaster.domain.database.model.WargearRule
         WargearRule::class,
         FavoriteUnit::class,
     ],
-    version = 1
+    version = 2,
 )
 abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun favoriteUnitDao(): FavoriteUnitDao

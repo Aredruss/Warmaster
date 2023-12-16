@@ -1,4 +1,5 @@
-import org.jetbrains.kotlin.ir.backend.js.compile
+import java.util.Properties
+import java.io.FileInputStream
 
 plugins {
     id("com.android.application")

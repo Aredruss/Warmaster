@@ -229,8 +229,11 @@ fun UnitPage(
                             }
                         }
                         unitViewModel.datasheet?.lore?.let {
-                            LoreView(modifier = Modifier, lore = it)
-
+                            CollapsableTextContainer(
+                                title = stringResource(R.string.lore),
+                                modifier = Modifier.fillMaxWidth(),
+                                content = it
+                            )
                         }
                         Spacer(modifier = Modifier.height(height = 30.dp))
 

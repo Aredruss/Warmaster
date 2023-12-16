@@ -6,7 +6,10 @@ import org.koin.dsl.module
 
 val databaseModule = module {
     single {
-        Room.databaseBuilder(get(), WarmasterDatabase::class.java, "warmaster_db").build()
+        Room
+            .databaseBuilder(get(), WarmasterDatabase::class.java, "warmaster_db")
+            .fallbackToDestructiveMigration()
+            .build()
     }
     single { get<WarmasterDatabase>().favoriteUnitDao() }
 
