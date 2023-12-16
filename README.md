@@ -9,7 +9,7 @@ The latest release can be found right [here](https://github.com/Aredruss/Warmast
 
 | The factions | The detachments  | The units  | The unit info | WIP |
 |--|---|---|---|---|
-|[](./images/factions.png)|[](./images/detachments.png)|[](./images/units.png)|[](./images/unit.png)|[](./images/wip.png)|
+|![](./images/factions.png)|![](./images/detachments.png)|![](./images/units.png)|![](./images/unit.png)!|[](./images/wip.png)|
 
 ## :ocean: Planned stuff
 + A full fledged army builder
