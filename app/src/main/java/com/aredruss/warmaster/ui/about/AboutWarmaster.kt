@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -47,7 +48,8 @@ import org.koin.androidx.compose.getViewModel
 fun AboutWarmaster(navigator: DestinationsNavigator) {
 
     val viewModel = getViewModel<AboutViewModel>()
-    val url = "https://github.com/Aredruss/Warmaster"
+    val url = "https://play.google.com/store/apps/details?id=com.aredruss.warmaster&hl=en_US"
+    val githubUrl = "https://github.com/Aredruss/Warmaster"
     val discordUrl = "https://discord.com/invite/8fcDRVZQ8x"
 
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
@@ -124,11 +126,12 @@ fun AboutWarmaster(navigator: DestinationsNavigator) {
                             )
                             .background(color = MaterialTheme.colorScheme.secondary)
                             .padding(all = 10.dp),
-                        text = url,
+                        text = url.dropLast(40).plus("…"),
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onSecondary,
-                        textAlign = TextAlign.Center
-                    )
+                        textAlign = TextAlign.Center,
+
+                        )
                 }
                 Spacer(modifier = Modifier.height(height = 20.dp))
                 Text(
@@ -141,21 +144,36 @@ fun AboutWarmaster(navigator: DestinationsNavigator) {
                 )
 
                 Row(
-                    modifier = Modifier
-                        .clip(shape = MaterialTheme.shapes.small)
-                        .background(color = discordBlue)
-                        .clickable {
-                            uriHandler.openUri(discordUrl)
-                        }
-                        .padding(all = 15.dp),
+                    modifier = Modifier,
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Icon(
-                        modifier = Modifier.size(size = 30.dp),
+                        modifier = Modifier
+                            .size(size = 60.dp)
+                            .clip(shape = MaterialTheme.shapes.small)
+                            .background(color = discordBlue)
+                            .clickable {
+                                uriHandler.openUri(discordUrl)
+                            }
+                            .padding(all = 10.dp),
                         painter = painterResource(id = R.drawable.ic_discord),
                         contentDescription = "",
                         tint = Color.White
+                    )
+                    Spacer(modifier = Modifier.width(width = 15.dp))
+                    Icon(
+                        modifier = Modifier
+                            .size(size = 60.dp)
+                            .clip(shape = MaterialTheme.shapes.small)
+                            .background(color = Color.White)
+                            .clickable {
+                                uriHandler.openUri(githubUrl)
+                            }
+                            .padding(all = 10.dp),
+                        painter = painterResource(id = R.drawable.ic_github),
+                        contentDescription = "",
+                        tint = Color.Black
                     )
                 }
             }
