@@ -18,12 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
-import com.aredruss.warmaster.ui.common.ClickableTextLine
 import com.aredruss.warmaster.ui.common.InfoMessage
-import com.aredruss.warmaster.ui.destinations.SavedDatasheetsDestination
-import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
 import com.aredruss.warmaster.ui.destinations.UnitPageDestination
-import com.aredruss.warmaster.ui.factions.FactionItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
@@ -48,14 +44,6 @@ fun DataSheetList(
         topBar = {
             CenteredTopBar(
                 title = viewModel.factionNameState,
-                additionalActionIcon = R.drawable.ic_search,
-                enableAdditionalAction = true,
-                additionalAction = {
-                    navigator.navigate(SearchScreenDestination(
-                        factionId = factionId,
-                        isSubFaction = isSubFaction
-                    ))
-                },
                 navigationAction = { navigator.popBackStack() })
         },
         content = {

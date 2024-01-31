@@ -25,8 +25,8 @@ import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
 import com.aredruss.warmaster.ui.datasheets.detachment.DetachmentItem
 import com.aredruss.warmaster.ui.destinations.ArmyRulesDestination
-import com.aredruss.warmaster.ui.destinations.DataSheetListDestination
 import com.aredruss.warmaster.ui.destinations.DetachmentViewDestination
+import com.aredruss.warmaster.ui.destinations.PublicationDatasheetsDestination
 import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -50,17 +50,12 @@ fun IndexScreen(
         parametersOf(factionName, factionId, isSubFaction, factionImage, publicationId)
     }
 
-    fun navigateToDatasheetList(
-        isPatrol: Boolean,
-        isFavorites: Boolean
-    ) {
+    fun navigateToDatasheetList() {
         navigator.navigate(
-            DataSheetListDestination(
-                factionName = viewModel.factionNameState,
-                factionId = viewModel.factionIdState,
-                isSubFaction = viewModel.isSubFactionState,
-                isPatrol = isPatrol,
-                isFavorites = isFavorites
+            PublicationDatasheetsDestination(
+                pubName = viewModel.factionNameState,
+                publicationId = viewModel.publicationIdState,
+                pubImage = viewModel.factionImageState
             )
         )
     }
@@ -76,8 +71,7 @@ fun IndexScreen(
             additionalAction = {
                 navigator.navigate(
                     SearchScreenDestination(
-                        viewModel.factionIdState,
-                        viewModel.isSubFactionState
+                        publicationId = viewModel.publicationIdState
                     )
                 )
             }
@@ -108,10 +102,7 @@ fun IndexScreen(
                     modifier = Modifier,
                     text = stringResource(id = R.string.regular_datasheets)
                 ) {
-                    navigateToDatasheetList(
-                        isPatrol = false,
-                        isFavorites = false
-                    )
+                    navigateToDatasheetList()
                 }
             }
             item {

@@ -18,6 +18,9 @@ interface PublicationDao {
     @Query("SELECT * FROM Publication WHERE :id = factionKeywordId ORDER BY name")
     suspend fun getByFactionKeywordId(id: String): List<Publication>
 
-    @Query("SELECT * FROM Publication")
-    suspend fun getPublications(): List<Publication>
+    @Query("SELECT * FROM Publication WHERE isCoreRules OR name = 'Key Documents' ")
+    suspend fun getCorePublications(): List<Publication>
+
+    @Query("SELECT name FROM Publication WHERE :id = id")
+    suspend fun getPublicationNameById(id: String): String
 }

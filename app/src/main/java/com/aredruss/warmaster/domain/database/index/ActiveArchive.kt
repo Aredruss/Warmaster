@@ -23,7 +23,9 @@ import com.aredruss.warmaster.domain.database.model.LoadoutChoiceWargearItem
 import com.aredruss.warmaster.domain.database.model.Miniature
 import com.aredruss.warmaster.domain.database.model.MiniatureKeyword
 import com.aredruss.warmaster.domain.database.model.Publication
+import com.aredruss.warmaster.domain.database.model.RuleContainer
 import com.aredruss.warmaster.domain.database.model.RuleContainerComponent
+import com.aredruss.warmaster.domain.database.model.RuleSection
 import com.aredruss.warmaster.domain.database.model.SecondaryObjective
 import com.aredruss.warmaster.domain.database.model.Strategem
 import com.aredruss.warmaster.domain.database.model.UnitComposition
@@ -118,4 +120,8 @@ data class WarhammerData(
     val armyRules: List<ArmyRule>,
     @SerialName("bullet_point")
     val bulletPoints: List<BulletPoint>,
+    @SerialName("rule_section")
+    val ruleSections: List<RuleSection>,
+    @SerialName("rule_container")
+    val ruleContainers: List<RuleContainer>
 )

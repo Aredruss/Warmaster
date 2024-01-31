@@ -1,7 +1,11 @@
 package com.aredruss.warmaster.domain.database
 
+import androidx.room.AutoMigration
 import androidx.room.Database
+import androidx.room.DeleteColumn
+import androidx.room.RenameTable
 import androidx.room.RoomDatabase
+import androidx.room.migration.AutoMigrationSpec
 import com.aredruss.warmaster.domain.database.dao.ArmyRuleDao
 import com.aredruss.warmaster.domain.database.dao.BulletPointDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityBondDao
@@ -27,6 +31,8 @@ import com.aredruss.warmaster.domain.database.dao.MiniatureDao
 import com.aredruss.warmaster.domain.database.dao.MiniatureKeywordDao
 import com.aredruss.warmaster.domain.database.dao.PublicationDao
 import com.aredruss.warmaster.domain.database.dao.RuleContainerComponentDao
+import com.aredruss.warmaster.domain.database.dao.RuleContainerDao
+import com.aredruss.warmaster.domain.database.dao.RuleSectionDao
 import com.aredruss.warmaster.domain.database.dao.SecondaryObjectiveDao
 import com.aredruss.warmaster.domain.database.dao.StrategemDao
 import com.aredruss.warmaster.domain.database.dao.UnitCompositionDao
@@ -180,7 +186,7 @@ import com.aredruss.warmaster.domain.database.model.WargearRule
         WargearRule::class,
         FavoriteUnit::class,
     ],
-    version = 2,
+    version = 3
 )
 abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun favoriteUnitDao(): FavoriteUnitDao
@@ -220,4 +226,6 @@ abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun detachmentDetailBulletPointDao(): DetachmentDetailBulletPointDao
     abstract fun armyRuleDao(): ArmyRuleDao
     abstract fun bulletDao(): BulletPointDao
+    abstract fun ruleSectionDao(): RuleSectionDao
+    abstract fun ruleContainerDao(): RuleContainerDao
 }

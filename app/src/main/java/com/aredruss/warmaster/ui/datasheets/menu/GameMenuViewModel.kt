@@ -13,15 +13,14 @@ import org.koin.core.KoinApplication.Companion.init
 class GameMenuViewModel(
     private val factionName: String,
     private val factionId: String,
-    private val isSubFaction: Boolean,
     private val factionImage: String,
+    private val isSubFaction: Boolean,
     private val factionRepository: FactionRepository
 ) : ViewModel() {
     var factionNameState: String by mutableStateOf(""); private set
     var factionIdState: String by mutableStateOf(""); private set
     var isSubFactionState: Boolean by mutableStateOf(false); private set
     var factionImageState: String by mutableStateOf(""); private set
-
     var publications: List<Publication> by mutableStateOf(emptyList()); private set
 
     init {

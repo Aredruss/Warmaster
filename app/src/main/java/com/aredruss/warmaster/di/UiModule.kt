@@ -10,23 +10,23 @@ import com.aredruss.warmaster.ui.datasheets.index.IndexScreenViewModel
 import com.aredruss.warmaster.ui.datasheets.search.SearchViewModel
 import com.aredruss.warmaster.ui.factions.FactionListViewModel
 import com.aredruss.warmaster.ui.splash.SplashScreenViewModel
-import com.aredruss.warmaster.ui.subfaction.SubFactionViewModel
 import com.aredruss.warmaster.ui.unit.UnitPageViewModel
 import com.aredruss.warmaster.ui.datasheets.patrol.PatrolViewModel
 import com.aredruss.warmaster.ui.datasheets.PublicationDatasheetsViewModel
 import com.aredruss.warmaster.ui.datasheets.menu.GameMenuViewModel
 import com.aredruss.warmaster.ui.datasheets.armyRules.ArmyRulesViewModel
 import com.aredruss.warmaster.ui.datasheets.detachment.common.minorRules.MinorRulesViewModel
+import com.aredruss.warmaster.ui.rules.sections.RuleSectionListViewModel
+import com.aredruss.warmaster.ui.rules.containers.RuleContainersViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 val uiModule = module {
     viewModelOf(::FactionListViewModel)
     viewModelOf(::SplashScreenViewModel)
-    viewModelOf(::DataSheetViewModel)
     viewModelOf(::UnitPageViewModel)
     viewModelOf(::AboutViewModel)
-    viewModelOf(::SubFactionViewModel)
+    viewModelOf(::DataSheetViewModel)
     viewModelOf(::IndexScreenViewModel)
     viewModelOf(::SavedDatasheetsViewModel)
     viewModelOf(::AbilityInfoViewModel)
@@ -38,4 +38,6 @@ val uiModule = module {
     viewModelOf(::PublicationDatasheetsViewModel)
     viewModelOf(::ArmyRulesViewModel)
     viewModelOf(::MinorRulesViewModel)
+    viewModelOf(::RuleSectionListViewModel)
+    viewModelOf(::RuleContainersViewModel)
 }

@@ -10,11 +10,12 @@ import com.aredruss.warmaster.domain.database.model.Datasheet
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class SearchViewModel(
+    private val publicationId: String = "",
     private val factionId: String = "",
-    private val isSubFaction: Boolean = false,
+    private val useFactionSearch: Boolean = false,
+    private val isSubfaction: Boolean = false,
     private val datasheetRepository: DatasheetRepository
 ) : ViewModel() {
 
@@ -27,8 +28,8 @@ class SearchViewModel(
 
     fun getData(query: String) {
         loadingState = true
-        if (factionId.isNotEmpty()) {
-            getDatasheetsByQueryAndFaction(query, isSubFaction, factionId)
+        if (publicationId.isNotBlank() || factionId.isNotBlank()) {
+            getDatasheetsByQueryAndPublication(query)
         } else {
             getDatasheetsByQuery(query = query)
         }
@@ -43,16 +44,17 @@ class SearchViewModel(
             }.launchIn(viewModelScope)
     }
 
-    private fun getDatasheetsByQueryAndFaction(
-        query: String,
-        isSubFaction: Boolean,
-        factionId: String
+    private fun getDatasheetsByQueryAndPublication(
+        query: String
     ) = viewModelScope.launch {
-        datasheetRepository
-            .getDatasheetsByQueryWithFilter(query, factionId, isSubFaction)
-            .onEach {
-                loadingState = false
-                datasheetList = it
-            }.launchIn(viewModelScope)
+        if (useFactionSearch) {
+            datasheetRepository.getDatasheetsByFaction(query, factionId, isSubfaction)
+        } else {
+            datasheetRepository
+                .getDatasheetsByPublication(query, publicationId)
+        }.onEach {
+            loadingState = false
+            datasheetList = it
+        }.launchIn(viewModelScope)
     }
 }

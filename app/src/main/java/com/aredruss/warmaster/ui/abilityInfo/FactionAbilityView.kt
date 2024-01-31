@@ -96,14 +96,16 @@ fun FactionAbilityView(
                 else -> {
                     val textStyle = when (rule.type) {
                         "textBold" -> FontWeight.Bold
-                        "quote" -> FontWeight.Light
+                        "quote" -> FontWeight.SemiBold
                         else -> FontWeight.Normal
                     }
+                    val formatted =
+                        if (rule.type == "quote") "\"rule.textContent\"" else rule.textContent
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 5.dp, vertical = 10.dp),
-                        text = rule.textContent,
+                        text = formatted,
                         fontWeight = textStyle,
                         textAlign = TextAlign.Justify,
                         color = Color.Black,

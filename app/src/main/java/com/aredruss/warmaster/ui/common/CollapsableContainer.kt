@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.theme.md_theme_dark_onPrimary
@@ -77,16 +78,21 @@ fun CollapsableContainer(
             Spacer(modifier = Modifier.width(width = 10.dp))
             Text(
                 text = title,
-                modifier = Modifier.padding(horizontal = 5.dp),
+                modifier = Modifier
+                    .padding(horizontal = 5.dp)
+                    .padding(end = 20.dp),
                 style = MaterialTheme.typography.labelLarge,
                 textAlign = TextAlign.Start,
-                color = Color.White
+                color = Color.White,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.weight(1f))
             minorLeftText?.let {
                 Text(
                     text = it,
-                    modifier = Modifier.padding(horizontal = 5.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 5.dp),
                     style = MaterialTheme.typography.labelLarge,
                     textAlign = TextAlign.Start,
                     color = Color.White,

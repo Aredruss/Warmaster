@@ -7,10 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aredruss.warmaster.domain.database.model.FactionKeyword
 import com.aredruss.warmaster.domain.FactionRepository
+import com.aredruss.warmaster.domain.database.model.Publication
 import com.aredruss.warmaster.util.Event
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.koin.core.KoinApplication.Companion.init
 
 class FactionListViewModel(
     private val factionRepository: FactionRepository
@@ -20,10 +20,13 @@ class FactionListViewModel(
 
     var loadingState: Boolean by mutableStateOf(true); private set
 
+    var corePublications: List<Publication> by mutableStateOf(emptyList()); private set
+
     init {
         loadingState = true
         viewModelScope.launch {
-            factionKeywordList = factionRepository.getMainFactions()
+            factionKeywordList = factionRepository.getFactions()
+            corePublications = factionRepository.getCorePublications()
             loadingState = false
         }
     }

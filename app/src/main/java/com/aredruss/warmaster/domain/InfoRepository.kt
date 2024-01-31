@@ -84,6 +84,8 @@ class InfoRepository(
                 factionPopulator.insertDetachmentBulletPoints(detailBulletPoints)
                 factionPopulator.insertSecondaryObjective(secondaryObjectives)
                 factionPopulator.insertBulletPoints(bulletPoints)
+                factionPopulator.insertRuleSections(ruleSections)
+                factionPopulator.insertRuleContainers(ruleContainers)
 
                 datasheetPopulator.insertDatasheet(datasheets)
                 datasheetPopulator.insertMiniatures(miniatures)

@@ -23,7 +23,6 @@ import com.aredruss.warmaster.ui.common.ClickableTextLine
 import com.aredruss.warmaster.ui.destinations.DataSheetListDestination
 import com.aredruss.warmaster.ui.destinations.IndexScreenDestination
 import com.aredruss.warmaster.ui.destinations.PatrolMenuDestination
-import com.aredruss.warmaster.ui.destinations.PublicationDatasheetsDestination
 import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -42,10 +41,8 @@ fun GameMenu(
 ) {
 
     val viewModel = getViewModel<GameMenuViewModel> {
-        parametersOf(factionName, factionId, isSubFaction, factionImage)
+        parametersOf(factionName, factionId, factionImage, isSubFaction)
     }
-
-
     Scaffold(topBar = {
         CenteredTopBar(title = viewModel.factionNameState,
             navigationAction = {
@@ -56,10 +53,13 @@ fun GameMenu(
             additionalAction = {
                 navigator.navigate(
                     SearchScreenDestination(
-                        viewModel.factionIdState, viewModel.isSubFactionState
+                        publicationId = "",
+                        factionId = viewModel.factionIdState,
+                        useFactionSearch = true
                     )
                 )
-            })
+            }
+        )
     }, content = {
         LazyColumn(
             modifier = Modifier
@@ -92,16 +92,6 @@ fun GameMenu(
                     text = name
                 ) {
                     when {
-                        publication.name.contains("Imperial Armour") -> {
-                            navigator.navigate(
-                                PublicationDatasheetsDestination(
-                                    name,
-                                    publication.id,
-                                    viewModel.factionImageState,
-                                )
-                            )
-                        }
-
                         publication.combatPatrolName != null -> {
                             navigator.navigate(
                                 PatrolMenuDestination(
@@ -115,11 +105,11 @@ fun GameMenu(
                         else -> {
                             navigator.navigate(
                                 IndexScreenDestination(
-                                    viewModel.factionNameState,
-                                    viewModel.factionIdState,
-                                    viewModel.factionImageState,
-                                    viewModel.isSubFactionState,
-                                    publication.id
+                                    factionName = viewModel.factionNameState,
+                                    factionId = viewModel.factionIdState,
+                                    factionImage = viewModel.factionImageState,
+                                    false,
+                                    publicationId = publication.id
                                 )
                             )
                         }

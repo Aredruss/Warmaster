@@ -28,7 +28,7 @@ fun DatasheetItem(
     datasheet: Datasheet,
     action: (String) -> Unit
 ) {
-    val subtext = if (datasheet.isCombatPatrol) "\n(Combat Patrol)" else ""
+    val subtext = if (datasheet.publicationName != null) "\n(${datasheet.publicationName})" else ""
     Box(
         modifier = Modifier
             .clickable {

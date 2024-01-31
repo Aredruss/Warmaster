@@ -13,10 +13,11 @@ data class Datasheet(
     val publicationId: String? = null,
     val bannerImage: String? = null,
     val rowImage: String? = null,
-    val isCombatPatrol: Boolean,
     val isSuccessorChapter: Boolean,
     val lore: String? = null,
     val displayOrder: Long,
     val allegianceAbilityGroupId: String? = null,
     val unitComposition: String? = null,
-)
+) {
+    var publicationName: String? = null
+}

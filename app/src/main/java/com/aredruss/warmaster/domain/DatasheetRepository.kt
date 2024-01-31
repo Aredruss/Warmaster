@@ -2,6 +2,7 @@ package com.aredruss.warmaster.domain
 
 import com.aredruss.warmaster.domain.database.dao.DatasheetDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
+import com.aredruss.warmaster.domain.database.dao.PublicationDao
 import com.aredruss.warmaster.domain.database.model.Datasheet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -12,12 +13,13 @@ import kotlinx.coroutines.withContext
 class DatasheetRepository(
     private val datasheetFactionKeywordDao: DatasheetFactionKeywordDao,
     private val datasheetDao: DatasheetDao,
-    private val favoriteUnitRepository: FavoriteUnitRepository
+    private val favoriteUnitRepository: FavoriteUnitRepository,
+    private val publicationDao: PublicationDao
 ) {
     suspend fun getDatasheetsForFaction(
         factionId: String,
         isSubFaction: Boolean
-    ): Map<Boolean, List<Datasheet>> {
+    ): Map<String, List<Datasheet>> {
         val datasheetsIds = datasheetFactionKeywordDao
             .getAllDatasheetsByFaction(factionId = factionId)
 
@@ -27,9 +29,7 @@ class DatasheetRepository(
             } else {
                 true
             }
-        }.groupBy {
-            it.isCombatPatrol
-        }
+        }.groupBy { it.publicationId ?: "" }
     }
 
     suspend fun getFavoriteUnitsForFaction(
@@ -40,6 +40,8 @@ class DatasheetRepository(
         val favoriteUnits = favoriteUnitRepository.getFavoriteUnitIdsByFactionId(factionId)
         return units.filter { datasheet ->
             datasheet.id in favoriteUnits
+        }.map {
+            getPublicationName(it)
         }
     }
 
@@ -47,7 +49,9 @@ class DatasheetRepository(
     ): List<Datasheet> {
         val favoriteUnits = favoriteUnitRepository.selectAllFavorites()
         val favoriteIds = favoriteUnits.map { it.datasheetId }
-        return datasheetDao.getItemsByIds(favoriteIds)
+        return datasheetDao.getItemsByIds(favoriteIds).map {
+            getPublicationName(it)
+        }
     }
 
     suspend fun getDatasheetsByQuery(query: String) = datasheetDao
@@ -58,7 +62,7 @@ class DatasheetRepository(
         return@withContext datasheetDao.getDataByPubId(id)
     }
 
-    suspend fun getDatasheetsByQueryWithFilter(
+    suspend fun getDatasheetsByFaction(
         query: String,
         factionId: String,
         isSubFaction: Boolean
@@ -71,8 +75,31 @@ class DatasheetRepository(
                 it.id
             }
         return getDatasheetsByQuery(query).map { list ->
-            list.filter { it.id in datasheetIdsByFaction }
+            list.filter { it.id in datasheetIdsByFaction }.map {
+                getPublicationName(it)
+            }
         }
     }
 
+    suspend fun getDatasheetsByPublication(
+        query: String,
+        publicationId: String
+    ): Flow<List<Datasheet>> {
+        val datasheetIdsByPublication = getDatasheetsPublication(publicationId)
+            .map {
+                it.id
+            }
+        return getDatasheetsByQuery(query).map { list ->
+            list.filter { it.id in datasheetIdsByPublication }.map {
+               getPublicationName(it)
+            }
+        }
+    }
+
+    private suspend fun getPublicationName(item: Datasheet): Datasheet {
+        item.publicationId?.let {
+            item.publicationName =  publicationDao.getPublicationNameById(it)
+        }
+        return item
+    }
 }

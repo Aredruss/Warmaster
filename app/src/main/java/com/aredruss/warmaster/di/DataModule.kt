@@ -11,6 +11,7 @@ import com.aredruss.warmaster.domain.UnitCompositionRepository
 import com.aredruss.warmaster.domain.UnitInfoRepository
 import com.aredruss.warmaster.domain.WargearRepository
 import com.aredruss.warmaster.domain.WarmasterPrefs
+import com.aredruss.warmaster.domain.RuleRepository
 import com.aredruss.warmaster.domain.populators.CompositionPopulator
 import com.aredruss.warmaster.domain.populators.DatasheetPopulator
 import com.aredruss.warmaster.domain.populators.FactionPopulator
@@ -38,6 +39,7 @@ val dataModule = module {
     singleOf(::WargearRepository)
     singleOf(::FavoriteUnitRepository)
     singleOf(::DetachmentInfoRepository)
+    singleOf(::RuleRepository)
 
     singleOf(::ClearUtil)
 }

@@ -24,6 +24,7 @@ import coil.compose.AsyncImage
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.InfoMessage
+import com.aredruss.warmaster.ui.destinations.SearchScreenDestination
 import com.aredruss.warmaster.ui.destinations.UnitPageDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -48,6 +49,13 @@ fun PublicationDatasheets(
         topBar = {
             CenteredTopBar(
                 title = viewModel.publicationNameState,
+                additionalActionIcon = R.drawable.ic_search,
+                enableAdditionalAction = true,
+                additionalAction = {
+                    navigator.navigate(
+                        SearchScreenDestination(publicationId = viewModel.publicationIdState)
+                    )
+                },
                 navigationAction = { navigator.popBackStack() })
         },
         content = {

@@ -9,8 +9,7 @@ class FactionRepository(
     private val factionKeywordDao: FactionKeywordDao,
     private val publicationDao: PublicationDao
 ) {
-    suspend fun getMainFactions() =
-        factionKeywordDao.getFactions().filter { it.parentFactionKeywordId == null }
+    suspend fun getFactions() = factionKeywordDao.getFactions()
 
     suspend fun getSubFactions(parentId: String) = factionKeywordDao.getSubFactions(parentId)
 
@@ -20,5 +19,9 @@ class FactionRepository(
 
     suspend fun getPublicationsByFaction(id: String) = withContext(Dispatchers.IO) {
         return@withContext publicationDao.getByFactionKeywordId(id)
+    }
+
+    suspend fun getCorePublications() = withContext(Dispatchers.IO) {
+        return@withContext publicationDao.getCorePublications()
     }
 }

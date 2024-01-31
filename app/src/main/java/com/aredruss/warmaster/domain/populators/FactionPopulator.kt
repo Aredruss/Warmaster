@@ -12,6 +12,8 @@ import com.aredruss.warmaster.domain.database.dao.DetachmentRuleDao
 import com.aredruss.warmaster.domain.database.dao.EnhancementDao
 import com.aredruss.warmaster.domain.database.dao.FactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.PublicationDao
+import com.aredruss.warmaster.domain.database.dao.RuleContainerDao
+import com.aredruss.warmaster.domain.database.dao.RuleSectionDao
 import com.aredruss.warmaster.domain.database.dao.SecondaryObjectiveDao
 import com.aredruss.warmaster.domain.database.dao.StrategemDao
 import com.aredruss.warmaster.domain.database.model.ArmyRule
@@ -25,6 +27,8 @@ import com.aredruss.warmaster.domain.database.model.DetachmentRule
 import com.aredruss.warmaster.domain.database.model.Enhancement
 import com.aredruss.warmaster.domain.database.model.FactionKeyword
 import com.aredruss.warmaster.domain.database.model.Publication
+import com.aredruss.warmaster.domain.database.model.RuleContainer
+import com.aredruss.warmaster.domain.database.model.RuleSection
 import com.aredruss.warmaster.domain.database.model.SecondaryObjective
 import com.aredruss.warmaster.domain.database.model.Strategem
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +48,9 @@ class FactionPopulator(
     private val detachmentDetailBulletPointDao: DetachmentDetailBulletPointDao,
     private val detachmentDetailDao: DetachmentDetailDao,
     private val armyRuleDao: ArmyRuleDao,
-    private val bulletPointDao: BulletPointDao
+    private val bulletPointDao: BulletPointDao,
+    private val ruleSectionDao: RuleSectionDao,
+    private val ruleContainerDao: RuleContainerDao
 ) {
     suspend fun insertFactionKeyword(data: List<FactionKeyword>) =
         withContext(Dispatchers.IO + Job()) {
@@ -109,5 +115,15 @@ class FactionPopulator(
     suspend fun insertBulletPoints(data: List<BulletPoint>) =
         withContext(Dispatchers.IO + Job()) {
             bulletPointDao.insert(data)
+        }
+
+    suspend fun insertRuleSections(data: List<RuleSection>) =
+        withContext(Dispatchers.IO + Job()) {
+            ruleSectionDao.insert(data)
+        }
+
+    suspend fun insertRuleContainers(data: List<RuleContainer>) =
+        withContext(Dispatchers.IO + Job()) {
+            ruleContainerDao.insert(data)
         }
 }

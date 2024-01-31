@@ -15,6 +15,9 @@ interface RuleContainerComponentDao {
     @Query("SELECT * FROM RuleContainerComponent WHERE :id = armyRuleId ORDER BY displayOrder")
     suspend fun getItemsById(id: String): List<RuleContainerComponent>
 
+    @Query("SELECT * FROM RuleContainerComponent WHERE :id = ruleContainerId ORDER BY displayOrder")
+    suspend fun getItemsByRuleContainerId(id: String): List<RuleContainerComponent>
+
     @Query("SELECT * FROM RuleContainerComponent WHERE :id = detachmentRuleId ORDER BY displayOrder")
     suspend fun getItemsByDetachmentRuleId(id: String): List<RuleContainerComponent>
 }

@@ -10,6 +10,6 @@ data class RuleSection(
     @PrimaryKey val id: String,
     val name: String,
     val displayOrder: Long,
-    val parentId: String,
+    val parentId: String? = null,
     val publicationId: String? = null
 )

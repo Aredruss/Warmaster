@@ -31,13 +31,15 @@ import org.koin.core.parameter.parametersOf
 @Destination
 @Composable
 fun SearchScreen(
+    publicationId: String = "",
     factionId: String = "",
-    isSubFaction: Boolean = false,
+    useFactionSearch:Boolean = false,
+    isSubfaction: Boolean = false,
     navigator: DestinationsNavigator
 ) {
 
     val searchViewModel = getViewModel<SearchViewModel> {
-        parametersOf(factionId, isSubFaction)
+        parametersOf(publicationId, factionId, useFactionSearch, isSubfaction)
     }
 
     Scaffold(

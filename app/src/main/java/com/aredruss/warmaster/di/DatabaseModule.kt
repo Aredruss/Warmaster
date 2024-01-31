@@ -59,4 +59,6 @@ val databaseModule = module {
     single { get<WarmasterDatabase>().strategemDao() }
     single { get<WarmasterDatabase>().armyRuleDao() }
     single { get<WarmasterDatabase>().bulletDao() }
+    single { get<WarmasterDatabase>().ruleSectionDao() }
+    single { get<WarmasterDatabase>().ruleContainerDao() }
 }

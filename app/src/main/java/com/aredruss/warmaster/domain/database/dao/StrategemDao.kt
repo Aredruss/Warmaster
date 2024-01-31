@@ -17,4 +17,7 @@ interface StrategemDao {
 
     @Query("SELECT * FROM Strategem WHERE :detachmentId = detachmentId ORDER BY displayOrder")
     suspend fun getItemsByDetachmentId(detachmentId: String): List<Strategem>
+
+    @Query("SELECT * FROM Strategem WHERE :id = id")
+    suspend fun getItemId(id: String): Strategem?
 }

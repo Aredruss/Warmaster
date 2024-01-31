@@ -33,13 +33,11 @@ class DataSheetViewModel(
                     factionId = factionId,
                     isSubFaction = isSubFaction
                 )
-
             } else {
-                val items = datasheetRepository.getDatasheetsForFaction(
+                datasheetRepository.getDatasheetsForFaction(
                     factionId = factionId,
                     isSubFaction = isSubFaction
-                )
-                items[isPatrol] ?: emptyList()
+                ).values.flatten()
             }
             loadingState = false
         }
