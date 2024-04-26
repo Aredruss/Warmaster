@@ -15,23 +15,20 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.aredruss.warmaster.ui.NavGraphs
 import com.aredruss.warmaster.ui.theme.WarmasterTheme
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
+import com.ramcosta.composedestinations.rememberNavHostEngine
 
 class MainActivity : ComponentActivity() {
     @OptIn(
-        ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class,
-        ExperimentalMaterial3Api::class
+        ExperimentalAnimationApi::class,
+        ExperimentalMaterialNavigationApi::class
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberAnimatedNavController()
-
-            val currentState =
-                navController.currentBackStackEntry
+            val navController = rememberNavController()
 
             WarmasterTheme {
                 Scaffold(
@@ -48,7 +45,7 @@ class MainActivity : ComponentActivity() {
                                 DestinationsNavHost(
                                     navController = navController,
                                     navGraph = NavGraphs.root,
-                                    engine = rememberAnimatedNavHostEngine()
+                                    engine = rememberNavHostEngine()
                                 )
                             }
                         }

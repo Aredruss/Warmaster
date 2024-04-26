@@ -62,7 +62,7 @@ fun DetachmentView(
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(height = 120.dp),
+                        .height(height = 150.dp),
                     model = viewModel.detachmentState?.bannerImage,
                     contentDescription = null,
                     contentScale = ContentScale.FillWidth,

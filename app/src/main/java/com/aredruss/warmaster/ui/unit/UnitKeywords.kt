@@ -22,7 +22,7 @@ fun UnitKeywords(modifier: Modifier,unitKeywords: List<String>) {
     FlowRow(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start ,
-        verticalAlignment = Alignment.CenterVertically
+        verticalArrangement = Arrangement.Center
     ) {
         unitKeywords.forEach {
             Text(

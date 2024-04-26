@@ -146,7 +146,7 @@ fun AbilitiesFlowRow(
             .fillMaxWidth()
             .padding(horizontal = 5.dp),
         horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
+        verticalArrangement = Arrangement.Center
     ) {
         abilities.forEach {
             MiniAbilityView(ability = it, onClick = onClick)
