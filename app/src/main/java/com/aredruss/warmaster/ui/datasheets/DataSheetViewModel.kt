@@ -13,7 +13,6 @@ class DataSheetViewModel(
     private val factionId: String,
     private val factionName: String,
     private val isSubFaction: Boolean,
-    private val isPatrol: Boolean,
     private val isFavorites: Boolean,
     private val datasheetRepository: DatasheetRepository
 ) : ViewModel() {
@@ -37,7 +36,7 @@ class DataSheetViewModel(
                 datasheetRepository.getDatasheetsForFaction(
                     factionId = factionId,
                     isSubFaction = isSubFaction
-                ).values.flatten()
+                )
             }
             loadingState = false
         }

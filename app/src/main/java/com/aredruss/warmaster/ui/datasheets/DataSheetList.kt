@@ -32,12 +32,11 @@ fun DataSheetList(
     factionName: String,
     factionId: String,
     isSubFaction: Boolean,
-    isPatrol: Boolean,
     isFavorites: Boolean,
     navigator: DestinationsNavigator,
 ) {
     val viewModel = getViewModel<DataSheetViewModel> {
-        parametersOf(factionId, factionName, isSubFaction, isPatrol, isFavorites)
+        parametersOf(factionId, factionName, isSubFaction, isFavorites)
     }
 
     Scaffold(

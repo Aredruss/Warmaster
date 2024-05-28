@@ -83,6 +83,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+
     implementation("com.jakewharton.timber:timber:5.0.1")
 
     implementation( "io.github.raamcosta.compose-destinations:animations-core:1.10.0")

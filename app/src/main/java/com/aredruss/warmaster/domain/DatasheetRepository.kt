@@ -1,5 +1,6 @@
 package com.aredruss.warmaster.domain
 
+import android.util.Log
 import com.aredruss.warmaster.domain.database.dao.DatasheetDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.PublicationDao
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class DatasheetRepository(
     private val datasheetFactionKeywordDao: DatasheetFactionKeywordDao,
@@ -19,24 +21,26 @@ class DatasheetRepository(
     suspend fun getDatasheetsForFaction(
         factionId: String,
         isSubFaction: Boolean
-    ): Map<String, List<Datasheet>> {
+    ): List<Datasheet> {
         val datasheetsIds = datasheetFactionKeywordDao
             .getAllDatasheetsByFaction(factionId = factionId)
 
-        return datasheetDao.getItemsByIds(datasheetsIds).filter {
+        val datasheets = datasheetDao.getItemsByIds(datasheetsIds).filter {
             if (!isSubFaction) {
                 datasheetFactionKeywordDao.getDatasheetFactionCount(it.id) == 1
             } else {
                 true
             }
-        }.groupBy { it.publicationId ?: "" }
+        }.sortedBy { it.displayOrder }
+
+        return datasheets
     }
 
     suspend fun getFavoriteUnitsForFaction(
         factionId: String,
         isSubFaction: Boolean
     ): List<Datasheet> {
-        val units = getDatasheetsForFaction(factionId, isSubFaction).values.flatten()
+        val units = getDatasheetsForFaction(factionId, isSubFaction)
         val favoriteUnits = favoriteUnitRepository.getFavoriteUnitIdsByFactionId(factionId)
         return units.filter { datasheet ->
             datasheet.id in favoriteUnits
@@ -68,9 +72,6 @@ class DatasheetRepository(
         isSubFaction: Boolean
     ): Flow<List<Datasheet>> {
         val datasheetIdsByFaction = getDatasheetsForFaction(factionId, isSubFaction)
-            .values
-            .flatten()
-            .toList()
             .map {
                 it.id
             }
@@ -91,14 +92,14 @@ class DatasheetRepository(
             }
         return getDatasheetsByQuery(query).map { list ->
             list.filter { it.id in datasheetIdsByPublication }.map {
-               getPublicationName(it)
+                getPublicationName(it)
             }
         }
     }
 
     private suspend fun getPublicationName(item: Datasheet): Datasheet {
         item.publicationId?.let {
-            item.publicationName =  publicationDao.getPublicationNameById(it)
+            item.publicationName = publicationDao.getPublicationNameById(it)
         }
         return item
     }

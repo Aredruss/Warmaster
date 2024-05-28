@@ -127,7 +127,6 @@ fun GameMenu(
                                 factionName = viewModel.factionNameState,
                                 factionId = viewModel.factionIdState,
                                 isSubFaction = viewModel.isSubFactionState,
-                                isPatrol = false,
                                 isFavorites = false
                             )
                         )
@@ -144,7 +143,6 @@ fun GameMenu(
                             factionName = viewModel.factionNameState,
                             factionId = viewModel.factionIdState,
                             isSubFaction = viewModel.isSubFactionState,
-                            isPatrol = false,
                             isFavorites = true
                         )
                     )

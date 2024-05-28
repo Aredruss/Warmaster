@@ -1,6 +1,5 @@
 package com.aredruss.warmaster.ui.about
 
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -137,7 +136,7 @@ fun AboutWarmaster(navigator: DestinationsNavigator) {
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 10.dp),
+                        .padding(vertical = 10.dp, horizontal = 20.dp),
                     text = stringResource(R.string.and_join_the_official_discord),
                     style = MaterialTheme.typography.labelMedium,
                     textAlign = TextAlign.Center
