@@ -25,6 +25,7 @@ import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.abilityInfo.AbilityInfoViewModel
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
+import com.aredruss.warmaster.ui.common.GradientAsyncImage
 import com.aredruss.warmaster.ui.common.InfoMessage
 import com.aredruss.warmaster.ui.datasheets.DatasheetItem
 import com.aredruss.warmaster.ui.destinations.AbilityScreenDestination
@@ -59,16 +60,7 @@ fun ArmyRules(
                 .padding(paddingValues = it)
         ) {
             item {
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height = 100.dp),
-                    model = viewModel.publicationImageState,
-                    contentDescription = null,
-                    contentScale = ContentScale.FillWidth,
-                    alignment = Alignment.Center,
-                    filterQuality = FilterQuality.High
-                )
+                GradientAsyncImage(image = viewModel.publicationImageState, height = 200)
             }
             item {
                 Spacer(modifier = Modifier.height(height = 10.dp))

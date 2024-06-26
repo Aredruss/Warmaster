@@ -19,6 +19,7 @@ import coil.compose.AsyncImage
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
+import com.aredruss.warmaster.ui.common.GradientAsyncImage
 import com.aredruss.warmaster.ui.datasheets.detachment.common.minorRules.MinorRulesViewModel
 import com.aredruss.warmaster.ui.destinations.ArmyRulesDestination
 import com.aredruss.warmaster.ui.destinations.MinorRulesListDestination
@@ -56,16 +57,7 @@ fun PatrolMenu(
                 .padding(paddingValues = it)
         ) {
             item {
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height = 150.dp),
-                    model = viewModel.factionImageState,
-                    contentDescription = null,
-                    contentScale = ContentScale.FillWidth,
-                    alignment = Alignment.Center,
-                    filterQuality = FilterQuality.High
-                )
+                GradientAsyncImage(image = viewModel.factionImageState, height = 200)
             }
             item {
                 Spacer(modifier = Modifier.height(height = 10.dp))

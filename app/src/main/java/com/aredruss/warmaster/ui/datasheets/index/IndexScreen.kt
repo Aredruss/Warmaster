@@ -23,6 +23,7 @@ import coil.compose.AsyncImage
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
+import com.aredruss.warmaster.ui.common.GradientAsyncImage
 import com.aredruss.warmaster.ui.datasheets.detachment.DetachmentItem
 import com.aredruss.warmaster.ui.destinations.ArmyRulesDestination
 import com.aredruss.warmaster.ui.destinations.DetachmentViewDestination
@@ -83,16 +84,7 @@ fun IndexScreen(
                 .padding(paddingValues = it)
         ) {
             item {
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height = 150.dp),
-                    model = viewModel.factionImageState,
-                    contentDescription = null,
-                    contentScale = ContentScale.FillHeight,
-                    alignment = Alignment.Center,
-                    filterQuality = FilterQuality.High
-                )
+                GradientAsyncImage(image = viewModel.factionImageState, height = 200)
             }
             item {
                 Spacer(modifier = Modifier.height(height = 10.dp))

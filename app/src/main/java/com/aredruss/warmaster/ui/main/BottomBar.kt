@@ -19,7 +19,6 @@ import com.aredruss.warmaster.ui.destinations.Destination
 import com.aredruss.warmaster.ui.destinations.FactionListDestination
 import com.aredruss.warmaster.ui.startAppDestination
 import com.ramcosta.composedestinations.navigation.navigate
-import timber.log.Timber
 
 val bottomBarApprovedDestinations = listOf(
     FactionListDestination, ArmyListDestination

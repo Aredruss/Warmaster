@@ -26,6 +26,7 @@ import com.aredruss.warmaster.ui.abilityInfo.FactionAbilityView
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
 import com.aredruss.warmaster.ui.common.CollapsableIsland
+import com.aredruss.warmaster.ui.common.GradientAsyncImage
 import com.aredruss.warmaster.ui.datasheets.detachment.common.minorRules.MinorRulesViewModel
 import com.aredruss.warmaster.ui.destinations.MinorRulesListDestination
 import com.aredruss.warmaster.ui.theme.md_theme_dark_tertiaryContainer
@@ -59,15 +60,9 @@ fun DetachmentView(
                 .padding(paddingValues = it)
         ) {
             item {
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height = 150.dp),
-                    model = viewModel.detachmentState?.bannerImage,
-                    contentDescription = null,
-                    contentScale = ContentScale.FillWidth,
-                    alignment = Alignment.Center,
-                    filterQuality = FilterQuality.High
+                GradientAsyncImage(
+                    image = viewModel.detachmentState?.bannerImage ?: "",
+                    height = 200
                 )
             }
             item {
