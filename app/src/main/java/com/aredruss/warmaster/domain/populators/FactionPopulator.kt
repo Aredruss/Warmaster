@@ -1,6 +1,6 @@
 package com.aredruss.warmaster.domain.populators
 
-import android.provider.SyncStateContract.Helpers.insert
+import com.aredruss.warmaster.domain.database.dao.AmendmentDao
 import com.aredruss.warmaster.domain.database.dao.ArmyRuleDao
 import com.aredruss.warmaster.domain.database.dao.BulletPointDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
@@ -11,11 +11,13 @@ import com.aredruss.warmaster.domain.database.dao.DetachmentFactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.DetachmentRuleDao
 import com.aredruss.warmaster.domain.database.dao.EnhancementDao
 import com.aredruss.warmaster.domain.database.dao.FactionKeywordDao
+import com.aredruss.warmaster.domain.database.dao.FaqDao
 import com.aredruss.warmaster.domain.database.dao.PublicationDao
 import com.aredruss.warmaster.domain.database.dao.RuleContainerDao
 import com.aredruss.warmaster.domain.database.dao.RuleSectionDao
 import com.aredruss.warmaster.domain.database.dao.SecondaryObjectiveDao
 import com.aredruss.warmaster.domain.database.dao.StrategemDao
+import com.aredruss.warmaster.domain.database.model.Amendment
 import com.aredruss.warmaster.domain.database.model.ArmyRule
 import com.aredruss.warmaster.domain.database.model.BulletPoint
 import com.aredruss.warmaster.domain.database.model.DatasheetFactionKeyword
@@ -26,6 +28,7 @@ import com.aredruss.warmaster.domain.database.model.DetachmentFactionKeyword
 import com.aredruss.warmaster.domain.database.model.DetachmentRule
 import com.aredruss.warmaster.domain.database.model.Enhancement
 import com.aredruss.warmaster.domain.database.model.FactionKeyword
+import com.aredruss.warmaster.domain.database.model.Faq
 import com.aredruss.warmaster.domain.database.model.Publication
 import com.aredruss.warmaster.domain.database.model.RuleContainer
 import com.aredruss.warmaster.domain.database.model.RuleSection
@@ -50,7 +53,9 @@ class FactionPopulator(
     private val armyRuleDao: ArmyRuleDao,
     private val bulletPointDao: BulletPointDao,
     private val ruleSectionDao: RuleSectionDao,
-    private val ruleContainerDao: RuleContainerDao
+    private val ruleContainerDao: RuleContainerDao,
+    private val faqDao: FaqDao,
+    private val amendmentDao: AmendmentDao
 ) {
     suspend fun insertFactionKeyword(data: List<FactionKeyword>) =
         withContext(Dispatchers.IO + Job()) {
@@ -120,6 +125,16 @@ class FactionPopulator(
     suspend fun insertRuleSections(data: List<RuleSection>) =
         withContext(Dispatchers.IO + Job()) {
             ruleSectionDao.insert(data)
+        }
+
+    suspend fun insertFaqs(data: List<Faq>) =
+        withContext(Dispatchers.IO + Job()) {
+            faqDao.insert(data)
+        }
+
+    suspend fun insertAmendments(data: List<Amendment>) =
+        withContext(Dispatchers.IO + Job()) {
+            amendmentDao.insert(data)
         }
 
     suspend fun insertRuleContainers(data: List<RuleContainer>) =

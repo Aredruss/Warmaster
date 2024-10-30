@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.aredruss.warmaster.domain.DetachmentInfoRepository
 import com.aredruss.warmaster.domain.database.model.Detachment
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class IndexScreenViewModel(
     private val factionName: String,
@@ -35,7 +34,9 @@ class IndexScreenViewModel(
         publicationIdState = publicationId
 
         viewModelScope.launch {
-            detachments = detachmentInfoRepository.getDetachmentsForFactionId(factionId = factionId, isSubFaction)
+            detachments = detachmentInfoRepository.getDetachmentsForPublicationId(
+                publicationId = publicationId
+            )
         }
     }
 }

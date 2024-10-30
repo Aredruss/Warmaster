@@ -5,12 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aredruss.warmaster.domain.database.model.FactionKeyword
 import com.aredruss.warmaster.domain.FactionRepository
+import com.aredruss.warmaster.domain.database.model.FactionKeyword
 import com.aredruss.warmaster.domain.database.model.Publication
 import com.aredruss.warmaster.util.Event
 import kotlinx.coroutines.launch
-import org.koin.core.KoinApplication.Companion.init
 
 class FactionListViewModel(
     private val factionRepository: FactionRepository

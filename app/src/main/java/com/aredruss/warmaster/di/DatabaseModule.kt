@@ -1,6 +1,7 @@
 package com.aredruss.warmaster.di
 
 import androidx.room.Room
+import com.aredruss.warmaster.domain.database.MIGRATION_2_3
 import com.aredruss.warmaster.domain.database.WarmasterDatabase
 import org.koin.dsl.module
 
@@ -8,7 +9,7 @@ val databaseModule = module {
     single {
         Room
             .databaseBuilder(get(), WarmasterDatabase::class.java, "warmaster_db")
-            .fallbackToDestructiveMigration()
+            .addMigrations(MIGRATION_2_3)
             .build()
     }
     single { get<WarmasterDatabase>().favoriteUnitDao() }
@@ -61,4 +62,6 @@ val databaseModule = module {
     single { get<WarmasterDatabase>().bulletDao() }
     single { get<WarmasterDatabase>().ruleSectionDao() }
     single { get<WarmasterDatabase>().ruleContainerDao() }
+    single { get<WarmasterDatabase>().faqDao() }
+    single { get<WarmasterDatabase>().amendmentDao() }
 }

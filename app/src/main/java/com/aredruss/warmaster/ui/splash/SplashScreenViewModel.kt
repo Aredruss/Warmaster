@@ -5,10 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aredruss.warmaster.R
 import com.aredruss.warmaster.domain.InfoRepository
 import com.aredruss.warmaster.domain.WarmasterPrefs
-
 import com.aredruss.warmaster.util.Event
 import kotlinx.coroutines.launch
 import timber.log.Timber

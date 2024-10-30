@@ -1,6 +1,5 @@
 package com.aredruss.warmaster.domain
 
-import android.util.Log
 import com.aredruss.warmaster.domain.database.dao.DatasheetDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetFactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.PublicationDao
@@ -10,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class DatasheetRepository(
     private val datasheetFactionKeywordDao: DatasheetFactionKeywordDao,

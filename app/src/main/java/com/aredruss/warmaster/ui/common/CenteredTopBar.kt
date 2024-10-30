@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
-import com.aredruss.warmaster.ui.theme.md_theme_dark_primaryContainer
+import com.aredruss.warmaster.ui.theme.md_theme_dark_surface
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,14 +55,13 @@ fun CenteredTopBar(
                         painter = painterResource(
                             id = additionalActionIcon ?: R.drawable.ic_info
                         ),
-                        contentDescription = null,
-                        tint = Color.White
+                        contentDescription = null
                     )
                 }
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = md_theme_dark_primaryContainer
+            containerColor = md_theme_dark_surface
         )
     )
 }

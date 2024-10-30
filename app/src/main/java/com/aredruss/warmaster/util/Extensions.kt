@@ -13,3 +13,7 @@ fun String.uppercaseFirst(): String {
         this.first(), this.first().titlecaseChar()
     )
 }
+
+fun String.ellipsizeEnd(count: Int): String {
+    return if (this.length > count) this.take(16) + "..." else this
+}

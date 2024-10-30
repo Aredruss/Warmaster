@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.aredruss.warmaster.domain.FactionRepository
 import com.aredruss.warmaster.domain.database.model.Publication
 import kotlinx.coroutines.launch
-import org.koin.core.KoinApplication.Companion.init
 
 class GameMenuViewModel(
     private val factionName: String,

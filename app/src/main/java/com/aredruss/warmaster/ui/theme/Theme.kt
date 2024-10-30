@@ -1,19 +1,12 @@
 package com.aredruss.warmaster.ui.theme
 
 import android.app.Activity
-import android.graphics.Color.toArgb
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
@@ -34,7 +27,7 @@ private val DarkColors = darkColorScheme(
     errorContainer = md_theme_dark_errorContainer,
     onError = md_theme_dark_onError,
     onErrorContainer = md_theme_dark_onErrorContainer,
-    background = md_theme_dark_background,
+    background = black,
     onBackground = md_theme_dark_onBackground,
     surface = md_theme_dark_surface,
     onSurface = md_theme_dark_onSurface,
@@ -59,8 +52,8 @@ fun WarmasterTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = md_theme_dark_onSecondary.toArgb()
-            window.navigationBarColor = Color.Black.toArgb()
+            window.statusBarColor = md_theme_dark_surface.toArgb()
+            window.navigationBarColor =  md_theme_dark_surface.toArgb()
             WindowCompat.getInsetsController(window, view)
                 .isAppearanceLightStatusBars = false
         }

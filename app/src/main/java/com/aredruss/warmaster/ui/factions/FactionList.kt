@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
-import com.aredruss.warmaster.ui.destinations.ArmyRulesDestination
 import com.aredruss.warmaster.ui.destinations.RulelistDestination
 import com.aredruss.warmaster.ui.destinations.SavedDatasheetsDestination
 import com.aredruss.warmaster.ui.destinations.SearchScreenDestination

@@ -66,3 +66,5 @@ val md_theme_dark_scrim = Color(0xFF000000)
 
 val seed = Color(0xFF00897C)
 val discordBlue = Color(0xFF7785CC)
+val black = Color.Black
+val amber = Color(0xFFFFC107)

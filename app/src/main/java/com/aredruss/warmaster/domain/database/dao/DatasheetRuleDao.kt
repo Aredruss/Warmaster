@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.aredruss.warmaster.domain.database.model.DatasheetRule
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DatasheetRuleDao {

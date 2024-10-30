@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aredruss.warmaster.domain.AbilityInfoRepository
 import com.aredruss.warmaster.domain.DetachmentInfoRepository
 import com.aredruss.warmaster.domain.database.model.ArmyRule
 import kotlinx.coroutines.launch
@@ -13,14 +14,17 @@ class ArmyRulesViewModel(
     pubName: String,
     publicationId: String,
     publicationImage: String,
-    detachmentInfoRepository: DetachmentInfoRepository
+    detachmentInfoRepository: DetachmentInfoRepository,
+    abilityInfoRepository: AbilityInfoRepository
 ) : ViewModel() {
 
     var publicationNameState: String by mutableStateOf(""); private set
     var publicationIdState: String by mutableStateOf(""); private set
     var publicationImageState: String by mutableStateOf(""); private set
 
-    var rules: List<ArmyRule> by mutableStateOf(emptyList());  private set
+    var rules: List<ArmyRule> by mutableStateOf(emptyList()); private set
+    var hasFaqState: Boolean by mutableStateOf(false); private set
+    var hasAmendmentsState: Boolean by mutableStateOf(false); private set
 
     var loadingState: Boolean by mutableStateOf(true); private set
 
@@ -33,6 +37,8 @@ class ArmyRulesViewModel(
         viewModelScope.launch {
             loadingState = false
             rules = detachmentInfoRepository.getArmyRules(publicationId)
+            hasFaqState = detachmentInfoRepository.checkIfHasFaq(publicationId)
+            hasAmendmentsState = detachmentInfoRepository.checkIfHasAmendments(publicationId)
         }
     }
 }

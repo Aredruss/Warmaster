@@ -6,8 +6,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity
-data class AlliedFactionAllegianceAbility(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val alliedFactionId: String,
-    val allegianceAbilityId: String
+data class Amendment(
+    @PrimaryKey val id: String,
+    val title: String,
+    val text: String,
+    val displayOrder: Int,
+    val publicationId: String,
+    val note: String?
 )

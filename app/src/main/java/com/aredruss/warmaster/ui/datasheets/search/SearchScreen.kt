@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
-import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.InfoMessage
 import com.aredruss.warmaster.ui.common.SearchTopBar
 import com.aredruss.warmaster.ui.datasheets.DatasheetItem

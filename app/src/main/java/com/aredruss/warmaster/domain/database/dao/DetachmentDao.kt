@@ -17,4 +17,7 @@ interface DetachmentDao {
 
     @Query("SELECT * FROM Detachment WHERE id in (:ids)")
     suspend fun getItemsByIds(ids: List<String>?): List<Detachment>
+
+    @Query("SELECT * FROM Detachment WHERE :publicationId = publicationId")
+    suspend fun getItemsByPublicationId(publicationId: String): List<Detachment>
 }

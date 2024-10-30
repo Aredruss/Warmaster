@@ -1,7 +1,6 @@
 package com.aredruss.warmaster.ui.abilityInfo
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.domain.database.model.WargearAbility
-import com.aredruss.warmaster.ui.theme.md_theme_dark_onPrimary
 
 @Composable
 fun GearAbilityView(modifier: Modifier, ability: WargearAbility) {

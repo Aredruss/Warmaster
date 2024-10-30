@@ -1,41 +1,29 @@
 package com.aredruss.warmaster.ui.datasheets.armyRules
 
-import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.FilterQuality
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.abilityInfo.AbilityInfoViewModel
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
 import com.aredruss.warmaster.ui.common.GradientAsyncImage
 import com.aredruss.warmaster.ui.common.InfoMessage
-import com.aredruss.warmaster.ui.datasheets.DatasheetItem
 import com.aredruss.warmaster.ui.destinations.AbilityScreenDestination
-import com.aredruss.warmaster.ui.destinations.UnitPageDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
 fun ArmyRules(
@@ -83,6 +71,40 @@ fun ArmyRules(
                                 AbilityInfoViewModel.Companion.ScreenType.PUBLICATION
                             )
                         )
+                    }
+                }
+                if (viewModel.hasFaqState) {
+                    item {
+                        val text = stringResource(id = R.string.faq)
+                        ClickableTextLine(
+                            modifier = Modifier.fillMaxWidth(),
+                            text = text
+                        ) {
+                            navigator.navigate(
+                                AbilityScreenDestination(
+                                    text,
+                                    viewModel.publicationIdState,
+                                    AbilityInfoViewModel.Companion.ScreenType.FAQ
+                                )
+                            )
+                        }
+                    }
+                }
+                if (viewModel.hasAmendmentsState) {
+                    item {
+                        val text = stringResource(id = R.string.amendments)
+                        ClickableTextLine(
+                            modifier = Modifier.fillMaxWidth(),
+                            text = text
+                        ) {
+                            navigator.navigate(
+                                AbilityScreenDestination(
+                                    text,
+                                    viewModel.publicationIdState,
+                                    AbilityInfoViewModel.Companion.ScreenType.AMEND
+                                )
+                            )
+                        }
                     }
                 }
             }

@@ -14,7 +14,7 @@ interface FactionKeywordDao {
     @Query("SELECT EXISTS (SELECT * FROM FactionKeyword WHERE :parentId = parentFactionKeywordId)")
     suspend fun checkSubFactionsExist(parentId: String): Boolean
 
-    @Query("SELECT * FROM FactionKeyword ORDER BY name")
+    @Query("SELECT * FROM FactionKeyword WHERE excludedFromArmyBuilder = 0 ORDER BY name")
     suspend fun getFactions(): List<FactionKeyword>
 
     @Query("SELECT * FROM FactionKeyword WHERE :parentId = parentFactionKeywordId OR :parentId = id")

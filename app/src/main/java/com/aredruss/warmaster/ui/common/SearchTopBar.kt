@@ -27,7 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aredruss.warmaster.R
-import com.aredruss.warmaster.ui.theme.md_theme_dark_primaryContainer
+import com.aredruss.warmaster.ui.theme.md_theme_dark_surface
 import kotlinx.coroutines.android.awaitFrame
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,7 +48,8 @@ fun SearchTopBar(
     }
 
     CenterAlignedTopAppBar(
-        modifier = Modifier.shadow(elevation = 5.dp),
+        modifier = Modifier
+            .shadow(elevation = 5.dp),
         title = {
             TextField(
                 modifier = Modifier.focusRequester(focusRequester),
@@ -105,7 +106,7 @@ fun SearchTopBar(
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = md_theme_dark_primaryContainer
+            containerColor = md_theme_dark_surface
         )
     )
 }

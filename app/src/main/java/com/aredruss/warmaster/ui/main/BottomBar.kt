@@ -1,5 +1,7 @@
 package com.aredruss.warmaster.ui.main
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
@@ -18,6 +20,7 @@ import com.aredruss.warmaster.ui.destinations.ArmyListDestination
 import com.aredruss.warmaster.ui.destinations.Destination
 import com.aredruss.warmaster.ui.destinations.FactionListDestination
 import com.aredruss.warmaster.ui.startAppDestination
+import com.aredruss.warmaster.ui.theme.md_theme_dark_surface
 import com.ramcosta.composedestinations.navigation.navigate
 
 val bottomBarApprovedDestinations = listOf(
@@ -41,6 +44,9 @@ fun BottomBar(
     if (currentDestination in bottomBarApprovedDestinations) {
         BottomAppBar(
             modifier = Modifier.height(height = 60.dp),
+            containerColor = md_theme_dark_surface,
+            tonalElevation = 0.dp,
+            contentPadding = PaddingValues(all = 0.dp)
         ) {
             BottomBarAppDestination.values().forEach { destination ->
                 val destinationList =
@@ -58,16 +64,21 @@ fun BottomBar(
                 } else {
                     MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
                 }
-                Tab(modifier = Modifier
-                    .height(height = 60.dp)
-                    .weight(weight = 1f),
+                Tab(
+                    modifier = Modifier
+                        .height(height = 60.dp)
+                        .weight(weight = 1f)
+                        .background(color = md_theme_dark_surface),
                     selected = isSelected,
                     onClick = {
                         navController.saveState()
                         if (destinationList.isEmpty()) {
                             navigateProperly(destination)
                         } else {
-                            if (destinationList.last() in pages && destinationList.size > 2 && destination.direction.route != destinationList.last()
+                            if (
+                                destinationList.last() in pages &&
+                                destinationList.size > 2 &&
+                                destination.direction.route != destinationList.last()
                                     .toString()
                             ) {
                                 navController.popBackStack()

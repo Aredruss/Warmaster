@@ -37,10 +37,13 @@
     <string name="or_get_the_link">or just copy the link below</string>
     <string name="and_join_the_official_discord">Join the official discord and checkout this project on GitHub!</string>
     <string name="detachments">Detachments</string>
+    <string name="faq">F.A.Q.</string>
+    <string name="amendments">Amendments</string>
     <string name="enhancements">Enhancements</string>
     <string name="strategems">Strategems</string>
     <string name="codex">"Codex: "</string>
     <string name="combat_patrol">"Combat Patrol: "</string>
+    <string name="army_rules_faq_amend">Army Rules, FAQ, Amendments</string>
     <string name="army_rules">Army Rules</string>
     <string name="secondary_objectives">Secondary Objectives</string>
     <string name="detachment_rules">Detachment Rules</string>

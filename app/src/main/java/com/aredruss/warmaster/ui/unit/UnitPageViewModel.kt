@@ -3,7 +3,6 @@ package com.aredruss.warmaster.ui.unit
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Shadow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aredruss.warmaster.domain.AbilityInfoRepository
@@ -25,7 +24,6 @@ import com.aredruss.warmaster.domain.database.model.WargearRule
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class UnitPageViewModel(
     private val datasheetId: String,

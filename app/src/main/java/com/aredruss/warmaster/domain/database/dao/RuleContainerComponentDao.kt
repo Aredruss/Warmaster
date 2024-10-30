@@ -13,7 +13,7 @@ interface RuleContainerComponentDao {
     suspend fun insert(items: List<RuleContainerComponent>)
 
     @Query("SELECT * FROM RuleContainerComponent WHERE :id = armyRuleId ORDER BY displayOrder")
-    suspend fun getItemsById(id: String): List<RuleContainerComponent>
+    suspend fun getItemsByArmyRuleId(id: String): List<RuleContainerComponent>
 
     @Query("SELECT * FROM RuleContainerComponent WHERE :id = ruleContainerId ORDER BY displayOrder")
     suspend fun getItemsByRuleContainerId(id: String): List<RuleContainerComponent>

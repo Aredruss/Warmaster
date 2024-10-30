@@ -4,11 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -17,35 +18,39 @@ import androidx.compose.ui.unit.dp
 fun TextBlock(
     modifier: Modifier,
     textTitle: String,
-    textValue: String,
-    isTextCentered: Boolean = false
+    textValue: String
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.secondaryContainer,
-                shape = RoundedCornerShape(size = 10.dp)
+                color = MaterialTheme.colorScheme.secondaryContainer
             )
     ) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp),
+                .padding(all = 10.dp),
             text = textTitle,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Justify,
             color = MaterialTheme.colorScheme.onSecondaryContainer,
-            style = MaterialTheme.typography.labelSmall
+            style = MaterialTheme.typography.bodyLarge
         )
         Text(
             modifier = Modifier
+                .padding(top = 16.dp)
                 .fillMaxWidth()
-                .padding(all = 10.dp),
+                .background(color = Color.White)
+                .padding(
+                    horizontal = 10.dp,
+                    vertical = 8.dp
+                ),
             text = textValue,
-            textAlign = if (isTextCentered) TextAlign.Center else TextAlign.Justify,
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
-            style = MaterialTheme.typography.labelSmall
+            textAlign = TextAlign.Justify,
+            color = Color.Black,
+            style = MaterialTheme.typography.bodyMedium,
+            fontStyle = FontStyle.Italic
         )
     }
 }

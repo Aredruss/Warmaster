@@ -5,7 +5,6 @@ import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceSetDao
 import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceWargearItemDao
 import com.aredruss.warmaster.domain.database.dao.WargearItemDao
 import com.aredruss.warmaster.domain.database.model.WargearItem
-import timber.log.Timber
 
 class LoadoutChoiceRepository(
     private val loadoutChoiceDao: LoadoutChoiceDao,

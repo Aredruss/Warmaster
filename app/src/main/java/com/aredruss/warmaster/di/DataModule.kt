@@ -7,11 +7,11 @@ import com.aredruss.warmaster.domain.FactionRepository
 import com.aredruss.warmaster.domain.FavoriteUnitRepository
 import com.aredruss.warmaster.domain.InfoRepository
 import com.aredruss.warmaster.domain.LoadoutChoiceRepository
+import com.aredruss.warmaster.domain.RuleRepository
 import com.aredruss.warmaster.domain.UnitCompositionRepository
 import com.aredruss.warmaster.domain.UnitInfoRepository
 import com.aredruss.warmaster.domain.WargearRepository
 import com.aredruss.warmaster.domain.WarmasterPrefs
-import com.aredruss.warmaster.domain.RuleRepository
 import com.aredruss.warmaster.domain.populators.CompositionPopulator
 import com.aredruss.warmaster.domain.populators.DatasheetPopulator
 import com.aredruss.warmaster.domain.populators.FactionPopulator

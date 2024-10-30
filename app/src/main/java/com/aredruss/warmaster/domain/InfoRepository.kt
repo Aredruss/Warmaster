@@ -57,9 +57,6 @@ class InfoRepository(
                 }
             )
             (metadata.dataVersion > prefs.currentDataVersion).also {
-                if (prefs.currentDataVersion != 0L) {
-
-                }
                 prefs.currentDataVersion = metadata.dataVersion
             }
         } catch (e: Exception) {
@@ -86,6 +83,8 @@ class InfoRepository(
                 factionPopulator.insertBulletPoints(bulletPoints)
                 factionPopulator.insertRuleSections(ruleSections)
                 factionPopulator.insertRuleContainers(ruleContainers)
+                factionPopulator.insertFaqs(faqs)
+                factionPopulator.insertAmendments(amendments)
 
                 datasheetPopulator.insertDatasheet(datasheets)
                 datasheetPopulator.insertMiniatures(miniatures)

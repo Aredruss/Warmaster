@@ -12,14 +12,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.FilterQuality
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.aredruss.warmaster.R
 import com.aredruss.warmaster.ui.common.CenteredTopBar
 import com.aredruss.warmaster.ui.common.ClickableTextLine
@@ -100,7 +96,7 @@ fun IndexScreen(
             item {
                 ClickableTextLine(
                     modifier = Modifier,
-                    text = stringResource(R.string.army_rules)
+                    text = stringResource(R.string.army_rules_faq_amend)
                 ) {
                     navigator.navigate(
                         ArmyRulesDestination(

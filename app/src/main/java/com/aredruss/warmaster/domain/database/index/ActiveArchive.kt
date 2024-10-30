@@ -1,5 +1,6 @@
 package com.aredruss.warmaster.domain.database.index
 
+import com.aredruss.warmaster.domain.database.model.Amendment
 import com.aredruss.warmaster.domain.database.model.ArmyRule
 import com.aredruss.warmaster.domain.database.model.BulletPoint
 import com.aredruss.warmaster.domain.database.model.Datasheet
@@ -15,6 +16,7 @@ import com.aredruss.warmaster.domain.database.model.DetachmentFactionKeyword
 import com.aredruss.warmaster.domain.database.model.DetachmentRule
 import com.aredruss.warmaster.domain.database.model.Enhancement
 import com.aredruss.warmaster.domain.database.model.FactionKeyword
+import com.aredruss.warmaster.domain.database.model.Faq
 import com.aredruss.warmaster.domain.database.model.InvSave
 import com.aredruss.warmaster.domain.database.model.Keyword
 import com.aredruss.warmaster.domain.database.model.LoadoutChoice
@@ -123,5 +125,9 @@ data class WarhammerData(
     @SerialName("rule_section")
     val ruleSections: List<RuleSection>,
     @SerialName("rule_container")
-    val ruleContainers: List<RuleContainer>
+    val ruleContainers: List<RuleContainer>,
+    @SerialName("amendment")
+    val amendments: List<Amendment>,
+    @SerialName("faq")
+    val faqs: List<Faq>
 )

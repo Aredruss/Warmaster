@@ -91,7 +91,7 @@ class UnitInfoRepository(
                 factionAbilities = abilities.filter {
                     it.armyRuleId != null
                 }.map {
-                    it to ruleContainerComponentDao.getItemsById(it.armyRuleId ?: "0")
+                    it to ruleContainerComponentDao.getItemsByArmyRuleId(it.armyRuleId ?: "0")
                 }
             )
         }

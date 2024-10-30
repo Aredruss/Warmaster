@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,9 +15,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
-import timber.log.Timber
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Destination(style = DismissibleDialog::class)
 @Composable
 fun AbilityScreen(
@@ -59,6 +56,22 @@ fun AbilityScreen(
                             DatasheetAbilityView(
                                 modifier = Modifier.fillMaxWidth(),
                                 datasheetAbility = ability
+                            )
+                        }
+                    }
+
+                    AbilityInfoViewModel.Companion.ScreenType.FAQ -> {
+                        abilityViewModel.faqs?.let { faqs ->
+                            FaqListView(
+                                faqs = faqs
+                            )
+                        }
+                    }
+
+                    AbilityInfoViewModel.Companion.ScreenType.AMEND -> {
+                        abilityViewModel.amendments?.let { amendments ->
+                            AmendmentsListView(
+                                faqs = amendments
                             )
                         }
                     }

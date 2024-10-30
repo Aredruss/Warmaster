@@ -4,11 +4,8 @@ import com.aredruss.warmaster.domain.database.model.DatasheetAbility
 import com.aredruss.warmaster.domain.database.model.RuleContainerComponent
 import com.aredruss.warmaster.domain.database.model.WargearAbility
 import com.aredruss.warmaster.domain.database.model.WargearItemProfile
-import timber.log.Timber
 
-class AbilityInfoRepository(
-    private val detachmentInfoRepository: DetachmentInfoRepository
-) {
+class AbilityInfoRepository {
 
     private var factionAbilities: List<Pair<DatasheetAbility, List<RuleContainerComponent>>>? = null
     private var wargearAbilities: List<WargearAbility>? = null

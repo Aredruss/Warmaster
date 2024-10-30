@@ -1,11 +1,10 @@
 package com.aredruss.warmaster.domain.database
 
-import androidx.room.AutoMigration
 import androidx.room.Database
-import androidx.room.DeleteColumn
-import androidx.room.RenameTable
 import androidx.room.RoomDatabase
-import androidx.room.migration.AutoMigrationSpec
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.aredruss.warmaster.domain.database.dao.AmendmentDao
 import com.aredruss.warmaster.domain.database.dao.ArmyRuleDao
 import com.aredruss.warmaster.domain.database.dao.BulletPointDao
 import com.aredruss.warmaster.domain.database.dao.DatasheetAbilityBondDao
@@ -21,6 +20,7 @@ import com.aredruss.warmaster.domain.database.dao.DetachmentFactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.DetachmentRuleDao
 import com.aredruss.warmaster.domain.database.dao.EnhancementDao
 import com.aredruss.warmaster.domain.database.dao.FactionKeywordDao
+import com.aredruss.warmaster.domain.database.dao.FaqDao
 import com.aredruss.warmaster.domain.database.dao.FavoriteUnitDao
 import com.aredruss.warmaster.domain.database.dao.InvSaveDao
 import com.aredruss.warmaster.domain.database.dao.KeywordsDao
@@ -56,6 +56,7 @@ import com.aredruss.warmaster.domain.database.model.AlliedFactionAllowedWarlordM
 import com.aredruss.warmaster.domain.database.model.AlliedFactionDatasheet
 import com.aredruss.warmaster.domain.database.model.AlliedFactionKeyword
 import com.aredruss.warmaster.domain.database.model.AlliedFactionParentFactionKeyword
+import com.aredruss.warmaster.domain.database.model.Amendment
 import com.aredruss.warmaster.domain.database.model.ArmyRule
 import com.aredruss.warmaster.domain.database.model.ArmyRuleFactionKeyword
 import com.aredruss.warmaster.domain.database.model.BaseMiniLoadout
@@ -185,8 +186,9 @@ import com.aredruss.warmaster.domain.database.model.WargearRule
         WargearOptionGroup::class,
         WargearRule::class,
         FavoriteUnit::class,
+        Amendment::class
     ],
-    version = 3
+    version = 4
 )
 abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun favoriteUnitDao(): FavoriteUnitDao
@@ -211,6 +213,8 @@ abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun wargearItemProfileAbilityDao(): WargearItemProfileAbilityDao
     abstract fun wargearRuleDao(): WargearRuleDao
     abstract fun ruleContainerComponentComponent(): RuleContainerComponentDao
+    abstract fun faqDao(): FaqDao
+    abstract fun amendmentDao(): AmendmentDao
     abstract fun loadoutChoiceDao(): LoadoutChoiceDao
     abstract fun loadoutChoiceSetDao(): LoadoutChoiceSetDao
     abstract fun loadoutChoiceWargearItemDao(): LoadoutChoiceWargearItemDao
@@ -228,4 +232,10 @@ abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun bulletDao(): BulletPointDao
     abstract fun ruleSectionDao(): RuleSectionDao
     abstract fun ruleContainerDao(): RuleContainerDao
+}
+
+val MIGRATION_2_3 = object : Migration(3, 4) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS `Amendment` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `text` TEXT NOT NULL, `displayOrder` INTEGER NOT NULL, `publicationId` TEXT NOT NULL, `note` TEXT, PRIMARY KEY(`id`))");
+    }
 }

@@ -1,5 +1,6 @@
 package com.aredruss.warmaster.domain
 
+import com.aredruss.warmaster.domain.database.dao.AmendmentDao
 import com.aredruss.warmaster.domain.database.dao.ArmyRuleDao
 import com.aredruss.warmaster.domain.database.dao.BulletPointDao
 import com.aredruss.warmaster.domain.database.dao.DetachmentDao
@@ -8,6 +9,7 @@ import com.aredruss.warmaster.domain.database.dao.DetachmentDetailDao
 import com.aredruss.warmaster.domain.database.dao.DetachmentFactionKeywordDao
 import com.aredruss.warmaster.domain.database.dao.DetachmentRuleDao
 import com.aredruss.warmaster.domain.database.dao.EnhancementDao
+import com.aredruss.warmaster.domain.database.dao.FaqDao
 import com.aredruss.warmaster.domain.database.dao.RuleContainerComponentDao
 import com.aredruss.warmaster.domain.database.dao.SecondaryObjectiveDao
 import com.aredruss.warmaster.domain.database.dao.StrategemDao
@@ -26,7 +28,9 @@ class DetachmentInfoRepository(
     private val detachmentBulletPointDao: DetachmentDetailBulletPointDao,
     private val enhancementDao: EnhancementDao,
     private val detailDao: DetachmentDetailDao,
-    private val secondaryObjectiveDao: SecondaryObjectiveDao
+    private val secondaryObjectiveDao: SecondaryObjectiveDao,
+    private val faqDao: FaqDao,
+    private val amendmentDao: AmendmentDao
 ) {
 
     suspend fun getDetachmentInfoById(id: String) = withContext(Dispatchers.IO + Job()) {
@@ -50,6 +54,12 @@ class DetachmentInfoRepository(
                 if (isSubfaction) it.displayOrder == 0L else true
             }
         }
+
+    suspend fun getDetachmentsForPublicationId(
+        publicationId: String
+    ) = withContext(Dispatchers.IO + Job()) {
+        return@withContext detachmentDao.getItemsByPublicationId(publicationId)
+    }
 
     suspend fun getArmyRules(publicationId: String) = withContext(Dispatchers.IO + Job()) {
         return@withContext armyRuleDao.getItemsByPubId(publicationId)
@@ -92,7 +102,7 @@ class DetachmentInfoRepository(
         }
 
     suspend fun getArmyRulesSteps(abilityId: String) = withContext(Dispatchers.IO + Job()) {
-        val rules = ruleContainerComponentDao.getItemsById(abilityId)
+        val rules = ruleContainerComponentDao.getItemsByArmyRuleId(abilityId)
         return@withContext rules.map {
             if (it.type == "bullets") {
                 it.bullets = it.bullets.plus(getRuleBullets(it.id))
@@ -100,6 +110,22 @@ class DetachmentInfoRepository(
             it
         }
     }
+
+    suspend fun checkIfHasFaq(publicationId: String) =
+        getFaqForPublication(publicationId).isNotEmpty()
+
+    suspend fun checkIfHasAmendments(publicationId: String) =
+        getAmendmentsForPublication(publicationId).isNotEmpty()
+
+    suspend fun getAmendmentsForPublication(publicationId: String) =
+        withContext(Dispatchers.IO + Job()) {
+            amendmentDao.getItemsByPublication(publicationId)
+        }
+
+    suspend fun getFaqForPublication(publicationId: String) =
+        withContext(Dispatchers.IO + Job()) {
+            faqDao.getItemsByPublication(publicationId)
+        }
 
     private suspend fun getRuleBullets(ruleId: String) = withContext(Dispatchers.IO + Job()) {
         return@withContext bulletPointDao.getItemsByRuleComponentId(ruleId)

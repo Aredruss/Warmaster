@@ -3,7 +3,6 @@ package com.aredruss.warmaster.domain.populators
 import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceDao
 import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceSetDao
 import com.aredruss.warmaster.domain.database.dao.LoadoutChoiceWargearItemDao
-import com.aredruss.warmaster.domain.database.model.FactionKeyword
 import com.aredruss.warmaster.domain.database.model.LoadoutChoice
 import com.aredruss.warmaster.domain.database.model.LoadoutChoiceSet
 import com.aredruss.warmaster.domain.database.model.LoadoutChoiceWargearItem

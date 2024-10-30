@@ -8,7 +8,6 @@ import com.aredruss.warmaster.domain.database.dao.WargearOptionDao
 import com.aredruss.warmaster.domain.database.dao.WargearOptionGroupDao
 import com.aredruss.warmaster.domain.database.dao.WargearRuleDao
 import com.aredruss.warmaster.domain.database.model.WargearItemProfile
-import timber.log.Timber
 
 class WargearRepository(
     private val wargearItemProfileAbilityDao: WargearItemProfileAbilityDao,

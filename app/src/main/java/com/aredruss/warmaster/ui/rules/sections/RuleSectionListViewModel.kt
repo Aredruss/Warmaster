@@ -16,8 +16,10 @@ class RuleSectionListViewModel(
     private val ruleRepository: RuleRepository,
 ) : ViewModel() {
 
+    private var publicationIdState: String by mutableStateOf(""); private set
+
     var publicationNameState: String by mutableStateOf(""); private set
-    var publicationIdState: String by mutableStateOf(""); private set
+
     var publicationImageState: String by mutableStateOf(""); private set
 
     var sections: List<RuleSection> by mutableStateOf(emptyList()); private set
