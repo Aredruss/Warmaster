@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 data class SecondaryObjective(
     @PrimaryKey val id: String,
     val name: String,
-    val lore: String,
-    val rules: String,
+    val lore: String? = null,
+    val rules: String? = null,
     val publicationId: String,
     val displayOrder: Long
 )

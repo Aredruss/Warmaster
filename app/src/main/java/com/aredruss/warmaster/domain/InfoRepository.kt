@@ -1,6 +1,7 @@
 package com.aredruss.warmaster.domain
 
 import android.content.Context
+import coil.network.HttpException
 import com.aredruss.warmaster.domain.database.index.MetaData
 import com.aredruss.warmaster.domain.database.index.WarhammerData
 import com.aredruss.warmaster.domain.populators.CompositionPopulator
@@ -43,8 +44,6 @@ class InfoRepository(
             } else {
                 true
             }
-        }.onFailure {
-            Timber.e(it)
         }
     }
 

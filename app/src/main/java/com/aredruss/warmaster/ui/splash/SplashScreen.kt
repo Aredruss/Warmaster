@@ -67,7 +67,9 @@ fun SplashScreen(
         bottomBar = {
             if (viewModel.firstLaunchState) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(all = 10.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(all = 10.dp),
                     text = stringResource(R.string.first_launch_msg),
                     style = MaterialTheme.typography.labelMedium,
                     textAlign = TextAlign.Center
