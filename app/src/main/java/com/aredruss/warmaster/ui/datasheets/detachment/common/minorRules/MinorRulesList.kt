@@ -94,7 +94,7 @@ fun MinorRulesList(
                                 modifier = Modifier.fillMaxWidth(),
                                 title = objective.name,
                                 content = {
-                                    BasicMinorText(text = objective.rules)
+                                    BasicMinorText(text = objective.rules ?: "")
                                 })
                         }
                     }

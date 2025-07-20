@@ -19,6 +19,8 @@ class SplashScreenViewModel(
     var allowNavigateNext: Event<Boolean>? by mutableStateOf(null); private set
     var firstLaunchState: Boolean by mutableStateOf(false); private set
 
+    var errorState: Boolean by mutableStateOf(false); private set
+
     init {
         loadDataIfNecessary()
         if (prefs.isFirstLaunch) {
@@ -32,8 +34,9 @@ class SplashScreenViewModel(
             .onSuccess {
                 allowNavigateNext = Event(true)
             }.onFailure {
+                prefs.isFirstLaunch = true
+                errorState = true
                 Timber.e(it)
             }
     }
-
 }

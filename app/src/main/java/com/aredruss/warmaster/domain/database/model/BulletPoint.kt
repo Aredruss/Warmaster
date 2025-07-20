@@ -8,8 +8,8 @@ import kotlinx.serialization.Serializable
 @Entity
 data class BulletPoint(
     @PrimaryKey val id: String,
-    val text: String,
-    val indent: Long,
-    val displayOrder: Long,
-    val ruleContainerComponentId: String
+    val text: String ?= null,
+    val indent: Long ?= null,
+    val displayOrder: Long ?= null,
+    val ruleContainerComponentId: String ?= null
 )

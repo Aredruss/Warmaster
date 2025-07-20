@@ -67,6 +67,8 @@ class WargearPopulator(
 
     suspend fun insertRuleContainerComponent(data: List<RuleContainerComponent>) =
         withContext(Dispatchers.IO + Job()) {
-            ruleContainerComponentDao.insert(data)
+            ruleContainerComponentDao.insert(data.map {
+                it.copy(textContent = it.textContent ?: "")
+            })
         }
 }

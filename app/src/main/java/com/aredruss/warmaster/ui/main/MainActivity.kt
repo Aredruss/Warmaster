@@ -47,10 +47,11 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         }
-                    },
-                    bottomBar = {
-                        BottomBar(navController)
                     })
+                    //,
+//                    bottomBar = {
+//                        BottomBar(navController)
+//                    })
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.aredruss.warmaster.ui.common
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,6 +9,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -24,7 +26,9 @@ fun CenteredTopBar(
     navigationAction: (() -> Unit)? = null,
     enableAdditionalAction: Boolean = false,
     additionalActionIcon: Int? = null,
-    additionalAction: (() -> Unit)? = null
+    additionalAction: (() -> Unit)? = null,
+    secondAdditionalActionIcon: Int? = null,
+    secondAdditionalAction: (() -> Unit)? = null,
 ) {
     CenterAlignedTopAppBar(
         modifier = Modifier.shadow(elevation = 5.dp),
@@ -50,13 +54,25 @@ fun CenteredTopBar(
         },
         actions = {
             if (enableAdditionalAction) {
-                IconButton(onClick = { additionalAction?.invoke() }) {
-                    Icon(
-                        painter = painterResource(
-                            id = additionalActionIcon ?: R.drawable.ic_info
-                        ),
-                        contentDescription = null
-                    )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = { additionalAction?.invoke() }) {
+                        Icon(
+                            painter = painterResource(
+                                id = additionalActionIcon ?: R.drawable.ic_info
+                            ),
+                            contentDescription = null
+                        )
+                    }
+                    secondAdditionalAction?.let {
+                        IconButton(onClick = { secondAdditionalAction.invoke() }) {
+                            Icon(
+                                painter = painterResource(
+                                    id = secondAdditionalActionIcon ?: R.drawable.ic_info
+                                ),
+                                contentDescription = null
+                            )
+                        }
+                    }
                 }
             }
         },

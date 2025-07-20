@@ -53,7 +53,7 @@ fun FactionAbilityView(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 5.dp, vertical = 5.dp),
-                        text = rule.textContent,
+                        text = rule.textContent ?: "",
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start,
                         color = Color.Black,
@@ -66,7 +66,7 @@ fun FactionAbilityView(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 5.dp, vertical = 5.dp),
-                        text = rule.textContent,
+                        text = rule.textContent ?: "",
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start,
                         color = Color.Black.copy(alpha = 0.7f),
@@ -105,7 +105,7 @@ fun FactionAbilityView(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 5.dp, vertical = 10.dp),
-                        text = formatted,
+                        text = formatted ?: "",
                         fontWeight = textStyle,
                         textAlign = TextAlign.Justify,
                         color = Color.Black,
@@ -123,7 +123,7 @@ fun BulletView(bullets: List<BulletPoint>) {
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = (5 + it.indent.toInt()).dp, vertical = 2.dp),
+                .padding(horizontal = (5 + (it.indent ?: 0).toInt()).dp, vertical = 2.dp),
             text = "• " + it.text,
             textAlign = TextAlign.Justify,
             color = Color.Black.copy(alpha = 0.7f),

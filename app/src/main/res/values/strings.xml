@@ -54,4 +54,5 @@
     <string name="target_strategem">Target: </string>
     <string name="effect_strategem">"Effect: "</string>
     <string name="faction_data">Faction data</string>
+    <string name="data_error">Something went wrong\nPlease clear the app data and try again</string>
 </resources>

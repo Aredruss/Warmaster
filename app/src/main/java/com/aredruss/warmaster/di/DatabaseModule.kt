@@ -2,6 +2,7 @@ package com.aredruss.warmaster.di
 
 import androidx.room.Room
 import com.aredruss.warmaster.domain.database.MIGRATION_2_3
+import com.aredruss.warmaster.domain.database.MIGRATION_4_6
 import com.aredruss.warmaster.domain.database.WarmasterDatabase
 import org.koin.dsl.module
 
@@ -9,7 +10,7 @@ val databaseModule = module {
     single {
         Room
             .databaseBuilder(get(), WarmasterDatabase::class.java, "warmaster_db")
-            .addMigrations(MIGRATION_2_3)
+            .addMigrations(MIGRATION_2_3, MIGRATION_4_6)
             .build()
     }
     single { get<WarmasterDatabase>().favoriteUnitDao() }

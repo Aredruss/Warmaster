@@ -188,7 +188,7 @@ import com.aredruss.warmaster.domain.database.model.WargearRule
         FavoriteUnit::class,
         Amendment::class
     ],
-    version = 4
+    version = 6
 )
 abstract class WarmasterDatabase : RoomDatabase() {
     abstract fun favoriteUnitDao(): FavoriteUnitDao
@@ -235,7 +235,29 @@ abstract class WarmasterDatabase : RoomDatabase() {
 }
 
 val MIGRATION_2_3 = object : Migration(3, 4) {
-    override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS `Amendment` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `text` TEXT NOT NULL, `displayOrder` INTEGER NOT NULL, `publicationId` TEXT NOT NULL, `note` TEXT, PRIMARY KEY(`id`))");
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("CREATE TABLE IF NOT EXISTS `Amendment` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `text` TEXT NOT NULL, `displayOrder` INTEGER NOT NULL, `publicationId` TEXT NOT NULL, `note` TEXT, PRIMARY KEY(`id`))");
+    }
+}
+
+val MIGRATION_4_6 = object : Migration(4, 6) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE 'RuleContainerComponent' ADD COLUMN 'trigger' TEXT")
+        database.execSQL("ALTER TABLE 'RuleContainerComponent' ADD COLUMN 'effect' TEXT")
+
+        database.execSQL("CREATE TABLE IF NOT EXISTS RuleContainerComponent_new (id TEXT PRIMARY KEY NOT NULL, textContent TEXT, displayOrder INTEGER NOT NULL, type TEXT NOT NULL, altText TEXT, imageUrl TEXT, title TEXT, subtitle TEXT, backgroundColor TEXT, ruleContainerId TEXT, armyRuleId TEXT, detachmentRuleId TEXT, trigger TEXT, effect TEXT)")
+        database.execSQL("INSERT INTO RuleContainerComponent_new SELECT * FROM RuleContainerComponent")
+        database.execSQL("DROP TABLE RuleContainerComponent")
+        database.execSQL("ALTER TABLE RuleContainerComponent_new RENAME TO RuleContainerComponent")
+
+        database.execSQL("CREATE TABLE IF NOT EXISTS BulletPoint_new (id TEXT PRIMARY KEY NOT NULL, text TEXT, ruleContainerComponentId TEXT, indent INTEGER, displayOrder INTEGER)")
+        database.execSQL("INSERT INTO BulletPoint_new (id, text, ruleContainerComponentId, indent, displayOrder) SELECT id, text, ruleContainerComponentId, indent, displayOrder FROM BulletPoint")
+        database.execSQL("DROP TABLE BulletPoint")
+        database.execSQL("ALTER TABLE BulletPoint_new RENAME TO BulletPoint")
+
+        database.execSQL("CREATE TABLE IF NOT EXISTS SecondaryObjective_new (id TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL, publicationId TEXT NOT NULL, displayOrder INTEGER NOT NULL, lore TEXT, rules TEXT)")
+        database.execSQL("INSERT INTO SecondaryObjective_new (id, name, publicationId, displayOrder, lore, rules) SELECT id, name, publicationId, displayOrder, lore, rules FROM SecondaryObjective")
+        database.execSQL("DROP TABLE SecondaryObjective")
+        database.execSQL("ALTER TABLE SecondaryObjective_new RENAME TO SecondaryObjective")
     }
 }
