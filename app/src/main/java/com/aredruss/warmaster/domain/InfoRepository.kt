@@ -26,7 +26,10 @@ class InfoRepository(
     private val clearUtil: ClearUtil
 ) {
 
-    private val json = Json { ignoreUnknownKeys = true }
+    private val json = Json {
+        coerceInputValues = true
+        ignoreUnknownKeys = true
+    }
     private val metaDataFile = context.resources.assets.open("metadata.json")
     private val dataFile = context.resources.assets.open("data.json")
 

@@ -15,9 +15,9 @@ android {
     defaultConfig {
         applicationId = "com.aredruss.warmaster"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 97
-        versionName = "0.98"
+        targetSdk = 35
+        versionCode = 98
+        versionName = "0.981"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

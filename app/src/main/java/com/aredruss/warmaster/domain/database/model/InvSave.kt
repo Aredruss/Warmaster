@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Entity
 data class InvSave (
     @PrimaryKey val id: String,
-    val save: String,
+    val save: String = "",
     val rules: String? = null,
     val datasheetId: String,
     val miniatureId: String? = null,
