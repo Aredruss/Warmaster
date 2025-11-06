@@ -42,7 +42,11 @@ class UnitCompositionRepository(
                     //Everything is heavily dependent on the indexes and everything being in order
                     unitCompositionMiniature = mappedIdCompositions
                         .map {
-                            it.value[(order - 1).toInt()]
+                            if (it.value.size == 1) {
+                                it.value.first()
+                            } else {
+                                it.value.reversed()[(order - 1).toInt()]
+                            }
                         }
                         .map {
                             it.getReadableRange()
